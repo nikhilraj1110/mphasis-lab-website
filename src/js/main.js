@@ -534,10 +534,13 @@
     var currentPath = window.location.pathname;
     document.querySelectorAll('.nav__link, .nav-mobile__link').forEach(function (link) {
       var href = link.getAttribute('href');
-      if (href === currentPath ||
-          (currentPath === '/' && href === '/') ||
-          (currentPath.endsWith('/index.html') && href === '/') ||
-          (href !== '/' && currentPath.startsWith(href))) {
+      // Resolve relative href to absolute for comparison
+      var linkUrl = new URL(href, window.location.href).pathname;
+      var isHome = href === 'index.html' || href === '/' || href === '../index.html';
+      var isCurrentHome = currentPath.endsWith('/') || currentPath.endsWith('/index.html');
+      if (linkUrl === currentPath ||
+          (isCurrentHome && isHome) ||
+          (!isHome && currentPath.indexOf(linkUrl) !== -1)) {
         link.classList.add(
           link.classList.contains('nav__link') ? 'nav__link--active' : 'nav-mobile__link--active'
         );
