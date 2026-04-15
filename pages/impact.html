@@ -156,7 +156,7 @@
               <div class="stat-card__label">Research Pillars</div>
             </div>
             <div class="stat-card reveal">
-              <div class="stat-card__number" data-count="27">0<span class="stat-card__suffix">+</span></div>
+              <div class="stat-card__number" data-count="25">0<span class="stat-card__suffix">+</span></div>
               <div class="stat-card__label">Faculty Across 7 Departments</div>
             </div>
             <div class="stat-card reveal">
@@ -183,7 +183,7 @@
               <div class="card__body">
                 <div class="stat-card__number" data-count="60" style="font-size: var(--text-4xl); color: var(--color-red); margin-bottom: var(--space-2);">0<span class="stat-card__suffix" style="color: var(--color-red);">+</span></div>
                 <h4 class="card__title">Research Personnel</h4>
-                <p class="card__text">Research assistants, project assistants, postdocs, PhD students, and interns trained and employed across all projects.</p>
+                <p class="card__text">Research assistants, project assistants, postdocs, PhD students, and interns trained and employed annually across all projects.</p>
               </div>
             </div>
 
@@ -219,219 +219,333 @@
 
           <div class="grid grid--2 reveal-stagger" style="gap: var(--space-5); margin-top: var(--space-8);">
 
-            <article class="project-list-card reveal">
+            <a href="project.html?id=bharatsim" class="project-list-card reveal" style="text-decoration:none;color:inherit;">
               <div class="project-list-card__body">
                 <h3 class="project-list-card__title">BharatSim for National AIDS Control Organisation</h3>
                 <p class="project-list-card__desc">Agent-based modelling platform deployed for epidemic simulation and policy planning.</p>
                 <span class="tag tag--sm">BharatSim</span>
               </div>
-            </article>
+            </a>
 
-            <article class="project-list-card reveal">
+            <a href="project.html?id=folk-computing" class="project-list-card reveal" style="text-decoration:none;color:inherit;">
               <div class="project-list-card__body">
                 <h3 class="project-list-card__title">PRISM</h3>
                 <p class="project-list-card__desc">Physician Rules Integrated with Small LLMs — diagnostic support system for abdominal pain, integrating clinical rules with language models.</p>
                 <span class="tag tag--sm">CHART</span>
               </div>
-            </article>
+            </a>
 
-            <article class="project-list-card reveal">
+            <a href="project.html?id=indiamedialens" class="project-list-card reveal" style="text-decoration:none;color:inherit;">
               <div class="project-list-card__body">
                 <h3 class="project-list-card__title">IndiaMediaLens</h3>
                 <p class="project-list-card__desc">Computational analysis platform for studying Indian media coverage patterns, framing, and representation.</p>
                 <span class="tag tag--sm">AI@Ashoka</span>
               </div>
-            </article>
+            </a>
 
-            <article class="project-list-card reveal">
+            <a href="project.html?id=cs-pedagogy" class="project-list-card reveal" style="text-decoration:none;color:inherit;">
               <div class="project-list-card__body">
                 <h3 class="project-list-card__title">BOOP &amp; SocraticAI</h3>
-                <p class="project-list-card__desc">Formal methods tool and scaffolded LLM tutor deployed in introductory CS courses at Ashoka University.</p>
+                <p class="project-list-card__desc">Formal methods tool and scaffolded LLM tutor deployed in introductory CS course at Ashoka University.</p>
                 <span class="tag tag--sm">AI@Ashoka</span>
               </div>
-            </article>
+            </a>
 
-            <article class="project-list-card reveal">
+            <a href="project.html?id=multimodal-food-computing" class="project-list-card reveal" style="text-decoration:none;color:inherit;">
               <div class="project-list-card__body">
                 <h3 class="project-list-card__title">Indian Recipe Dialogue System (IRDS)</h3>
                 <p class="project-list-card__desc">Conversational system for Indian food and nutrition queries with voice interaction and vernacular language support.</p>
                 <span class="tag tag--sm">CHART</span>
               </div>
-            </article>
+            </a>
 
-            <article class="project-list-card reveal">
+            <a href="project.html?id=cmt" class="project-list-card reveal" style="text-decoration:none;color:inherit;">
               <div class="project-list-card__body">
                 <h3 class="project-list-card__title">Covalent Magnetic Tweezers</h3>
-                <p class="project-list-card__desc">Custom-built single-molecule force spectroscopy instrument — described as unique in India. Custom C++/Python hybrid software stack.</p>
+                <p class="project-list-card__desc">Custom-built single-molecule force spectroscopy instrument, unique in India.</p>
                 <span class="tag tag--sm">Makerspace</span>
               </div>
-            </article>
+            </a>
 
           </div>
         </div>
       </section>
 
       <!-- ═══════════════════════════════════════
-           AWARDS & RECOGNITION
+           AWARDS & RECOGNITION — SPOTLIGHT STAGE
            ═══════════════════════════════════════ -->
-      <section class="section section--alt">
+      <section class="section section--dark section--lg">
         <div class="container">
-          <div class="section__header reveal">
+          <div class="section__header text-center reveal">
+            <span class="section__eyebrow">Recognition</span>
             <h2 class="section__title">Awards &amp; Recognition</h2>
           </div>
 
-          <div class="grid grid--2 reveal-stagger" style="gap: var(--space-5); margin-top: var(--space-8);">
+          <style>
+            .spotlight { position: relative; min-height: 320px; text-align: center; overflow: hidden; margin-top: var(--space-8, 32px); }
+            .spotlight::before {
+              content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+              width: 400px; height: 450px;
+              background: radial-gradient(ellipse at top, rgba(77,171,247,0.06) 0%, transparent 70%);
+              pointer-events: none;
+            }
+            .spotlight__slide {
+              position: absolute; inset: 0; display: flex; flex-direction: column;
+              align-items: center; justify-content: center; padding: 40px 24px;
+              opacity: 0; transform: translateY(20px);
+              transition: opacity 0.8s ease, transform 0.8s ease;
+              pointer-events: none;
+            }
+            .spotlight__slide.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+            .spotlight__pillar {
+              font-family: var(--font-mono, 'JetBrains Mono', monospace); font-size: 0.65rem;
+              text-transform: uppercase; letter-spacing: 0.12em;
+              padding: 4px 14px; border-radius: 20px; margin-bottom: 24px;
+              border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.5);
+            }
+            .spotlight__title {
+              font-family: var(--font-heading, 'Barlow', sans-serif);
+              font-size: clamp(1.8rem, 4.5vw, 3.2rem); font-weight: 800;
+              line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.03em;
+              background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,0.5));
+              -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            }
+            .spotlight__desc {
+              font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,0.5);
+              max-width: 600px; margin: 0 auto;
+            }
+            .spotlight__link {
+              display: inline-block; margin-top: 16px;
+              font-family: var(--font-mono, 'JetBrains Mono', monospace); font-size: 0.7rem;
+              color: #4dabf7; text-decoration: none; letter-spacing: 0.05em;
+              transition: color 0.2s; border-bottom: 1px solid rgba(77,171,247,0.3);
+              padding-bottom: 2px;
+            }
+            .spotlight__link:hover { color: #74c0fc; border-bottom-color: #74c0fc; }
+            .spotlight-dots {
+              display: flex; justify-content: center; gap: 10px; margin-top: 48px;
+            }
+            .spotlight-dot {
+              width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.12);
+              cursor: pointer; transition: all 0.3s ease; border: none; padding: 0;
+            }
+            .spotlight-dot.active { background: #4dabf7; box-shadow: 0 0 12px rgba(77,171,247,0.4); transform: scale(1.3); }
+            .spotlight-dot:hover { background: rgba(255,255,255,0.3); }
+            .spotlight-progress { width: 200px; height: 2px; background: rgba(255,255,255,0.06); border-radius: 1px; margin: 20px auto 0; overflow: hidden; }
+            .spotlight-progress__bar { height: 100%; background: #4dabf7; border-radius: 1px; width: 0%; animation: spotlightFill 5s linear infinite; }
+            @keyframes spotlightFill { 0% { width: 0%; } 100% { width: 100%; } }
+            .spotlight-counter {
+              font-family: var(--font-mono, 'JetBrains Mono', monospace); font-size: 0.65rem;
+              color: rgba(255,255,255,0.2); margin-top: 12px; text-align: center;
+            }
+          </style>
 
-            <article class="card reveal" style="border-left: 3px solid var(--color-red);">
-              <div class="card__body">
-                <span class="card__eyebrow">CHART</span>
-                <h4 class="card__title">INFUSE Promising Innovation Award</h4>
-                <p class="card__text">SmartDiet project recognized for promising innovation in food and nutrition technology.</p>
-              </div>
-            </article>
-
-            <article class="card reveal" style="border-left: 3px solid var(--color-blue);">
-              <div class="card__body">
-                <span class="card__eyebrow">AI@Ashoka</span>
-                <h4 class="card__title">Schmidt AI for Science Fellowship</h4>
-                <p class="card__text">Meghna Agarwala awarded the Schmidt AI for Science Fellowship at the University of Oxford.</p>
-              </div>
-            </article>
-
-            <article class="card reveal" style="border-left: 3px solid var(--color-navy);">
-              <div class="card__body">
-                <span class="card__eyebrow">AI@Ashoka</span>
-                <h4 class="card__title">India-AI Casebook Selection</h4>
-                <p class="card__text">CS Pedagogy project selected as a case study in the Ministry of Electronics and Information Technology's Casebook on the Real-World Impact of AI in Education.</p>
-              </div>
-            </article>
-
-            <article class="card reveal" style="border-left: 3px solid var(--pillar-makerspace);">
-              <div class="card__body">
-                <span class="card__eyebrow">Makerspace</span>
-                <h4 class="card__title">Meera Memorial Paper Reading — 3rd Place</h4>
-                <p class="card__text">Table Top Experiments undergraduate interns recognized at the Meera Memorial Paper Reading Competition.</p>
-              </div>
-            </article>
-
-            <article class="card reveal" style="border-left: 3px solid var(--pillar-makerspace);">
-              <div class="card__body">
-                <span class="card__eyebrow">Makerspace</span>
-                <h4 class="card__title">Cell Press Technology of the Month</h4>
-                <p class="card__text">The Covalent Magnetic Tweezers instrument featured as Technology of the Month by Cell Press.</p>
-              </div>
-            </article>
-
-            <article class="card reveal" style="border-left: 3px solid var(--pillar-cyber);">
-              <div class="card__body">
-                <span class="card__eyebrow">Cybersecurity</span>
-                <h4 class="card__title">Best Paper Award — SPACE 2023</h4>
-                <p class="card__text">Post-Quantum Cryptography research recognized with the Best Paper Award at the International Conference on Security, Privacy, and Applied Cryptographic Engineering.</p>
-              </div>
-            </article>
-
+          <div class="spotlight reveal" id="spotlight">
+            <div class="spotlight__slide active" data-index="0">
+              <div class="spotlight__pillar">CHART</div>
+              <div class="spotlight__title">INFUSE Promising Innovation Award</div>
+              <div class="spotlight__desc">SmartDiet project recognized for promising innovation in food and nutrition technology at NIN/ICMR Hyderabad.</div>
+              <a href="https://timesofindia.indiatimes.com/city/hyderabad/ai-driven-nutritional-solutions-steal-spotlight-at-infuse-summit/articleshow/125965546.cms" target="_blank" rel="noopener" class="spotlight__link">Read coverage →</a>
+            </div>
+            <div class="spotlight__slide" data-index="1">
+              <div class="spotlight__pillar">AI@Ashoka</div>
+              <div class="spotlight__title">Schmidt AI for Science Fellowship</div>
+              <div class="spotlight__desc">Meghna Agarwala awarded the Schmidt AI for Science Fellowship at the University of Oxford for AI-driven pollen detection and biodiversity monitoring.</div>
+              <a href="https://schmidtaifaculty.site.ox.ac.uk/people/meghna-agarwala" target="_blank" rel="noopener" class="spotlight__link">View profile →</a>
+            </div>
+            <div class="spotlight__slide" data-index="2">
+              <div class="spotlight__pillar">AI@Ashoka</div>
+              <div class="spotlight__title">India-AI Impact Summit Compendium</div>
+              <div class="spotlight__desc">SocraticAI — an AI tutoring system for foundational CS education — selected as a case study in MeitY's Compendium on the Real-World Impact of AI in Education.</div>
+              <a href="../src/assets/docs/India-AI-Impact-Summit-2026-AI-in-Education-Compendium.pdf" target="_blank" rel="noopener" class="spotlight__link">Read the compendium →</a>
+            </div>
+            <div class="spotlight__slide" data-index="3">
+              <div class="spotlight__pillar">AI@Ashoka</div>
+              <div class="spotlight__title">1st Place — NeurIPS 2023</div>
+              <div class="spotlight__desc">Ragul N won 1st place in Track 2 (Differential Privacy) of the NeurIPS 2023 Privacy Preserving Federated Learning Document VQA competition, applying LoRA-based parameter-efficient fine-tuning.</div>
+              <a href="https://arxiv.org/abs/2411.03730" target="_blank" rel="noopener" class="spotlight__link">Read the paper →</a>
+            </div>
+            <div class="spotlight__slide" data-index="4">
+              <div class="spotlight__pillar">CHART</div>
+              <div class="spotlight__title">AMR-Vivli Challenge Innovation Award</div>
+              <div class="spotlight__desc">Shraddha Karve recognized for a novel approach to antibiogram analysis — looking at composite resistance phenotypes — at the Vivli AMR Surveillance Open Data Re-Use Challenge 2023.</div>
+              <a href="https://amr.vivli.org/data-challenge/2023-finalist-and-award-winning-solutions/" target="_blank" rel="noopener" class="spotlight__link">View winners →</a>
+            </div>
+            <div class="spotlight__slide" data-index="5">
+              <div class="spotlight__pillar">Makerspace</div>
+              <div class="spotlight__title">Cell Press Technology of the Month</div>
+              <div class="spotlight__desc">The Covalent Magnetic Tweezers instrument — custom-built, unique in India — featured as Technology of the Month by Cell Press in Trends in Biochemical Sciences.</div>
+              <a href="https://www.cell.com/trends/biochemical-sciences/abstract/S0968-0004(23)00126-3" target="_blank" rel="noopener" class="spotlight__link">Read the feature →</a>
+            </div>
+            <div class="spotlight__slide" data-index="6">
+              <div class="spotlight__pillar">Cybersecurity</div>
+              <div class="spotlight__title">Best Paper Award — SPACE 2023</div>
+              <div class="spotlight__desc">Post-Quantum Cryptography research recognized with the Best Paper Award at the International Conference on Security, Privacy, and Applied Cryptographic Engineering.</div>
+              <a href="https://link.springer.com/chapter/10.1007/978-3-031-51583-5_4" target="_blank" rel="noopener" class="spotlight__link">Read the paper →</a>
+            </div>
+            <div class="spotlight__slide" data-index="7">
+              <div class="spotlight__pillar">Makerspace</div>
+              <div class="spotlight__title">Meera Memorial — 3rd Place</div>
+              <div class="spotlight__desc">Three undergraduate interns from the Table Top Experiments project won 3rd Place at the Meera Memorial Paper Reading Competition, St. Stephen's College, Delhi.</div>
+            </div>
           </div>
+
+          <div class="spotlight-dots" id="spotlight-dots"></div>
+          <div class="spotlight-progress"><div class="spotlight-progress__bar" id="spotlight-bar"></div></div>
         </div>
       </section>
 
       <!-- ═══════════════════════════════════════
-           STUDENT OUTCOMES
-           ═══════════════════════════════════════ -->
-      <section class="section">
-        <div class="container">
-          <div class="section__header reveal">
-            <h2 class="section__title">Student Trajectories</h2>
-            <p class="section__subtitle">Lab alumni going on to prestigious programs worldwide.</p>
-          </div>
-
-          <div class="grid grid--3 reveal-stagger" style="gap: var(--space-5); margin-top: var(--space-8);">
-
-            <article class="card reveal">
-              <div class="card__body">
-                <h4 class="card__title">Simar Randhawa</h4>
-                <p class="card__text" style="margin-bottom: var(--space-2);">Trained through the Table Top Experiments project as an undergraduate intern.</p>
-                <p style="font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-navy);">ANU Future Research Talent Award, Australian National University</p>
-              </div>
-            </article>
-
-            <article class="card reveal">
-              <div class="card__body">
-                <h4 class="card__title">Drishana Kundu</h4>
-                <p class="card__text" style="margin-bottom: var(--space-2);">Trained through the Table Top Experiments project as an undergraduate intern.</p>
-                <p style="font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-navy);">GIST South Korea PhD Program</p>
-              </div>
-            </article>
-
-            <article class="card reveal">
-              <div class="card__body">
-                <h4 class="card__title">Pranit Sinha</h4>
-                <p class="card__text" style="margin-bottom: var(--space-2);">Research assistant on the Biomarker Discovery project.</p>
-                <p style="font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-navy);">MS at McGill University</p>
-              </div>
-            </article>
-
-            <article class="card reveal">
-              <div class="card__body">
-                <h4 class="card__title">Subhas Chandra Bera</h4>
-                <p class="card__text" style="margin-bottom: var(--space-2);">Postdoctoral researcher on the Covalent Magnetic Tweezers project.</p>
-                <p style="font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-navy);">Secured independent DBT grant as Principal Investigator</p>
-              </div>
-            </article>
-
-            <article class="card reveal">
-              <div class="card__body">
-                <h4 class="card__title">Swapnanil Mukherjee</h4>
-                <p class="card__text" style="margin-bottom: var(--space-2);">Undergraduate researcher on the Multimodal Food Computing project.</p>
-                <p style="font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-navy);">Published at EMNLP (A* conference) as a 4th-year undergraduate</p>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══════════════════════════════════════
-           MEDIA COVERAGE
+           STUDENT TRAJECTORIES — STREAM
            ═══════════════════════════════════════ -->
       <section class="section section--alt">
         <div class="container">
           <div class="section__header reveal">
-            <h2 class="section__title">Media Coverage</h2>
-            <p class="section__subtitle">Lab research featured in 25+ national and international media outlets.</p>
+            <h2 class="section__title">Student Trajectories</h2>
+            <p class="section__subtitle">From the lab to the world stage.</p>
           </div>
+        </div>
 
-          <div class="reveal" style="margin-top: var(--space-8);">
-            <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center;">
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">BBC</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">CNBC-TV18</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">NDTV</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Nature India</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Sydney Morning Herald</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">The Sun</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Yahoo News</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">MoneyControl</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">IndiaSpend</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">The Statesman</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Mid-Day</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">The Week</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Medical Buyer</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">The Tribune</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">India New England News</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">BBC Afrique</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Brisbane Times</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Daily Star</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">AOL</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">IANS Live</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">ProKerala</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">IndiaMedToday</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">DT Next</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Social News XYZ</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">India News Network</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">NewsBytes</span>
-              <span class="tag" style="font-size: var(--text-sm); padding: var(--space-2) var(--space-4);">Observer Voice</span>
+        <style>
+          .stream-wrapper { position: relative; overflow: hidden; padding: 20px 0; }
+          .stream-wrapper::before, .stream-wrapper::after {
+            content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 3; pointer-events: none;
+          }
+          .stream-wrapper::before { left: 0; background: linear-gradient(90deg, var(--color-bg-alt, #f8f9fa), transparent); }
+          .stream-wrapper::after { right: 0; background: linear-gradient(270deg, var(--color-bg-alt, #f8f9fa), transparent); }
+          .stream-track { display: flex; gap: 24px; animation: streamScroll 50s linear infinite; width: max-content; }
+          .stream-track:hover { animation-play-state: paused; }
+          .stream-track--reverse { animation-direction: reverse; }
+          @keyframes streamScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+          .win-card {
+            flex-shrink: 0; width: 320px;
+            background: #fff; border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 16px; padding: 28px 24px;
+            transition: all 0.35s ease; cursor: default; position: relative; overflow: hidden;
+          }
+          .win-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px; opacity: 0.8; transition: opacity 0.3s;
+          }
+          .win-card:hover {
+            background: #fff; border-color: rgba(0,0,0,0.12);
+            transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+          }
+          .win-card:hover::before { opacity: 1; }
+          .win-card[data-type="pub"]::before { background: #4dabf7; }
+          .win-card[data-type="place"]::before { background: #cc5de8; }
+          .win-card[data-type="pres"]::before { background: #51cf66; }
+          .win-card[data-type="award"]::before { background: #fcc419; }
+          .win-card[data-type="career"]::before { background: #ff922b; }
+
+          .win-card__name {
+            font-family: var(--font-heading, 'Barlow', sans-serif);
+            font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; color: var(--color-navy, #1B2A4A);
+          }
+          .win-card__achievement {
+            font-size: 0.88rem; line-height: 1.55; color: var(--color-text-secondary, #64748b); margin-bottom: 14px;
+          }
+          .win-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+          .win-card__project {
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(0,0,0,0.3);
+          }
+          .win-card__icon { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+          .win-card[data-type="pub"] .win-card__icon { background: #4dabf7; }
+          .win-card[data-type="place"] .win-card__icon { background: #cc5de8; }
+          .win-card[data-type="pres"] .win-card__icon { background: #51cf66; }
+          .win-card[data-type="award"] .win-card__icon { background: #fcc419; }
+          .win-card[data-type="career"] .win-card__icon { background: #ff922b; }
+          .stream-fy-note {
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.65rem; color: rgba(0,0,0,0.2); text-align: center; margin-top: 40px;
+          }
+        </style>
+
+        <!-- Row 1 -->
+        <div class="stream-wrapper">
+          <div class="stream-track" id="stream-row1">
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Swapnanil Mukherjee</div>
+              <div class="win-card__achievement">Published at EMNLP 2025 Findings — a top-tier A* conference — as a 4th-year undergraduate. Presented the paper in Suzhou, China.</div>
+              <div class="win-card__footer"><span class="win-card__project">Multi-Modal Food Computing</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="place">
+              <div class="win-card__name">Simar Randhawa</div>
+              <div class="win-card__achievement">Awarded the ANU Future Research Talent Award at Australian National University after undergraduate research training in glacier dynamics.</div>
+              <div class="win-card__footer"><span class="win-card__project">Table Top Experiments</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Vaani Goenka</div>
+              <div class="win-card__achievement">"BOOP: Write Right Code" — led development of a formal methods tool for CS education and authored the paper presented at ACM COMPUTE 2025.</div>
+              <div class="win-card__footer"><span class="win-card__project">CS Pedagogy</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="place">
+              <div class="win-card__name">Drishana Kundu</div>
+              <div class="win-card__achievement">Selected for GIST South Korea PhD program, University of Toronto, and Indian Academy of Sciences — chose GIST after lab training in experimental physics.</div>
+              <div class="win-card__footer"><span class="win-card__project">Table Top Experiments</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pres">
+              <div class="win-card__name">Gautam Ahuja</div>
+              <div class="win-card__achievement">From capstone thesis to NeurIPS 2025 — presented PRISM diagnostic AI system as a poster at the GenAI4Health Workshop in San Diego.</div>
+              <div class="win-card__footer"><span class="win-card__project">Folk Computing</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="career">
+              <div class="win-card__name">Shreyansh Priyadarshi</div>
+              <div class="win-card__achievement">Capstone thesis on single-molecule instrumentation led to a full-time role and first-authorship in Communications Biology (Nature portfolio).</div>
+              <div class="win-card__footer"><span class="win-card__project">Covalent Magnetic Tweezers</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Vaanee Tripathi</div>
+              <div class="win-card__achievement">"Accessibility Beyond Accommodations" — led research on redesigning CS courses for students with visual impairments. Published at ACM COMPUTE 2025.</div>
+              <div class="win-card__footer"><span class="win-card__project">CS Pedagogy</span><span class="win-card__icon"></span></div>
             </div>
           </div>
         </div>
+
+        <!-- Row 2 -->
+        <div class="stream-wrapper" style="margin-top: 24px;">
+          <div class="stream-track stream-track--reverse" id="stream-row2">
+            <div class="win-card" data-type="place">
+              <div class="win-card__name">Pranit Sinha</div>
+              <div class="win-card__achievement">Research assistant on AI-powered biomarker discovery — went on to pursue an MS at McGill University, Canada.</div>
+              <div class="win-card__footer"><span class="win-card__project">Biomarker Discovery</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Aarush Kumbhakern</div>
+              <div class="win-card__achievement">Summer intern who continued into a semester-long research role — co-authored a short paper at ACM MMFood'25 Workshop on cooking procedure ontologies.</div>
+              <div class="win-card__footer"><span class="win-card__project">Multi-Modal Food Computing</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="award">
+              <div class="win-card__name">Simar, Drishana &amp; Bhavana</div>
+              <div class="win-card__achievement">Three undergraduate interns won 3rd Place at the Meera Memorial Paper Reading Competition at St. Stephen's College, Delhi.</div>
+              <div class="win-card__footer"><span class="win-card__project">Table Top Experiments</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Ayush Thonge</div>
+              <div class="win-card__achievement">Co-authored the SocraticAI case study in MeitY's India-AI Impact Summit Compendium — a government publication on AI in education.</div>
+              <div class="win-card__footer"><span class="win-card__project">CS Pedagogy</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pres">
+              <div class="win-card__name">Hrsh Venket</div>
+              <div class="win-card__achievement">Trained in satellite-based fire detection using GIS and ML — went on to present findings at a NASA-SARI meeting.</div>
+              <div class="win-card__footer"><span class="win-card__project">Fire Mapping</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Gautam Ahuja</div>
+              <div class="win-card__achievement">PRISM — Physician Rules Integrated with Small LLMs — co-authored at NeurIPS 2025 GenAI4Health Workshop after completing his CS capstone thesis.</div>
+              <div class="win-card__footer"><span class="win-card__project">Folk Computing</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pres">
+              <div class="win-card__name">Swapnanil Mukherjee</div>
+              <div class="win-card__achievement">Presented research on natural language knowledge integration for visual language models at EMNLP 2025 in Suzhou, China.</div>
+              <div class="win-card__footer"><span class="win-card__project">Multi-Modal Food Computing</span><span class="win-card__icon"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="stream-fy-note">Highlights from FY 2025-26</p>
       </section>
 
       <!-- CTA -->
@@ -523,5 +637,58 @@
   <script src="../src/js/main.js"></script>
   <script src="../src/js/search.js"></script>
   <script src="../src/js/page-canvases.js"></script>
+  <script>
+  // Duplicate stream cards for seamless loop
+  ['stream-row1', 'stream-row2'].forEach(function(id) {
+    var track = document.getElementById(id);
+    if (track) track.innerHTML += track.innerHTML;
+  });
+
+  // Spotlight Stage carousel
+  (function() {
+    var slides = document.querySelectorAll('.spotlight__slide');
+    var dotsContainer = document.getElementById('spotlight-dots');
+    // counter removed
+    var progressBar = document.getElementById('spotlight-bar');
+    if (!slides.length || !dotsContainer) return;
+    var current = 0;
+    var total = slides.length;
+    var interval = 5000;
+    var timer;
+
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('button');
+      dot.className = 'spotlight-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('data-index', i);
+      dot.setAttribute('aria-label', 'Award ' + (i + 1));
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-index')));
+        resetTimer();
+      });
+      dotsContainer.appendChild(dot);
+    }
+
+    function goTo(idx) {
+      slides[current].classList.remove('active');
+      dotsContainer.children[current].classList.remove('active');
+      current = idx;
+      slides[current].classList.add('active');
+      dotsContainer.children[current].classList.add('active');
+      progressBar.style.animation = 'none';
+      progressBar.offsetHeight;
+      progressBar.style.animation = 'spotlightFill ' + (interval / 1000) + 's linear infinite';
+    }
+
+    function next() { goTo((current + 1) % total); }
+    function resetTimer() { clearInterval(timer); timer = setInterval(next, interval); }
+    timer = setInterval(next, interval);
+
+    var stage = document.getElementById('spotlight');
+    if (stage) {
+      stage.addEventListener('mouseenter', function() { clearInterval(timer); });
+      stage.addEventListener('mouseleave', resetTimer);
+    }
+  })();
+  </script>
 </body>
 </html>

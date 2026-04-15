@@ -356,10 +356,10 @@ window.PROJECTS_DATA = {
     pis: [
       { name: 'Aalok Thakkar', slug: 'aalok-thakkar', role: 'Faculty, Computer Science' }
     ],
-    description: 'This project redesigns Introduction to Computer Science with formal methods tools (BOOP), scaffolded LLM interaction (SocraticAI), syntax obfuscation (OOPS), and Universal Design for Learning (UDL) principles to develop a relevant, adaptive, and inclusive curriculum.\n\nBOOP (Blueprint-Operations-OCaml-Proof) is a modified OCaml parser that enforces course-specific constraints with customized error messages. SocraticAI is a guardrailed LLM system for CS educational contexts with static filters blocking direct solution requests. Both tools were deployed in Ashoka\'s Summer 2025 Intro to CS course, benefiting 25 students directly.\n\nThe project produced 4 papers accepted at ACM COMPUTE 2025 and was selected for the India-AI Impact Summit Casebook published by the Ministry of Electronics & IT (MeitY), Government of India — launched at Bharat Mandapam, New Delhi on February 17, 2026. The tools have generated interest from IISc Bangalore and IIIT Hyderabad.',
+    description: 'This project redesigns Introduction to Computer Science with formal methods tools (BOOP), scaffolded LLM interaction (SocraticAI), syntax obfuscation (OOPS), and Universal Design for Learning (UDL) principles to develop a relevant, adaptive, and inclusive curriculum.\n\nBOOP (Blueprint-Operations-OCaml-Proof) is a modified OCaml parser that enforces course-specific constraints with customized error messages. SocraticAI is a guardrailed LLM system for CS educational contexts with static filters blocking direct solution requests. Both tools were deployed in Ashoka\'s Summer 2025 Intro to CS course, benefiting 25 students directly.\n\nThe project produced 4 papers accepted at ACM COMPUTE 2025. SocraticAI was featured as a case study in MeitY\'s Compendium on the Real-World Impact of AI in Education, launched at the India-AI Impact Summit, Bharat Mandapam, New Delhi on February 17, 2026. The tools have generated interest from IISc Bangalore and IIIT Hyderabad.',
     highlights: [
       '4 papers accepted and presented at ACM COMPUTE 2025',
-      'Selected for India-AI Impact Summit Casebook by the Ministry of Electronics and Information Technology — launched at Bharat Mandapam, Feb 17, 2026',
+      'SocraticAI featured as a case study in MeitY\'s Compendium on the Real-World Impact of AI in Education — launched at Bharat Mandapam, Feb 17, 2026',
       'BOOP and SocraticAI tools deployed in Ashoka CS courses, benefiting 49 students',
       'Interest from IISc Bangalore and IIIT Hyderabad in tool adoption',
       'Panel on AI Integration in Education at O.P. Jindal Global University',
@@ -381,11 +381,12 @@ window.PROJECTS_DATA = {
         type: 'conference'
       },
       {
-        title: 'Casebook on the Real-World Impact of AI in Education',
+        title: 'Compendium on the Real-World Impact of AI in Education (SocraticAI)',
         authors: ['Aalok Thakkar', 'Ayush Thonge'],
         venue: 'Ministry of Electronics & IT (MeitY), Government of India',
         year: 2026,
-        type: 'government'
+        type: 'government',
+        url: '../src/assets/docs/India-AI-Impact-Summit-2026-AI-in-Education-Compendium.pdf'
       }
     ],
     team: [

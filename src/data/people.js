@@ -9,7 +9,7 @@ window.PEOPLE_DATA = {
 
   'shantanu-bhanja': {
     name: 'Shantanu Bhanja',
-    role: 'Senior Advisor to the Chairman, Ashoka University',
+    role: 'Senior Advisor to Chairperson, Board of Trustees, Ashoka University',
     category: 'leadership',
     department: '',
     profileUrl: 'https://www.ashoka.edu.in/profile/shantanu-bhanja/',
@@ -19,7 +19,7 @@ window.PEOPLE_DATA = {
 
   'partha-pratim-chakrabarti': {
     name: 'Partha Pratim Chakrabarti',
-    role: 'Former Director, IIT Kharagpur',
+    role: 'Former Director, and Professor, IIT Kharagpur',
     category: 'leadership',
     department: '',
     profileUrl: 'https://www.ashoka.edu.in/profile/partha-pratim-chakrabarti/',
@@ -47,27 +47,9 @@ window.PEOPLE_DATA = {
     photo: ''
   },
 
-  'neeraj-kumar': {
-    name: 'Neeraj Kumar',
-    role: 'Lab Assistant',
-    category: 'staff',
-    department: '',
-    hasPhoto: false,
-    photo: ''
-  },
-
-  'deepraj-pandey': {
-    name: 'Deepraj Pandey',
-    role: 'Makerspace Co-Lead',
-    category: 'staff',
-    department: 'Makerspace',
-    hasPhoto: false,
-    photo: ''
-  },
-
   'sai-khurana': {
     name: 'Sai Khurana',
-    role: 'Makerspace Co-Lead',
+    role: 'Co-Lead',
     category: 'staff',
     department: 'Makerspace',
     hasPhoto: false,
@@ -76,18 +58,45 @@ window.PEOPLE_DATA = {
 
   'kanishk-singh': {
     name: 'Kanishk Singh',
-    role: 'Makerspace Co-Lead',
+    role: 'Co-Lead',
     category: 'staff',
     department: 'Makerspace',
     hasPhoto: false,
     photo: ''
   },
 
-  'deepak-jangra': {
-    name: 'Deepak Jangra',
-    role: 'Technical Staff, Makerspace',
+  'ojas-tripathi': {
+    name: 'Ojas Tripathi',
+    role: 'Community Engagement Manager',
     category: 'staff',
     department: 'Makerspace',
+    hasPhoto: false,
+    photo: ''
+  },
+
+  'neeraj-kumar': {
+    name: 'Neeraj Kumar',
+    role: 'Lab Attendant',
+    category: 'staff',
+    department: '',
+    hasPhoto: false,
+    photo: ''
+  },
+
+  'deepak-jangra': {
+    name: 'Deepak Jangra',
+    role: 'Lab Attendant',
+    category: 'staff',
+    department: '',
+    hasPhoto: false,
+    photo: ''
+  },
+
+  'priyanshi-bansal': {
+    name: 'Priyanshi Bansal',
+    role: 'Media and Communications',
+    category: 'staff',
+    department: '',
     hasPhoto: false,
     photo: ''
   },
@@ -293,42 +302,13 @@ window.PEOPLE_DATA = {
     photo: '../src/assets/images/people/anurag-agrawal.jpg'
   },
 
-  'maya-ramanath': {
-    name: 'Maya Ramanath',
-    role: 'Project Director, World Food Atlas',
-    category: 'faculty',
-    department: 'CHART',
-    hasPhoto: false,
-    photo: ''
-  },
-
-  'kritika-garg': {
-    name: 'Kritika Garg',
-    role: 'Former Faculty, Biology',
-    category: 'faculty',
-    department: 'Biology',
-    isFormer: true,
-    hasPhoto: true,
-    photo: '../src/assets/images/people/kritika-garg.jpg'
-  },
-
-  'madhavi-maganti': {
-    name: 'Madhavi Maganti',
-    role: 'Former Faculty, Psychology',
-    category: 'faculty',
-    department: 'Psychology',
-    isFormer: true,
-    hasPhoto: true,
-    photo: '../src/assets/images/people/madhavi-maganti.jpg'
-  },
-
   /* ── Researchers ── */
 
   'neerav-dwivedi': {
     name: 'Neerav Dwivedi',
     role: 'Senior Writing Fellow, Centre for Writing and Communication',
     category: 'researchers',
-    department: 'CWC',
+    department: 'AI@Ashoka',
     profileUrl: 'https://www.ashoka.edu.in/profile/neerav-dwivedi/',
     hasPhoto: false,
     photo: ''
@@ -338,7 +318,7 @@ window.PEOPLE_DATA = {
     name: 'Sampurna Dutta',
     role: 'Senior Writing Tutor, Centre for Writing and Communication',
     category: 'researchers',
-    department: 'CWC',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   },
@@ -347,7 +327,7 @@ window.PEOPLE_DATA = {
     name: 'Archishman Sarker',
     role: 'Senior Writing Tutor, Centre for Writing and Communication',
     category: 'researchers',
-    department: 'CWC',
+    department: 'AI@Ashoka',
     profileUrl: 'https://www.ashoka.edu.in/profile/archishman-sarker/',
     hasPhoto: false,
     photo: ''
@@ -366,7 +346,7 @@ window.PEOPLE_DATA = {
     name: 'Aditya Singh Rawat',
     role: 'Senior Research Associate, Cybersecurity',
     category: 'researchers',
-    department: 'Computer Science',
+    department: 'Cybersecurity',
     hasPhoto: false,
     photo: ''
   },
@@ -375,7 +355,7 @@ window.PEOPLE_DATA = {
     name: 'Pritam Chandra',
     role: 'Research Associate, Cybersecurity',
     category: 'researchers',
-    department: 'Computer Science',
+    department: 'Cybersecurity',
     hasPhoto: false,
     photo: ''
   },
@@ -384,7 +364,7 @@ window.PEOPLE_DATA = {
     name: 'Ritu Panwar',
     role: 'Postdoctoral Fellow, Evolutionary Biology',
     category: 'researchers',
-    department: 'Biology',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   },
@@ -402,7 +382,7 @@ window.PEOPLE_DATA = {
     name: 'Aditi Singh',
     role: 'Research Associate, Triple-Negative Breast Cancer',
     category: 'researchers',
-    department: 'Biology',
+    department: 'CHART',
     hasPhoto: false,
     photo: ''
   },
@@ -411,7 +391,7 @@ window.PEOPLE_DATA = {
     name: 'Vedant Ingawale',
     role: 'Research Assistant, Triple-Negative Breast Cancer',
     category: 'researchers',
-    department: 'Biology',
+    department: 'CHART',
     hasPhoto: false,
     photo: ''
   },
@@ -420,7 +400,7 @@ window.PEOPLE_DATA = {
     name: 'Pritam Biswas',
     role: 'Research Associate, Dengue Drug Discovery',
     category: 'researchers',
-    department: 'Chemistry',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   },
@@ -429,7 +409,7 @@ window.PEOPLE_DATA = {
     name: 'Aawaj Kuloong Rai',
     role: 'Research Associate, Dengue Drug Discovery',
     category: 'researchers',
-    department: 'Chemistry',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   },
@@ -438,7 +418,7 @@ window.PEOPLE_DATA = {
     name: 'Shivam Kheral',
     role: 'Project Assistant, Carbon Capture Research',
     category: 'researchers',
-    department: 'Chemistry',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   },
@@ -447,7 +427,7 @@ window.PEOPLE_DATA = {
     name: 'Zeeshan Nazir',
     role: 'Project Assistant, Carbon Capture Research',
     category: 'researchers',
-    department: 'Chemistry',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   },
@@ -456,7 +436,7 @@ window.PEOPLE_DATA = {
     name: 'Pavinap Priya',
     role: 'Project Assistant, Dengue Immunology',
     category: 'researchers',
-    department: 'Biology',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   },
@@ -465,7 +445,7 @@ window.PEOPLE_DATA = {
     name: 'Mezya Sezen',
     role: 'Project Assistant, Dengue Immunology',
     category: 'researchers',
-    department: 'Biology',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   },
@@ -474,7 +454,7 @@ window.PEOPLE_DATA = {
     name: 'Abdullah Haneef',
     role: 'Research Assistant, Cancer Diagnostics',
     category: 'researchers',
-    department: 'Computer Science',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   },
@@ -483,7 +463,7 @@ window.PEOPLE_DATA = {
     name: 'Philip Cherian',
     role: 'PhD Student, BharatSim',
     category: 'researchers',
-    department: 'Physics',
+    department: 'BharatSim',
     hasPhoto: false,
     photo: ''
   },
@@ -519,15 +499,6 @@ window.PEOPLE_DATA = {
     name: 'Rohit Kumar Vishwakarma',
     role: 'Research Assistant, Table-Top Experiments',
     category: 'researchers',
-    department: 'Physics',
-    hasPhoto: false,
-    photo: ''
-  },
-
-  'ojas-tripathi': {
-    name: 'Ojas Tripathi',
-    role: 'Community-Making Lead, Makerspace',
-    category: 'researchers',
     department: 'Makerspace',
     hasPhoto: false,
     photo: ''
@@ -555,7 +526,7 @@ window.PEOPLE_DATA = {
     name: 'Krishanu Kanta',
     role: 'Project Assistant, Evolutionary Biology',
     category: 'researchers',
-    department: 'Biology',
+    department: 'AI@Ashoka',
     hasPhoto: false,
     photo: ''
   }

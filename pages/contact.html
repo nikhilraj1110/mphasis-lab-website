@@ -248,79 +248,37 @@
       </section>
 
       <!-- Collaborators & Partners -->
-      <section class="section">
+      <section class="section section--dark section--lg">
         <div class="container">
           <div class="section__header text-center reveal">
-            <span class="section__eyebrow">Network</span>
-            <h2 class="section__title">Our Collaborators</h2>
+            <span class="section__eyebrow">15+ Countries</span>
+            <h2 class="section__title">Global Research Footprint</h2>
             <p class="section__description">
-              We work with 40+ institutional and industry partners worldwide — from clinical hospitals and national agencies to leading international universities.
+              Research partners, conference presentations, student placements, and industry collaborations across 15+ countries.
             </p>
           </div>
 
-          <!-- International -->
-          <div style="margin-bottom: var(--space-8);">
-            <h3 class="text-sm font-semibold text-muted text-center reveal" style="text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-5);">International Partners</h3>
-            <div class="collaborator-logos reveal-stagger">
-              <span class="reveal collaborator-logos__logo"><img src="../src/assets/images/logos/partners/oxford.png" alt="University of Oxford" loading="lazy"></span>
-              <span class="reveal collaborator-logos__logo"><img src="../src/assets/images/logos/partners/stanford.png" alt="Stanford University" loading="lazy"></span>
-              <span class="reveal">UC Irvine</span>
-              <span class="reveal collaborator-logos__logo"><img src="../src/assets/images/logos/partners/mcgill.png" alt="McGill University" loading="lazy"></span>
-              <span class="reveal">U of South Carolina</span>
-              <span class="reveal">Johns Hopkins University</span>
-              <span class="reveal">U of Southampton</span>
-              <span class="reveal">Complutense University of Madrid</span>
-              <span class="reveal collaborator-logos__logo"><img src="../src/assets/images/logos/partners/wellcome-trust.png" alt="Wellcome Trust" loading="lazy"></span>
-              <span class="reveal">WHO-SEARO</span>
-              <span class="reveal">Kew Library, UK</span>
-            </div>
-          </div>
+          <div id="globe-container" class="reveal" style="width: 100%; margin: 0 auto;"></div>
 
-          <!-- National Research -->
-          <div style="margin-bottom: var(--space-8);">
-            <h3 class="text-sm font-semibold text-muted text-center reveal" style="text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-5);">National Research Institutions</h3>
-            <div class="collaborator-logos reveal-stagger">
-              <span class="reveal">AIIMS New Delhi</span>
-              <span class="reveal">IIT Kharagpur</span>
-              <span class="reveal">IIT Bombay</span>
-              <span class="reveal collaborator-logos__logo"><img src="../src/assets/images/logos/partners/iit-delhi.png" alt="IIT Delhi" loading="lazy"></span>
-              <span class="reveal collaborator-logos__logo"><img src="../src/assets/images/logos/partners/iisc.png" alt="IISc Bengaluru" loading="lazy"></span>
-              <span class="reveal">IISER Pune</span>
-              <span class="reveal">IISER Kolkata</span>
-              <span class="reveal">S.N. Bose National Centre</span>
-              <span class="reveal">CMC Vellore</span>
-              <span class="reveal collaborator-logos__logo"><img src="../src/assets/images/logos/partners/ncbs.png" alt="NCBS Bangalore" loading="lazy"></span>
-              <span class="reveal">NIN/ICMR Hyderabad</span>
-              <span class="reveal">Max Hospital, Delhi</span>
-              <span class="reveal">Dr. RML Hospital, Delhi</span>
-            </div>
-          </div>
-
-          <!-- Government -->
-          <div style="margin-bottom: var(--space-8);">
-            <h3 class="text-sm font-semibold text-muted text-center reveal" style="text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-5);">Government &amp; National Bodies</h3>
-            <div class="collaborator-logos reveal-stagger">
-              <span class="reveal">National AIDS Control Organisation</span>
-              <span class="reveal">Ministry of Electronics &amp; IT / India-AI Mission</span>
-              <span class="reveal">Bureau of Indian Standards</span>
-              <span class="reveal">Border Security Force Academy, Gwalior</span>
-              <span class="reveal">Observational Health Data Sciences and Informatics (OHDSI) India Chapter</span>
-              <span class="reveal">National Disease Modeling Consortium</span>
-            </div>
-          </div>
-
-          <!-- Industry -->
-          <div>
-            <h3 class="text-sm font-semibold text-muted text-center reveal" style="text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-5);">Industry &amp; Ecosystem</h3>
-            <div class="collaborator-logos reveal-stagger">
-              <span class="reveal">Karya Inc. &amp; Microsoft Research</span>
-              <span class="reveal">TinkerHub Foundation</span>
-              <span class="reveal">Param Innovation</span>
-              <span class="reveal">Maker Bhavan Foundation</span>
-              <span class="reveal">Passionfruit Labs</span>
-            </div>
-          </div>
-
+          <style>
+            .globe-legend {
+              text-align: center;
+              font-size: 0.75rem;
+              font-family: var(--font-mono, 'JetBrains Mono', monospace);
+              color: rgba(255,255,255,0.6);
+              margin-top: var(--space-4, 16px);
+              letter-spacing: 0.02em;
+            }
+            .globe-legend span {
+              font-size: 0.65rem;
+            }
+            @media (max-width: 640px) {
+              .globe-legend {
+                font-size: 0.65rem;
+                line-height: 1.8;
+              }
+            }
+          </style>
         </div>
       </section>
 
@@ -429,5 +387,7 @@
   <script src="../src/js/main.js"></script>
   <script src="../src/js/search.js"></script>
   <script src="../src/js/page-canvases.js"></script>
+  <script src="../src/vendor/three.min.js"></script>
+  <script src="../src/js/globe.js"></script>
 </body>
 </html>

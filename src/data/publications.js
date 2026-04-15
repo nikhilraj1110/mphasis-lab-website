@@ -10,13 +10,24 @@ window.PUBLICATIONS_DATA = [
      ═══════════════════════════════════════════ */
 
   {
-    title: 'Casebook on the Real-World Impact of AI in Education',
+    title: 'Compendium on the Real-World Impact of AI in Education (SocraticAI)',
     authors: ['Aalok Thakkar', 'Ayush Thonge'],
     venue: 'Ministry of Electronics & IT (MeitY), Government of India — India-AI Impact Summit',
     year: 2026,
     type: 'report',
     pillar: 'ai',
-    url: ''
+    url: '../src/assets/docs/India-AI-Impact-Summit-2026-AI-in-Education-Compendium.pdf'
+  },
+
+  {
+    title: 'Molecular Profiling of a Triple-negative Breast Cancer Cohort in India for EGFR and AR expression analyzed for patient outcomes showed a distinct subset of cellular co-expression',
+    authors: ['Pooja Vaid', 'Anirudha Puntambekar', 'Pranali Kanse', 'Shweta Kadu', 'Piyush Agrawal', 'Aditi Khatpe', 'Rituja Banale', 'Ruhi Reddy', 'Devaki A. Kelkar', 'Sridhar Hannenhalli', 'L S Shashidhara', 'Chaitanyanand Koppiker', 'Madhura Kulkarni'],
+    venue: 'Scientific Reports',
+    year: 2026,
+    type: 'journal',
+    pillar: 'chart',
+    url: 'https://www.nature.com/articles/s41598-026-40913-9',
+    doi: '10.1038/s41598-026-40913-9'
   },
 
   /* ═══════════════════════════════════════════
@@ -42,7 +53,8 @@ window.PUBLICATIONS_DATA = [
     year: 2025,
     type: 'journal',
     pillar: 'bharatsim',
-    doi: '10.1186/s12889-025-21218-2'
+    url: 'https://link.springer.com/article/10.1186/s12889-025-25358-5',
+    doi: '10.1186/s12889-025-25358-5'
   },
 
   {
@@ -264,7 +276,8 @@ window.PUBLICATIONS_DATA = [
     year: 2024,
     type: 'preprint',
     pillar: 'ai',
-    doi: '10.1101/2024.11.26.625418v1'
+    url: 'https://www.biorxiv.org/content/10.1101/2024.11.26.625418v1',
+    doi: '10.1101/2024.11.26.625418'
   },
 
   {
