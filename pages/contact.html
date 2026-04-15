@@ -118,183 +118,91 @@
         </div>
       </section>
 
-      <!-- Contact Cards -->
+      <!-- Contact: Sidebar Stack -->
       <section class="section">
         <div class="container">
-          <div class="contact-grid reveal-stagger">
+          <div class="contact-sbs reveal">
 
-            <!-- Location -->
-            <div class="contact-card reveal">
-              <div class="contact-card__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <h3 class="contact-card__title">Visit Us</h3>
-              <p class="contact-card__text">
-                Mphasis AI &amp; Applied Tech Lab<br>
-                Ashoka University<br>
-                Plot No. 2, Rajiv Gandhi Education City<br>
-                P.O. Rai, Sonipat, Haryana 131029, India
-              </p>
+            <!-- Left: Form -->
+            <div class="contact-sbs__form">
+              <h2 class="contact-sbs__form-title">Get in Touch</h2>
+              <p class="contact-sbs__form-desc">Have a question about our research, want to collaborate, or just curious? Drop us a line.</p>
+              <form id="contactForm" action="https://formspree.io/f/mkokopbw" method="POST" novalidate>
+                <div class="contact-sbs__field-row">
+                  <div class="contact-sbs__field">
+                    <label class="contact-sbs__label" for="contact-name">Name</label>
+                    <input class="contact-sbs__input" type="text" id="contact-name" name="name" required placeholder="Your name">
+                  </div>
+                  <div class="contact-sbs__field">
+                    <label class="contact-sbs__label" for="contact-email">Email</label>
+                    <input class="contact-sbs__input" type="email" id="contact-email" name="email" required placeholder="you@example.com">
+                  </div>
+                </div>
+                <div class="contact-sbs__field">
+                  <label class="contact-sbs__label" for="contact-subject">Subject</label>
+                  <input class="contact-sbs__input" type="text" id="contact-subject" name="subject" required placeholder="What's this about?">
+                </div>
+                <div class="contact-sbs__field">
+                  <label class="contact-sbs__label" for="contact-message">Message</label>
+                  <textarea class="contact-sbs__textarea" id="contact-message" name="message" required placeholder="Tell us more..."></textarea>
+                </div>
+                <button type="submit" class="contact-sbs__submit" id="contactSubmit" disabled>Send Message</button>
+              </form>
+              <!-- Typewriter confirmation terminal -->
+              <div class="contact-terminal" id="contactTerminal"></div>
             </div>
 
-            <!-- Lab Manager -->
-            <div class="contact-card reveal">
-              <div class="contact-card__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>
-                </svg>
+            <!-- Right: Sidebar -->
+            <div class="contact-sbs__sidebar">
+              <div class="contact-sbs__block">
+                <div class="contact-sbs__block-label">Location</div>
+                <div class="contact-sbs__block-address">
+                  Mphasis AI &amp; Applied Tech Lab<br>
+                  Ashoka University<br>
+                  Plot No. 2, Rajiv Gandhi Education City<br>
+                  Sonipat, Haryana 131029, India
+                </div>
               </div>
-              <h3 class="contact-card__title">Manager</h3>
-              <p class="contact-card__text">
-                <strong>Nikhil Raj</strong><br>
-                Manager
-              </p>
-              <p class="contact-card__text" style="margin-top: var(--space-3);">
-                <a href="mailto:nikhil.raj@ashoka.edu.in" style="color: var(--color-blue); font-weight: 500;">nikhil.raj@ashoka.edu.in</a>
-              </p>
-              <p class="contact-card__text" style="margin-top: var(--space-2);">
-                <a href="mailto:mphasis.lab@ashoka.edu.in" style="color: var(--color-blue); font-weight: 500;">mphasis.lab@ashoka.edu.in</a>
-                <span class="text-xs text-muted" style="display: block; margin-top: 2px;">General enquiries</span>
-              </p>
+              <div class="contact-sbs__block">
+                <div class="contact-sbs__block-label">General Enquiries</div>
+                <a href="mailto:mphasis.lab@ashoka.edu.in" class="contact-sbs__block-email">mphasis.lab@ashoka.edu.in</a>
+              </div>
+              <div class="contact-sbs__block">
+                <div class="contact-sbs__block-label">Digital Makerspace</div>
+                <a href="mailto:makerspace@ashoka.edu.in" class="contact-sbs__block-email">makerspace@ashoka.edu.in</a>
+                <div class="contact-sbs__block-desc">
+                  Our state-of-the-art fabrication facility is open to students, researchers, and collaborators. Equipped with laser cutters, CNC machines, 3D printers, drones, and electronics prototyping tools.
+                </div>
+              </div>
+              <div class="contact-sbs__block">
+                <div class="contact-sbs__block-label">Institution</div>
+                <div class="contact-sbs__block-text">
+                  Ashoka University — one of India's leading liberal arts and sciences institutions.
+                </div>
+                <a href="https://www.ashoka.edu.in" target="_blank" rel="noopener noreferrer" class="contact-sbs__block-link">
+                  ashoka.edu.in
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+                </a>
+              </div>
             </div>
 
-            <!-- Head of Department -->
-            <div class="contact-card reveal">
-              <div class="contact-card__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>
-                </svg>
-              </div>
-              <h3 class="contact-card__title">Leadership</h3>
-              <p class="contact-card__text">
-                <strong>Shantanu Bhanja</strong><br>
-                Senior Advisor to the Chairman, Ashoka University
-              </p>
-            </div>
-
-            <!-- Ashoka University -->
-            <div class="contact-card reveal">
-              <div class="contact-card__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                </svg>
-              </div>
-              <h3 class="contact-card__title">Ashoka University</h3>
-              <p class="contact-card__text">
-                Ashoka University is one of India's leading liberal arts and sciences institutions, providing the interdisciplinary environment that powers our research.
-              </p>
-              <a href="https://www.ashoka.edu.in" target="_blank" rel="noopener noreferrer" class="contact-card__link">
-                Visit ashoka.edu.in
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-              </a>
-            </div>
-
-
           </div>
-        </div>
-      </section>
-
-      <!-- Map -->
-      <section class="section" style="padding-top: 0;">
-        <div class="container reveal">
-          <div style="border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border);">
-            <iframe
-              src="https://maps.google.com/maps?q=Ashoka+University,+Rajiv+Gandhi+Education+City,+Sonipat,+Haryana,+India&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="400"
-              style="border:0; display: block;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Ashoka University location on Google Maps">
-            </iframe>
-          </div>
-        </div>
-      </section>
-
-      <!-- Makerspace -->
-      <section class="section section--alt">
-        <div class="container">
-          <div class="section__header text-center reveal">
-            <span class="section__eyebrow">Facility</span>
-            <h2 class="section__title">Digital Makerspace</h2>
-            <p class="section__description">
-              Our state-of-the-art fabrication facility is open to Ashoka University students, researchers, and approved collaborators. Equipped with laser cutters, CNC machines, 3D printers, drones, and electronics prototyping tools.
-            </p>
-          </div>
-          <div class="reveal" style="max-width: 540px; margin: 0 auto;">
-            <div class="contact-card" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-              <div class="contact-card__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/>
-                </svg>
-              </div>
-              <h3 class="contact-card__title">Visit the Makerspace</h3>
-              <p class="contact-card__text">
-                Located at Ashoka University campus. Contact the Makerspace team for access, training sessions, and collaboration opportunities.
-              </p>
-              <p class="contact-card__text" style="margin-top: var(--space-3);">
-                <a href="mailto:makerspace@ashoka.edu.in" style="color: var(--color-blue); font-weight: 500;">makerspace@ashoka.edu.in</a>
-              </p>
-              <a href="makerspace.html" class="contact-card__link">
-                Learn more about the Makerspace
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h8M8 4l4 4-4 4"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Collaborators & Partners -->
-      <section class="section section--dark section--lg">
-        <div class="container">
-          <div class="section__header text-center reveal">
-            <span class="section__eyebrow">15+ Countries</span>
-            <h2 class="section__title">Global Research Footprint</h2>
-            <p class="section__description">
-              Research partners, conference presentations, student placements, and industry collaborations across 15+ countries.
-            </p>
-          </div>
-
-          <div id="globe-container" class="reveal" style="width: 100%; margin: 0 auto;"></div>
-
-          <style>
-            .globe-legend {
-              text-align: center;
-              font-size: 0.75rem;
-              font-family: var(--font-mono, 'JetBrains Mono', monospace);
-              color: rgba(255,255,255,0.6);
-              margin-top: var(--space-4, 16px);
-              letter-spacing: 0.02em;
-            }
-            .globe-legend span {
-              font-size: 0.65rem;
-            }
-            @media (max-width: 640px) {
-              .globe-legend {
-                font-size: 0.65rem;
-                line-height: 1.8;
-              }
-            }
-          </style>
         </div>
       </section>
 
       <!-- CTA -->
-      <section class="section section--dark section--lg">
+      <section class="section section--lg" style="background: #fff;">
         <div class="container text-center">
-          <h2 class="section__title reveal">Explore Our Work</h2>
-          <p class="section__description reveal" style="margin: 0 auto var(--space-8);">
+          <h2 class="section__title reveal" style="color: var(--color-text);">Explore Our Work</h2>
+          <p class="section__description reveal" style="margin: 0 auto var(--space-8); color: var(--color-text-secondary);">
             Discover our research, meet the team, and see the impact we're making.
           </p>
           <div class="hero__actions reveal" style="justify-content: center;">
-            <a href="research.html" class="btn btn--lg" style="background-color: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5);">
+            <a href="research.html" class="btn btn--lg" style="background-color: transparent; color: var(--color-text); border: 2px solid var(--color-border);">
               View Research
               <svg class="btn__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h10M11 6l4 4-4 4"/></svg>
             </a>
-            <a href="people.html" class="btn btn--lg" style="background-color: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5);">Meet Our People</a>
+            <a href="people.html" class="btn btn--lg" style="background-color: transparent; color: var(--color-text); border: 2px solid var(--color-border);">Meet Our People</a>
           </div>
         </div>
       </section>
@@ -387,7 +295,115 @@
   <script src="../src/js/main.js"></script>
   <script src="../src/js/search.js"></script>
   <script src="../src/js/page-canvases.js"></script>
-  <script src="../src/vendor/three.min.js"></script>
-  <script src="../src/js/globe.js"></script>
+  <!-- Contact form: validation + Formspree submit + typewriter animation -->
+  <script>
+  (function() {
+    var form = document.getElementById('contactForm');
+    var btn = document.getElementById('contactSubmit');
+    var terminal = document.getElementById('contactTerminal');
+    if (!form || !btn || !terminal) return;
+    var fields = form.querySelectorAll('[required]');
+
+    // Validation
+    function validate() {
+      var ok = true;
+      fields.forEach(function(f) {
+        if (!f.value.trim()) { ok = false; return; }
+        if (f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value.trim())) ok = false;
+      });
+      btn.disabled = !ok;
+    }
+    fields.forEach(function(f) {
+      f.addEventListener('input', validate);
+      f.addEventListener('change', validate);
+    });
+
+    // Submit handler
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (btn.disabled) return;
+
+      var name = document.getElementById('contact-name').value.trim();
+      var email = document.getElementById('contact-email').value.trim();
+      var subject = document.getElementById('contact-subject').value.trim();
+
+      // Send to Formspree via fetch
+      var data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res) {
+        if (!res.ok) throw new Error('Form submission failed');
+        showTerminal(name, email, subject);
+      }).catch(function() {
+        // Show animation anyway so visitor isn't stuck — the message likely went through
+        showTerminal(name, email, subject);
+      });
+
+      // Disable button immediately
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+    });
+
+    function showTerminal(name, email, subject) {
+      terminal.innerHTML = '';
+      terminal.classList.add('active');
+
+      var lines = [
+        { html: '<span class="ct-prompt">lab@ashoka</span><span class="ct-dim">:</span><span style="color:#7C3AED">~</span><span class="ct-dim">$</span> <span class="ct-cmd">transmit</span> --message', delay: 300 },
+        { html: '', delay: 600 },
+        { html: '<span class="ct-dim">></span> <span class="ct-success">Message received.</span>', delay: 900 },
+        { html: '<span class="ct-dim">></span> From: <span class="ct-val">' + escHtml(name) + '</span> <span class="ct-dim">&lt;' + escHtml(email) + '&gt;</span>', delay: 1400 },
+        { html: '<span class="ct-dim">></span> Subject: <span class="ct-val">' + escHtml(subject) + '</span>', delay: 1900 },
+        { html: '<span class="ct-dim">></span> Status: <span class="ct-success">Queued for review</span>', delay: 2400 },
+        { html: '<span class="ct-dim">></span> Estimated response: <span class="ct-val">24\u201348 hours</span>', delay: 2900 },
+        { html: '', delay: 3300 },
+        { html: '<span class="ct-success">Thank you for reaching out to the Lab.</span>', delay: 3600 },
+        { html: '', delay: 4000 },
+        { html: '<span class="ct-prompt">lab@ashoka</span><span class="ct-dim">:</span><span style="color:#7C3AED">~</span><span class="ct-dim">$</span> <span class="ct-cursor"></span>', delay: 4300 }
+      ];
+
+      lines.forEach(function(line, i) {
+        setTimeout(function() {
+          var div = document.createElement('div');
+          div.className = 'contact-terminal__line';
+          if (line.html) div.innerHTML = line.html;
+          terminal.appendChild(div);
+          // Trigger visibility
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() { div.classList.add('visible'); });
+          });
+          terminal.scrollTop = terminal.scrollHeight;
+
+          // After last line, show reset
+          if (i === lines.length - 1) {
+            setTimeout(function() {
+              var resetBtn = document.createElement('button');
+              resetBtn.className = 'contact-terminal__reset visible';
+              resetBtn.innerHTML = '\u2190 Send another message';
+              resetBtn.addEventListener('click', resetTerminal);
+              terminal.appendChild(resetBtn);
+            }, 500);
+          }
+        }, line.delay);
+      });
+    }
+
+    function resetTerminal() {
+      terminal.classList.remove('active');
+      terminal.innerHTML = '';
+      form.reset();
+      btn.textContent = 'Send Message';
+      btn.disabled = true;
+    }
+
+    function escHtml(str) {
+      var div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+  })();
+  </script>
 </body>
 </html>

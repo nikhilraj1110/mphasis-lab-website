@@ -501,6 +501,16 @@
               <div class="win-card__achievement">"Accessibility Beyond Accommodations" — led research on redesigning CS courses for students with visual impairments. Published at ACM COMPUTE 2025.</div>
               <div class="win-card__footer"><span class="win-card__project">CS Pedagogy</span><span class="win-card__icon"></span></div>
             </div>
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Arup Mondal</div>
+              <div class="win-card__achievement">CS PhD researcher who co-authored three papers in a single year — NeuroCrypt (AAAI 2022), BEAS, and SCOTCH (both AAAI PPAI-22 Workshop) — advancing privacy-preserving AI and federated learning.</div>
+              <div class="win-card__footer"><span class="win-card__project">Cybersecurity</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Chanda Grover</div>
+              <div class="win-card__achievement">Co-authored "ContextCLIP: Contextual Alignment of Image-Text pairs on CLIP visual representations" — published at ACM ICVGIP 2022.</div>
+              <div class="win-card__footer"><span class="win-card__project">AI@Ashoka</span><span class="win-card__icon"></span></div>
+            </div>
           </div>
         </div>
 
@@ -542,10 +552,57 @@
               <div class="win-card__achievement">Presented research on natural language knowledge integration for visual language models at EMNLP 2025 in Suzhou, China.</div>
               <div class="win-card__footer"><span class="win-card__project">Multi-Modal Food Computing</span><span class="win-card__icon"></span></div>
             </div>
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Vaani Goenka</div>
+              <div class="win-card__achievement">"Treating the Test-Case Myopia" — a framework for correctness-first CS education — accepted at ITiCSE 2026, to be presented in Spain.</div>
+              <div class="win-card__footer"><span class="win-card__project">CS Pedagogy</span><span class="win-card__icon"></span></div>
+            </div>
+            <div class="win-card" data-type="pub">
+              <div class="win-card__name">Ayush Thonge</div>
+              <div class="win-card__achievement">"A Good Rubber Duck Does Not Quack" — designing Socratic scaffolding in AI tutors — accepted at ITiCSE 2026, to be presented in Spain.</div>
+              <div class="win-card__footer"><span class="win-card__project">CS Pedagogy</span><span class="win-card__icon"></span></div>
+            </div>
           </div>
         </div>
 
         <p class="stream-fy-note">Highlights from FY 2025-26</p>
+      </section>
+
+      <!-- ═══════════════════════════════════════
+           GLOBAL RESEARCH FOOTPRINT
+           ═══════════════════════════════════════ -->
+      <section class="section section--dark section--lg">
+        <div class="container">
+          <div class="section__header text-center reveal">
+            <span class="section__eyebrow">15+ Countries</span>
+            <h2 class="section__title">Global Research Footprint</h2>
+            <p class="section__description">
+              Research partners, conference presentations, student placements, and industry collaborations across 15+ countries.
+            </p>
+          </div>
+
+          <div id="globe-container" class="reveal" style="width: 100%; margin: 0 auto;"></div>
+
+          <style>
+            .globe-legend {
+              text-align: center;
+              font-size: 0.75rem;
+              font-family: var(--font-mono, 'JetBrains Mono', monospace);
+              color: rgba(255,255,255,0.6);
+              margin-top: var(--space-4, 16px);
+              letter-spacing: 0.02em;
+            }
+            .globe-legend span {
+              font-size: 0.65rem;
+            }
+            @media (max-width: 640px) {
+              .globe-legend {
+                font-size: 0.65rem;
+                line-height: 1.8;
+              }
+            }
+          </style>
+        </div>
       </section>
 
       <!-- CTA -->
@@ -637,6 +694,8 @@
   <script src="../src/js/main.js"></script>
   <script src="../src/js/search.js"></script>
   <script src="../src/js/page-canvases.js"></script>
+  <script src="../src/vendor/three.min.js"></script>
+  <script src="../src/js/globe.js"></script>
   <script>
   // Duplicate stream cards for seamless loop
   ['stream-row1', 'stream-row2'].forEach(function(id) {

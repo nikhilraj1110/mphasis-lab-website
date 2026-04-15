@@ -23,6 +23,9 @@
     { lat: 40.45, lng: -3.73, name: 'Complutense University of Madrid (GRASIA)', category: 'research' },
     { lat: 51.52, lng: -0.13, name: 'Wellcome Trust, UK', category: 'research' },
     { lat: 42.39, lng: -72.53, name: 'UMass Amherst', category: 'research' },
+    { lat: 11.93, lng: 79.83, name: 'French Institute of Pondicherry', category: 'research' },
+    { lat: 47.62, lng: -122.35, name: 'Allen Institute of Cell Science, Seattle', category: 'research' },
+    { lat: 52.08, lng: 4.31, name: 'Many Babies Consortium', category: 'research' },
 
     // ── Research Institutions (India) ──
     { lat: 28.57, lng: 77.21, name: 'AIIMS New Delhi', category: 'research-india' },
@@ -37,6 +40,7 @@
     { lat: 13.07, lng: 77.58, name: 'NCBS Bangalore', category: 'research-india' },
     { lat: 17.38, lng: 78.49, name: 'NIN/ICMR Hyderabad', category: 'research-india' },
     { lat: 19.13, lng: 72.92, name: 'National Disease Modeling Consortium', category: 'research-india' },
+    { lat: 28.53, lng: 77.58, name: 'Shiv Nadar University', category: 'research-india' },
 
     // ── Clinical Partners ──
     { lat: 28.57, lng: 77.21, name: 'Max Hospital, Delhi', category: 'clinical' },
@@ -67,6 +71,13 @@
     { lat: 48.85, lng: 2.35, name: 'Sorbonne University, Paris', category: 'conference' },
     { lat: 10.76, lng: 79.14, name: 'SASTRA, Thanjavur', category: 'conference' },
     { lat: 34.08, lng: 74.80, name: 'NIT Srinagar (NCVPRIPG 2025)', category: 'conference' },
+    { lat: 52.51, lng: 13.39, name: 'TU Berlin', category: 'conference' },
+    { lat: 52.24, lng: 6.85, name: 'University of Twente, Netherlands (IFOW 2024)', category: 'conference' },
+    { lat: 13.76, lng: 100.50, name: 'IDM 2024, Bangkok', category: 'conference' },
+    { lat: 33.75, lng: -84.39, name: 'IEEE Radar Conference 2021, Atlanta', category: 'conference' },
+    { lat: 23.22, lng: 72.68, name: 'IIT Gandhinagar (IAMS 2025)', category: 'conference' },
+    { lat: 28.61, lng: 77.21, name: 'India-AI Impact Summit 2026, Bharat Mandapam', category: 'conference' },
+    { lat: 19.28, lng: 84.79, name: 'IISER Berhampur (ISEB 2025)', category: 'conference' },
 
     // ── Student Placements ──
     { lat: -35.28, lng: 149.13, name: 'ANU, Canberra (Student Placement)', category: 'placement' },
