@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About the Mphasis AI & Applied Tech Lab at Ashoka University — mission, vision, partnership, and research pillars.">
+  <meta name="theme-color" content="#1B2A4A">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="About | Mphasis AI & Applied Tech Lab">
+  <meta property="og:description" content="Advancing interdisciplinary research in AI, health, fabrication, and beyond at Ashoka University.">
+  <meta property="og:type" content="website">
+
+  <title>About — The Lens | Mphasis AI & Applied Tech Lab</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="src/assets/images/logos/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="src/assets/images/logos/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="src/assets/images/logos/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="src/css/variables.css">
+  <link rel="stylesheet" href="src/css/reset.css">
+  <link rel="stylesheet" href="src/css/base.css">
+  <link rel="stylesheet" href="src/css/layout.css">
+  <link rel="stylesheet" href="src/css/header.css">
+  <link rel="stylesheet" href="src/css/footer.css">
+  <link rel="stylesheet" href="src/css/components.css">
+  <link rel="stylesheet" href="src/css/animations.css">
+  <link rel="stylesheet" href="src/css/pages.css">
+  <link rel="stylesheet" href="src/css/utilities.css">
+  <link rel="stylesheet" href="src/css/search.css">
+
+  <style>
+    /* ============================================
+       THE LENS — Stack-Scroll Split Panel Layout
+       ============================================ */
+
+    /* ── Nav Dots ── */
+    .lens-dots {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .lens-dots__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .lens-dots__dot--light {
+      background: rgba(10,25,41,0.15);
+      border-color: rgba(10,25,41,0.3);
+    }
+    .lens-dots__dot--active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      transform: scale(1.3);
+      box-shadow: 0 0 8px rgba(0,155,222,0.5);
+    }
+
+    /* ── Split Panel System ── */
+    .lens-panel {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .lens-panel--dark {
+      background: var(--color-bg-dark);
+      color: var(--color-text-inverse);
+    }
+    .lens-panel--light {
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
+
+    .split {
+      display: flex;
+      min-height: 100vh;
+    }
+    .split__left,
+    .split__right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-16) var(--space-10);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── Panel 1: Hero ── */
+    .lens-hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-32) var(--space-8);
+    }
+    .lens-hero__inner {
+      max-width: 800px;
+    }
+    .lens-hero__eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-4);
+      display: block;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: lensReveal 0.8s ease forwards 0.2s;
+    }
+    .lens-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: var(--weight-bold);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      margin-bottom: var(--space-6);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: lensReveal 0.8s ease forwards 0.4s;
+    }
+    .lens-hero__desc {
+      font-family: var(--font-sans);
+      font-size: var(--text-lg);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: lensReveal 0.8s ease forwards 0.6s;
+    }
+    .lens-hero canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    @keyframes lensReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Panel 2: Mission ── */
+    .mission-text h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: var(--weight-bold);
+      margin-bottom: var(--space-6);
+      color: #fff;
+    }
+    .mission-text p {
+      font-family: var(--font-sans);
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: rgba(255,255,255,0.75);
+      margin-bottom: var(--space-5);
+    }
+    .mission-text p:last-child {
+      margin-bottom: 0;
+    }
+    .mission-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .mission-visual canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── Panel 3: Pillars ── */
+    .pillars-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      width: 100%;
+      max-width: 480px;
+    }
+    .pillar-card-mini {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-5) var(--space-6);
+      border-radius: var(--radius-lg);
+      background: #fff;
+      border: 1px solid var(--color-border-light);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .pillar-card-mini:hover {
+      transform: translateX(8px);
+      box-shadow: var(--shadow-lg);
+    }
+    .pillar-card-mini__dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .pillar-card-mini__name {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: var(--weight-semibold);
+      flex: 1;
+    }
+    .pillar-card-mini__desc {
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-normal);
+      flex: 2;
+    }
+    .pillar-card-mini__arrow {
+      color: var(--color-text-muted);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .pillar-card-mini:hover .pillar-card-mini__arrow {
+      transform: translateX(4px);
+    }
+
+    .pillars-ambient {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pillars-ambient__big-number {
+      font-family: var(--font-display);
+      font-size: clamp(12rem, 20vw, 22rem);
+      font-weight: var(--weight-extrabold);
+      color: rgba(10,25,41,0.04);
+      line-height: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      user-select: none;
+    }
+    .pillars-ambient__bars {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 60%;
+    }
+    .pillars-ambient__bar {
+      height: 6px;
+      border-radius: 3px;
+      opacity: 0.7;
+      transform-origin: left;
+    }
+
+    /* ── Panel 4: Stats + Timeline ── */
+    .stats-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-10);
+    }
+    .stat-readout {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .stat-readout__number {
+      font-family: var(--font-mono);
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: var(--weight-bold);
+      color: var(--color-primary);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .stat-readout__suffix {
+      color: rgba(0,155,222,0.6);
+    }
+    .stat-readout__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: var(--space-1);
+    }
+    .stat-readout__bar {
+      width: 60px;
+      height: 2px;
+      background: rgba(0,155,222,0.3);
+      margin-top: var(--space-2);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-readout__bar::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--color-primary);
+      transition: width 1.5s ease;
+    }
+    .stat-readout.is-visible .stat-readout__bar::after {
+      width: 100%;
+    }
+
+    /* Timeline (vertical line + dots) */
+    .timeline-vertical {
+      position: relative;
+      padding-left: var(--space-8);
+    }
+    .timeline-vertical::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255,255,255,0.15);
+    }
+    .timeline-vertical__item {
+      position: relative;
+      margin-bottom: var(--space-10);
+    }
+    .timeline-vertical__item:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-vertical__dot {
+      position: absolute;
+      left: calc(-1 * var(--space-8) + 1px);
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(0,155,222,0.2);
+    }
+    .timeline-vertical__date {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-1);
+    }
+    .timeline-vertical__title {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: var(--weight-semibold);
+      color: #fff;
+      margin-bottom: var(--space-1);
+    }
+    .timeline-vertical__text {
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ── Panel 5: Achievements ── */
+    .achievements-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      max-width: 520px;
+    }
+    .achievement-item {
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+    .achievement-item__tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .achievement-item__text {
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+      color: rgba(255,255,255,0.8);
+    }
+    .achievement-item__text strong {
+      color: #fff;
+      font-weight: var(--weight-semibold);
+    }
+
+    .impact-ambient {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .impact-ambient__word {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 10vw, 10rem);
+      font-weight: var(--weight-extrabold);
+      color: rgba(255,255,255,0.03);
+      letter-spacing: 0.2em;
+      user-select: none;
+      text-transform: uppercase;
+    }
+
+    /* ── Panel 6: Themes + Institutions + CTA + Footer ── */
+    .lens-themes {
+      padding: var(--space-24) 0;
+    }
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-10);
+    }
+    .theme-chip {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-5);
+      background: #fff;
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-lg);
+      transition: all 0.3s ease;
+    }
+    .theme-chip:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+    }
+    .theme-chip__icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+    .theme-chip__icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    .theme-chip__label {
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-text);
+    }
+
+    /* Institutions ticker */
+    .lens-institutions {
+      padding: var(--space-16) 0;
+    }
+
+    /* CTA */
+    .lens-cta {
+      padding: var(--space-20) 0;
+      text-align: center;
+    }
+    .lens-cta__title {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      margin-bottom: var(--space-4);
+    }
+    .lens-cta__desc {
+      font-family: var(--font-sans);
+      font-size: var(--text-lg);
+      color: var(--color-text-secondary);
+      max-width: 520px;
+      margin: 0 auto var(--space-8);
+      line-height: var(--leading-relaxed);
+    }
+    .lens-cta__actions {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── Scroll Reveal (JS-driven) ── */
+    .lens-reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .lens-reveal--left {
+      transform: translateX(-40px);
+    }
+    .lens-reveal--right {
+      transform: translateX(40px);
+    }
+    .lens-reveal.is-visible {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    /* ── Stagger children ── */
+    .lens-stagger > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .lens-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+    .lens-stagger.is-visible > *:nth-child(2) { transition-delay: 0.12s; }
+    .lens-stagger.is-visible > *:nth-child(3) { transition-delay: 0.19s; }
+    .lens-stagger.is-visible > *:nth-child(4) { transition-delay: 0.26s; }
+    .lens-stagger.is-visible > *:nth-child(5) { transition-delay: 0.33s; }
+    .lens-stagger.is-visible > *:nth-child(6) { transition-delay: 0.40s; }
+    .lens-stagger.is-visible > *:nth-child(7) { transition-delay: 0.47s; }
+    .lens-stagger.is-visible > *:nth-child(8) { transition-delay: 0.54s; }
+    .lens-stagger.is-visible > *:nth-child(9) { transition-delay: 0.61s; }
+    .lens-stagger.is-visible > * {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .lens-stagger.is-visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 767px) {
+      .split {
+        flex-direction: column;
+        min-height: auto;
+      }
+      .split__left,
+      .split__right {
+        min-height: 60vh;
+        padding: var(--space-12) var(--space-6);
+      }
+      .split--reverse-mobile {
+        flex-direction: column-reverse;
+      }
+      .lens-dots {
+        display: none;
+      }
+      .themes-grid {
+        grid-template-columns: 1fr;
+      }
+      .pillar-card-mini {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
+      }
+      .pillar-card-mini__desc {
+        display: none;
+      }
+      .pillars-ambient__big-number {
+        font-size: 8rem;
+      }
+      .achievement-item {
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .themes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .split__left,
+      .split__right {
+        padding: var(--space-12) var(--space-6);
+      }
+    }
+
+    /* Section headers inside full-width panels */
+    .lens-section-header {
+      text-align: center;
+      margin-bottom: var(--space-10);
+    }
+    .lens-section-header__eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-primary);
+      display: block;
+      margin-bottom: var(--space-2);
+    }
+    .lens-section-header__title {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      margin-bottom: var(--space-3);
+    }
+    .lens-section-header__desc {
+      font-family: var(--font-sans);
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── Dark section textures (from site design) ── */
+    .lens-panel--dark .split__left,
+    .lens-panel--dark .split__right {
+      position: relative;
+    }
+    .lens-panel--dark::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .lens-panel--dark > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Pillar section eyebrow  */
+    .split__left-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-4);
+      display: block;
+    }
+    .split__left-title {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: var(--weight-bold);
+      margin-bottom: var(--space-6);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
+
+  <div class="page">
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search" hidden>
+      <div class="search-overlay__backdrop"></div>
+      <div class="search-overlay__panel">
+        <div class="search-overlay__header">
+          <div class="search-overlay__input-wrapper">
+            <svg class="search-overlay__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+            <input type="search" class="search-overlay__input" id="search-input" placeholder="Search projects, people, publications..." autocomplete="off">
+            <kbd class="search-overlay__kbd">ESC</kbd>
+          </div>
+        </div>
+        <div class="search-overlay__results" id="search-results" aria-live="polite">
+          <div class="search-overlay__empty">
+            <p class="search-overlay__empty-text">Type to search across projects, people, and publications</p>
+          </div>
+        </div>
+        <div class="search-overlay__footer">
+          <span><kbd>&#8984;</kbd><kbd>K</kbd> to toggle</span>
+          <span><kbd>&#8593;</kbd><kbd>&#8595;</kbd> to navigate</span>
+          <span><kbd>Enter</kbd> to select</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo" aria-label="Mphasis AI & Applied Tech Lab — Home">
+          <img src="src/assets/images/logos/lab-logo.png" alt="Mphasis AI & Applied Tech Lab Logo">
+        </a>
+        <nav class="nav" role="navigation" aria-label="Primary navigation">
+          <a href="index.html" class="nav__link">Home</a>
+          <a href="pages/about.html" class="nav__link nav__link--active">About</a>
+          <a href="pages/research.html" class="nav__link">Research</a>
+          <a href="pages/people.html" class="nav__link">People</a>
+          <a href="pages/publications.html" class="nav__link">Publications</a>
+          <a href="pages/makerspace.html" class="nav__link">Makerspace</a>
+          <a href="pages/news.html" class="nav__link">News & Events</a>
+          <a href="pages/impact.html" class="nav__link">Impact</a>
+          <a href="pages/contact.html" class="nav__link">Contact</a>
+        </nav>
+        <div class="header__actions">
+          <button class="header__search-trigger" aria-label="Search" aria-expanded="false" aria-controls="search-overlay">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+          </button>
+          <button class="header__menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="nav-mobile" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-mobile__link">Home</a>
+      <a href="pages/about.html" class="nav-mobile__link nav-mobile__link--active">About</a>
+      <a href="pages/research.html" class="nav-mobile__link">Research</a>
+      <a href="pages/people.html" class="nav-mobile__link">People</a>
+      <a href="pages/publications.html" class="nav-mobile__link">Publications</a>
+      <a href="pages/makerspace.html" class="nav-mobile__link">Makerspace</a>
+      <a href="pages/news.html" class="nav-mobile__link">News & Events</a>
+      <a href="pages/impact.html" class="nav-mobile__link">Impact</a>
+      <a href="pages/contact.html" class="nav-mobile__link">Contact</a>
+    </nav>
+
+    <!-- NAV DOTS -->
+    <div class="lens-dots" id="lens-dots" aria-label="Section navigation">
+      <button class="lens-dots__dot lens-dots__dot--light lens-dots__dot--active" data-target="panel-hero" aria-label="Hero"></button>
+      <button class="lens-dots__dot" data-target="panel-mission" aria-label="Mission"></button>
+      <button class="lens-dots__dot lens-dots__dot--light" data-target="panel-pillars" aria-label="Pillars"></button>
+      <button class="lens-dots__dot" data-target="panel-stats" aria-label="Stats"></button>
+      <button class="lens-dots__dot" data-target="panel-achievements" aria-label="Achievements"></button>
+      <button class="lens-dots__dot lens-dots__dot--light" data-target="panel-bottom" aria-label="Themes & Contact"></button>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="page__content" id="main-content" role="main">
+
+      <!-- ═══════════════════════════════════════════
+           PANEL 1 — Hero (Light, Full Screen)
+           ═══════════════════════════════════════════ -->
+      <section class="lens-panel lens-panel--light lens-hero" id="panel-hero">
+        <canvas class="page-hero__canvas" data-page="about" aria-hidden="true"></canvas>
+        <div class="lens-hero__inner">
+          <span class="lens-hero__eyebrow">About</span>
+          <h1 class="lens-hero__title">About the Lab</h1>
+          <p class="lens-hero__desc">
+            The Mphasis AI & Applied Tech Lab at Ashoka University advances interdisciplinary research in AI, health, fabrication, and beyond.
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           PANEL 2 — Mission (Dark, Split: LEFT=text, RIGHT=ambient)
+           ═══════════════════════════════════════════ -->
+      <section class="lens-panel lens-panel--dark" id="panel-mission">
+        <div class="split">
+          <div class="split__left">
+            <div class="mission-text lens-reveal lens-reveal--left">
+              <h3>Our Mission</h3>
+              <p>
+                The Mphasis AI & Applied Tech Lab at Ashoka University is a collaboration between Ashoka University and Mphasis F1 Foundation, a partnership that has grown stronger since its founding in 2020. The Lab brings together researchers from seven departments — from biology and chemistry to computer science and environmental studies — to tackle problems that no single discipline can solve.
+              </p>
+              <p>
+                The Lab runs 25+ active research projects across five pillars. BharatSim builds large-scale simulations for epidemic modelling and public health policy. CHART (Centre for Health Analytics Research &amp; Trends) works on clinical AI, food computing, and cancer diagnostics. AI@Ashoka applies AI and machine learning across biology, chemistry, environmental science, education, and media analysis. The Cybersecurity pillar develops post-quantum cryptography protocols for internet security.
+              </p>
+              <p>
+                The Digital Makerspace is a workshop and fabrication lab where students and researchers design, build, and test their ideas — from laser-cut prototypes to custom scientific instruments. From laser cutters and CNC routers to 3D printers and drones, the Makerspace supports both rapid prototyping and scientific instrumentation for research across multiple pillars.
+              </p>
+            </div>
+          </div>
+          <div class="split__right">
+            <div class="mission-visual">
+              <canvas id="mission-canvas" aria-hidden="true"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           PANEL 3 — Pillars (Light, Split: LEFT=cards, RIGHT=ambient)
+           ═══════════════════════════════════════════ -->
+      <section class="lens-panel lens-panel--light" id="panel-pillars">
+        <div class="split">
+          <div class="split__left">
+            <div style="width:100%; max-width:520px;">
+              <span class="split__left-eyebrow lens-reveal">Structure</span>
+              <h2 class="split__left-title lens-reveal">Five Research Pillars</h2>
+              <div class="pillars-stack lens-stagger">
+                <a href="pages/pillar.html?pillar=ai" class="pillar-card-mini">
+                  <span class="pillar-card-mini__dot" style="background: var(--pillar-ai);"></span>
+                  <span class="pillar-card-mini__name">AI@Ashoka</span>
+                  <span class="pillar-card-mini__desc">AI and machine learning applied across health, biodiversity, education, policy, and materials science. 14 projects spanning seven departments.</span>
+                  <svg class="pillar-card-mini__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+                </a>
+                <a href="pages/pillar.html?pillar=bharatsim" class="pillar-card-mini">
+                  <span class="pillar-card-mini__dot" style="background: var(--pillar-bharatsim);"></span>
+                  <span class="pillar-card-mini__name">BharatSim</span>
+                  <span class="pillar-card-mini__desc">India-scale simulation framework for epidemic modelling and public health policy. Covered by BBC, NDTV, Nature India, and 20+ international outlets.</span>
+                  <svg class="pillar-card-mini__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+                </a>
+                <a href="pages/pillar.html?pillar=chart" class="pillar-card-mini">
+                  <span class="pillar-card-mini__dot" style="background: var(--pillar-chart);"></span>
+                  <span class="pillar-card-mini__name">CHART</span>
+                  <span class="pillar-card-mini__desc">Centre for Health Analytics Research and Trends. AI applied to clinical diagnosis, nutrition and food science, and cancer research.</span>
+                  <svg class="pillar-card-mini__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+                </a>
+                <a href="pages/pillar.html?pillar=cyber" class="pillar-card-mini">
+                  <span class="pillar-card-mini__dot" style="background: var(--pillar-cyber);"></span>
+                  <span class="pillar-card-mini__name">Cybersecurity</span>
+                  <span class="pillar-card-mini__desc">Post-quantum cryptography research developing encryption protocols that can withstand quantum computing.</span>
+                  <svg class="pillar-card-mini__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+                </a>
+                <a href="pages/pillar.html?pillar=makerspace" class="pillar-card-mini">
+                  <span class="pillar-card-mini__dot" style="background: var(--pillar-makerspace);"></span>
+                  <span class="pillar-card-mini__name">Makerspace</span>
+                  <span class="pillar-card-mini__desc">A fabrication lab equipped with laser cutters, 3D printers, CNC machines, and drones. Also home to RedBrick Hacks.</span>
+                  <svg class="pillar-card-mini__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="split__right">
+            <div class="pillars-ambient lens-reveal lens-reveal--right">
+              <div class="pillars-ambient__big-number">5</div>
+              <div class="pillars-ambient__bars">
+                <div class="pillars-ambient__bar" style="background: var(--pillar-ai); width: 100%;"></div>
+                <div class="pillars-ambient__bar" style="background: var(--pillar-bharatsim); width: 75%;"></div>
+                <div class="pillars-ambient__bar" style="background: var(--pillar-chart); width: 90%;"></div>
+                <div class="pillars-ambient__bar" style="background: var(--pillar-cyber); width: 50%;"></div>
+                <div class="pillars-ambient__bar" style="background: var(--pillar-makerspace); width: 85%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           PANEL 4 — Stats + Timeline (Dark, Split: LEFT=stats, RIGHT=timeline)
+           ═══════════════════════════════════════════ -->
+      <section class="lens-panel lens-panel--dark" id="panel-stats">
+        <div class="split">
+          <div class="split__left">
+            <div style="width:100%; max-width:360px;">
+              <span class="split__left-eyebrow lens-reveal" style="color:var(--color-primary);">Since 2020</span>
+              <h2 class="split__left-title lens-reveal" style="color:#fff;">The Lab in Numbers</h2>
+              <div class="stats-vertical lens-stagger">
+                <div class="stat-readout">
+                  <div class="stat-readout__number"><span data-count-to="25">0</span><span class="stat-readout__suffix">+</span></div>
+                  <div class="stat-readout__label">Research Projects</div>
+                  <div class="stat-readout__bar"></div>
+                </div>
+                <div class="stat-readout">
+                  <div class="stat-readout__number"><span data-count-to="30">0</span><span class="stat-readout__suffix">+</span></div>
+                  <div class="stat-readout__label">Publications</div>
+                  <div class="stat-readout__bar"></div>
+                </div>
+                <div class="stat-readout">
+                  <div class="stat-readout__number"><span data-count-to="40">0</span><span class="stat-readout__suffix">+</span></div>
+                  <div class="stat-readout__label">Partnerships</div>
+                  <div class="stat-readout__bar"></div>
+                </div>
+                <div class="stat-readout">
+                  <div class="stat-readout__number"><span data-count-to="25">0</span><span class="stat-readout__suffix">+</span></div>
+                  <div class="stat-readout__label">Faculty Researchers</div>
+                  <div class="stat-readout__bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="split__right">
+            <div class="timeline-vertical lens-reveal lens-reveal--right">
+              <div class="timeline-vertical__item">
+                <div class="timeline-vertical__dot"></div>
+                <div class="timeline-vertical__date">August 2020</div>
+                <div class="timeline-vertical__title">Lab Established</div>
+                <p class="timeline-vertical__text">Partnership established between Mphasis F1 Foundation and Ashoka University.</p>
+              </div>
+              <div class="timeline-vertical__item">
+                <div class="timeline-vertical__dot"></div>
+                <div class="timeline-vertical__date">2020 – 2023</div>
+                <div class="timeline-vertical__title">Foundation</div>
+                <p class="timeline-vertical__text">Research launched with 12 faculty researchers across AI, epidemiological modelling, and cybersecurity. 9 publications. BharatSim simulation framework developed.</p>
+              </div>
+              <div class="timeline-vertical__item">
+                <div class="timeline-vertical__dot"></div>
+                <div class="timeline-vertical__date">2023</div>
+                <div class="timeline-vertical__title">Growth</div>
+                <p class="timeline-vertical__text">The Lab expanded into five research pillars: AI@Ashoka, BharatSim, CHART, Cybersecurity, and Makerspace. Our Research Interns won 1st place in Privacy-Preserved Federated Learning and 4th place in the SENSORIUM Challenge at NeurIPS 2023.</p>
+              </div>
+              <div class="timeline-vertical__item">
+                <div class="timeline-vertical__dot"></div>
+                <div class="timeline-vertical__date">2023 – 2024</div>
+                <div class="timeline-vertical__title">Expansion</div>
+                <p class="timeline-vertical__text">Faculty researchers grew from 12 to 19 across 7 departments. 12 new publications across the five pillars.</p>
+              </div>
+              <div class="timeline-vertical__item">
+                <div class="timeline-vertical__dot"></div>
+                <div class="timeline-vertical__date">2024 – 2026</div>
+                <div class="timeline-vertical__title">Current</div>
+                <p class="timeline-vertical__text">25+ active projects with 25+ faculty researchers across 7 departments. 30+ publications across journals and conferences. 40+ partnerships with institutions in India and internationally.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           PANEL 5 — Achievements (Dark, Split: LEFT=list, RIGHT=ambient)
+           ═══════════════════════════════════════════ -->
+      <section class="lens-panel lens-panel--dark" id="panel-achievements" style="border-top: 1px solid rgba(255,255,255,0.06);">
+        <div class="split">
+          <div class="split__left">
+            <div style="width:100%; max-width:560px;">
+              <span class="split__left-eyebrow lens-reveal" style="color:var(--color-primary);">Highlights</span>
+              <h2 class="split__left-title lens-reveal" style="color:#fff;">Key Achievements</h2>
+              <div class="achievements-list lens-stagger">
+                <div class="achievement-item">
+                  <span class="achievement-item__tag" style="border-left: 2px solid var(--pillar-bharatsim);">BharatSim</span>
+                  <p class="achievement-item__text"><strong>Global Media Coverage</strong> — The BharatSim H5N1 avian influenza study was covered by BBC, NDTV, Nature India, and 20+ international media outlets, bringing the Lab's epidemiological modelling work to a global audience.</p>
+                </div>
+                <div class="achievement-item">
+                  <span class="achievement-item__tag" style="border-left: 2px solid var(--pillar-ai);">AI@Ashoka</span>
+                  <p class="achievement-item__text"><strong>Schmidt AI Fellowship at Oxford</strong> — Faculty from the Lab were awarded the prestigious Schmidt AI in Science Fellowship at the University of Oxford, recognizing excellence in AI-driven interdisciplinary research.</p>
+                </div>
+                <div class="achievement-item">
+                  <span class="achievement-item__tag" style="border-left: 2px solid var(--pillar-ai);">AI@Ashoka</span>
+                  <p class="achievement-item__text"><strong>India-AI Impact Summit Compendium</strong> — SocraticAI was selected as a case study in MeitY's Compendium on the Real-World Impact of AI in Education.</p>
+                </div>
+                <div class="achievement-item">
+                  <span class="achievement-item__tag" style="border-left: 2px solid var(--pillar-ai);">AI@Ashoka</span>
+                  <p class="achievement-item__text"><strong>NeurIPS 2023 Competition Wins</strong> — Our Research Interns won 1st place in Privacy-Preserved Federated Learning and 4th place in the SENSORIUM Challenge at NeurIPS 2023.</p>
+                </div>
+                <div class="achievement-item">
+                  <span class="achievement-item__tag" style="border-left: 2px solid var(--pillar-cyber);">Cyber</span>
+                  <p class="achievement-item__text"><strong>ACM ASIACCS 2025 Publication</strong> — Post-quantum cryptography research from the Lab was published at ACM ASIACCS 2025, one of the top venues in computer security.</p>
+                </div>
+                <div class="achievement-item">
+                  <span class="achievement-item__tag" style="border-left: 2px solid var(--pillar-makerspace);">Makerspace</span>
+                  <p class="achievement-item__text"><strong>RedBrick Hacks</strong> — The Lab's flagship hackathon series has engaged 430+ participants across multiple editions, fostering innovation and hands-on problem-solving among students.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="split__right">
+            <div class="impact-ambient lens-reveal lens-reveal--right">
+              <span class="impact-ambient__word">IMPACT</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           PANEL 6 — Themes + Institutions + CTA + Footer (Full Width)
+           ═══════════════════════════════════════════ -->
+
+      <!-- Research Themes (Light) -->
+      <section class="lens-panel--light lens-themes" id="panel-bottom">
+        <div class="container">
+          <div class="lens-section-header lens-reveal">
+            <span class="lens-section-header__eyebrow">Themes</span>
+            <h2 class="lens-section-header__title">Research Themes</h2>
+            <p class="lens-section-header__desc">Our projects span nine interconnected research themes, reflecting the truly interdisciplinary nature of the Lab.</p>
+          </div>
+          <div class="themes-grid lens-stagger">
+            <div class="theme-chip">
+              <div class="theme-chip__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+              </div>
+              <span class="theme-chip__label">AI Pedagogy</span>
+            </div>
+            <div class="theme-chip">
+              <div class="theme-chip__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/></svg>
+              </div>
+              <span class="theme-chip__label">Public Health</span>
+            </div>
+            <div class="theme-chip">
+              <div class="theme-chip__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-6 4 12 3-6h4"/></svg>
+              </div>
+              <span class="theme-chip__label">Computational Health</span>
+            </div>
+            <div class="theme-chip">
+              <div class="theme-chip__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c-4.97 0-9-2.24-9-5v-6c0-2.76 4.03-5 9-5s9 2.24 9 5v6c0 2.76-4.03 5-9 5z"/><path d="M3 11c0 2.76 4.03 5 9 5s9-2.24 9-5"/></svg>
+              </div>
+              <span class="theme-chip__label">Climate Science</span>
+            </div>
+            <div class="theme-chip">
+              <div class="theme-chip__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+              </div>
+              <span class="theme-chip__label">Digital Humanities</span>
+            </div>
+            <div class="theme-chip">
+              <div class="theme-chip__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"/></svg>
+              </div>
+              <span class="theme-chip__label">Materials Science</span>
+            </div>
+            <div class="theme-chip">
+              <div class="theme-chip__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11v11h-11z"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+              </div>
+              <span class="theme-chip__label">Biodiversity</span>
+            </div>
+            <div class="theme-chip">
+              <div class="theme-chip__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7l9-5z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg>
+              </div>
+              <span class="theme-chip__label">Digital Fabrication</span>
+            </div>
+            <div class="theme-chip">
+              <div class="theme-chip__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5.5-3.8 10.2-8 12-4.2-1.8-8-6.5-8-12V7l8-4z"/></svg>
+              </div>
+              <span class="theme-chip__label">Cybersecurity</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Collaborating Institutions (Light) -->
+      <section class="lens-institutions" style="background: var(--color-bg);">
+        <div class="container">
+          <div class="lens-section-header lens-reveal">
+            <span class="lens-section-header__eyebrow">Network</span>
+            <h2 class="lens-section-header__title">Collaborating Institutions</h2>
+            <p class="lens-section-header__desc">Our research partners include universities, hospitals, and research institutes across India and internationally.</p>
+          </div>
+          <div class="ticker lens-reveal" aria-label="Collaborating institutions">
+            <div class="ticker__track">
+              <span class="ticker__item ticker__item--logo"><img src="src/assets/images/logos/partners/oxford.png" alt="University of Oxford"></span>
+              <span class="ticker__item">UC Irvine</span>
+              <span class="ticker__item">Johns Hopkins</span>
+              <span class="ticker__item">U of Southampton</span>
+              <span class="ticker__item">Complutense Madrid</span>
+              <span class="ticker__item">IIT Kharagpur</span>
+              <span class="ticker__item ticker__item--logo"><img src="src/assets/images/logos/partners/iit-delhi.png" alt="IIT Delhi"></span>
+              <span class="ticker__item">IISER Pune</span>
+              <span class="ticker__item">IISER Kolkata</span>
+              <span class="ticker__item">AIIMS New Delhi</span>
+              <span class="ticker__item">S.N. Bose National Centre</span>
+              <span class="ticker__item">CMC Vellore</span>
+              <span class="ticker__item ticker__item--logo"><img src="src/assets/images/logos/partners/ncbs.png" alt="NCBS Bangalore"></span>
+              <span class="ticker__item">U of South Carolina</span>
+              <span class="ticker__item">Max Hospital, Delhi</span>
+              <span class="ticker__item">NACO</span>
+              <!-- duplicate set for seamless loop -->
+              <span class="ticker__item ticker__item--logo"><img src="src/assets/images/logos/partners/oxford.png" alt="University of Oxford"></span>
+              <span class="ticker__item">UC Irvine</span>
+              <span class="ticker__item">Johns Hopkins</span>
+              <span class="ticker__item">U of Southampton</span>
+              <span class="ticker__item">Complutense Madrid</span>
+              <span class="ticker__item">IIT Kharagpur</span>
+              <span class="ticker__item ticker__item--logo"><img src="src/assets/images/logos/partners/iit-delhi.png" alt="IIT Delhi"></span>
+              <span class="ticker__item">IISER Pune</span>
+              <span class="ticker__item">IISER Kolkata</span>
+              <span class="ticker__item">AIIMS New Delhi</span>
+              <span class="ticker__item">S.N. Bose National Centre</span>
+              <span class="ticker__item">CMC Vellore</span>
+              <span class="ticker__item ticker__item--logo"><img src="src/assets/images/logos/partners/ncbs.png" alt="NCBS Bangalore"></span>
+              <span class="ticker__item">U of South Carolina</span>
+              <span class="ticker__item">Max Hospital, Delhi</span>
+              <span class="ticker__item">NACO</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA (Light) -->
+      <section class="lens-cta" style="background: var(--color-bg);">
+        <div class="container">
+          <h2 class="lens-cta__title lens-reveal">Explore Our Work</h2>
+          <p class="lens-cta__desc lens-reveal">Discover our research projects, meet our people, and see the impact we're making.</p>
+          <div class="lens-cta__actions lens-reveal">
+            <a href="pages/research.html" class="btn btn--primary btn--lg">
+              View Research
+              <svg class="btn__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h10M11 6l4 4-4 4"/></svg>
+            </a>
+            <a href="pages/people.html" class="btn btn--secondary btn--lg">Meet Our People</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <img src="src/assets/images/logos/lab-logo.png" alt="Lab Logo" class="footer__brand-logo">
+            <p class="footer__brand-text">
+              Advancing interdisciplinary research in AI, health, fabrication, and beyond at Ashoka University.
+            </p>
+            <div class="footer__brand-partner">
+              <span>Supported by</span>
+              <img src="src/assets/images/logos/mphasis-foundation.png" alt="Mphasis F1 Foundation">
+            </div>
+          </div>
+          <div>
+            <h4 class="footer__heading">Navigate</h4>
+            <div class="footer__links">
+              <a href="index.html" class="footer__link">Home</a>
+              <a href="pages/about.html" class="footer__link">About</a>
+              <a href="pages/research.html" class="footer__link">Research</a>
+              <a href="pages/people.html" class="footer__link">People</a>
+              <a href="pages/publications.html" class="footer__link">Publications</a>
+              <a href="pages/makerspace.html" class="footer__link">Makerspace</a>
+              <a href="pages/news.html" class="footer__link">News & Events</a>
+              <a href="pages/impact.html" class="footer__link">Impact</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer__heading">Research</h4>
+            <div class="footer__links">
+              <a href="pages/pillar.html?pillar=ai" class="footer__pillar-link">
+                <span class="footer__pillar-dot" style="background-color: var(--pillar-ai);"></span>
+                AI@Ashoka
+              </a>
+              <a href="pages/pillar.html?pillar=bharatsim" class="footer__pillar-link">
+                <span class="footer__pillar-dot" style="background-color: var(--pillar-bharatsim);"></span>
+                BharatSim
+              </a>
+              <a href="pages/pillar.html?pillar=chart" class="footer__pillar-link">
+                <span class="footer__pillar-dot" style="background-color: var(--pillar-chart);"></span>
+                CHART
+              </a>
+              <a href="pages/pillar.html?pillar=cyber" class="footer__pillar-link">
+                <span class="footer__pillar-dot" style="background-color: var(--pillar-cyber);"></span>
+                Cybersecurity
+              </a>
+              <a href="pages/pillar.html?pillar=makerspace" class="footer__pillar-link">
+                <span class="footer__pillar-dot" style="background-color: var(--pillar-makerspace);"></span>
+                Makerspace
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer__heading">Contact</h4>
+            <div>
+              <div class="footer__contact-item">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 3l6 5 6-5"/></svg>
+                <a href="mailto:mphasis.lab@ashoka.edu.in" style="color: rgba(255,255,255,0.8);">mphasis.lab@ashoka.edu.in</a>
+              </div>
+              <div class="footer__contact-item">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6.7C14 11.3 8 15.3 8 15.3S2 11.3 2 6.7a6 6 0 1 1 12 0z"/><circle cx="8" cy="6.7" r="2"/></svg>
+                <span>Ashoka University<br>Sonipat, Haryana, India</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p class="footer__copyright">&copy; 2026 Mphasis AI & Applied Tech Lab, Ashoka University. All rights reserved.</p>
+          <div class="footer__bottom-links"></div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="src/data/projects.js"></script>
+  <script src="src/data/people.js"></script>
+  <script src="src/data/publications.js"></script>
+  <script src="src/data/pillars.js"></script>
+  <script src="src/vendor/gsap.min.js"></script>
+  <script src="src/vendor/ScrollTrigger.min.js"></script>
+  <script src="src/js/gsap-animations.js"></script>
+  <script src="src/js/main.js"></script>
+  <script src="src/js/search.js"></script>
+  <script src="src/js/page-canvases.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    /* ── Search guard: prevent Cmd+K from scrolling ── */
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+      }
+    });
+
+    /* ── Scroll Reveal (IntersectionObserver) ── */
+    const revealEls = document.querySelectorAll('.lens-reveal, .lens-stagger');
+    const revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          // Also mark stat-readout children
+          entry.target.querySelectorAll('.stat-readout').forEach(function(s) {
+            s.classList.add('is-visible');
+          });
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el) { revealObserver.observe(el); });
+
+    /* ── Counter animation ── */
+    const counterEls = document.querySelectorAll('[data-count-to]');
+    const counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-count-to'), 10);
+          let current = 0;
+          const duration = 1500;
+          const step = Math.ceil(target / (duration / 16));
+          const timer = setInterval(function() {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            el.textContent = current;
+          }, 16);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counterEls.forEach(function(el) { counterObserver.observe(el); });
+
+    /* ── Nav Dots ── */
+    const dots = document.querySelectorAll('.lens-dots__dot');
+    const panels = [];
+    dots.forEach(function(dot) {
+      var target = document.getElementById(dot.getAttribute('data-target'));
+      if (target) panels.push({ dot: dot, el: target });
+      dot.addEventListener('click', function() {
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    function updateDots() {
+      var scrollY = window.scrollY + window.innerHeight * 0.4;
+      var active = panels[0];
+      panels.forEach(function(p) {
+        if (p.el.offsetTop <= scrollY) active = p;
+      });
+      dots.forEach(function(d) { d.classList.remove('lens-dots__dot--active'); });
+      if (active) active.dot.classList.add('lens-dots__dot--active');
+
+      // Update dot color based on current panel theme
+      var currentPanel = active ? active.el : null;
+      if (currentPanel) {
+        var isDark = currentPanel.classList.contains('lens-panel--dark');
+        dots.forEach(function(d) {
+          if (!isDark) {
+            d.classList.add('lens-dots__dot--light');
+          } else {
+            d.classList.remove('lens-dots__dot--light');
+          }
+        });
+      }
+    }
+    window.addEventListener('scroll', updateDots, { passive: true });
+    updateDots();
+
+    /* ── Mission Canvas: 5 drifting pillar-colored blobs ── */
+    var missionCanvas = document.getElementById('mission-canvas');
+    if (missionCanvas) {
+      var ctx = missionCanvas.getContext('2d');
+      var pillarColors = [
+        { r: 37,  g: 99,  b: 235 },  // AI — #2563EB
+        { r: 5,   g: 150, b: 105 },  // BharatSim — #059669
+        { r: 217, g: 119, b: 6   },  // CHART — #D97706
+        { r: 124, g: 58,  b: 237 },  // Cyber — #7C3AED
+        { r: 0,   g: 155, b: 222 }   // Makerspace — #009BDE
+      ];
+
+      var blobs = pillarColors.map(function(c, i) {
+        return {
+          x: 0.2 + Math.random() * 0.6,
+          y: 0.15 + (i * 0.15) + Math.random() * 0.1,
+          r: 40 + Math.random() * 30,
+          vx: (Math.random() - 0.5) * 0.0004,
+          vy: (Math.random() - 0.5) * 0.0003,
+          color: c,
+          phase: Math.random() * Math.PI * 2
+        };
+      });
+
+      function resizeMissionCanvas() {
+        var rect = missionCanvas.parentElement.getBoundingClientRect();
+        missionCanvas.width = rect.width;
+        missionCanvas.height = rect.height;
+      }
+      resizeMissionCanvas();
+      window.addEventListener('resize', resizeMissionCanvas);
+
+      function drawMission(time) {
+        var w = missionCanvas.width;
+        var h = missionCanvas.height;
+        ctx.clearRect(0, 0, w, h);
+
+        blobs.forEach(function(b) {
+          b.x += b.vx;
+          b.y += b.vy;
+          // Bounce
+          if (b.x < 0.1 || b.x > 0.9) b.vx *= -1;
+          if (b.y < 0.1 || b.y > 0.9) b.vy *= -1;
+
+          var pulse = 1 + 0.15 * Math.sin(time * 0.001 + b.phase);
+          var radius = b.r * pulse;
+
+          var gradient = ctx.createRadialGradient(
+            b.x * w, b.y * h, 0,
+            b.x * w, b.y * h, radius
+          );
+          gradient.addColorStop(0, 'rgba(' + b.color.r + ',' + b.color.g + ',' + b.color.b + ', 0.35)');
+          gradient.addColorStop(0.6, 'rgba(' + b.color.r + ',' + b.color.g + ',' + b.color.b + ', 0.12)');
+          gradient.addColorStop(1, 'rgba(' + b.color.r + ',' + b.color.g + ',' + b.color.b + ', 0)');
+
+          ctx.beginPath();
+          ctx.arc(b.x * w, b.y * h, radius, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(drawMission);
+      }
+      requestAnimationFrame(drawMission);
+    }
+
+    /* ── Pillar bars entrance animation ── */
+    var barsContainer = document.querySelector('.pillars-ambient__bars');
+    if (barsContainer) {
+      var bars = barsContainer.querySelectorAll('.pillars-ambient__bar');
+      bars.forEach(function(bar) {
+        bar.style.transform = 'scaleX(0)';
+        bar.style.transition = 'transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      });
+      var barsObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            bars.forEach(function(bar, i) {
+              setTimeout(function() {
+                bar.style.transform = 'scaleX(1)';
+              }, i * 120);
+            });
+            barsObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      barsObserver.observe(barsContainer);
+    }
+
+  })();
+  </script>
+</body>
+</html>
