@@ -540,8 +540,16 @@
     var wheelAccum = 0;
     var WHEEL_THRESHOLD = 80;
     var wheelTimeout;
+    var SUB_COOLDOWN_MS = 900;
+
+    // Check if search overlay is open
+    function isSearchOpen() {
+      var overlay = document.getElementById('search-overlay');
+      return overlay && !overlay.hidden;
+    }
 
     document.addEventListener('wheel', function(e) {
+      if (isSearchOpen()) return; // let search scroll naturally
       e.preventDefault();
       clearTimeout(wheelTimeout);
       wheelAccum += e.deltaY;
@@ -555,12 +563,13 @@
     // Keyboard
     var keyCooldown = false;
     document.addEventListener('keydown', function(e) {
+      if (isSearchOpen()) return; // let search handle keys
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === 'ArrowUp' || e.key === 'PageUp') {
         e.preventDefault();
         if (keyCooldown) return;
         handleScroll((e.key === 'ArrowDown' || e.key === 'PageDown') ? 1 : -1);
         keyCooldown = true;
-        setTimeout(function() { keyCooldown = false; }, 900);
+        setTimeout(function() { keyCooldown = false; }, SUB_COOLDOWN_MS);
       }
     });
 
