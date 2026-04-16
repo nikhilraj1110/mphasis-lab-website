@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Chapters Prototype | Mphasis AI & Applied Tech Lab</title>
+<link rel="icon" type="image/png" sizes="32x32" href="src/assets/images/logos/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/css/variables.css"><link rel="stylesheet" href="src/css/reset.css"><link rel="stylesheet" href="src/css/base.css"><link rel="stylesheet" href="src/css/layout.css"><link rel="stylesheet" href="src/css/header.css"><link rel="stylesheet" href="src/css/footer.css"><link rel="stylesheet" href="src/css/components.css"><link rel="stylesheet" href="src/css/animations.css"><link rel="stylesheet" href="src/css/utilities.css"><link rel="stylesheet" href="src/css/search.css">
+<style>
+html,body{margin:0;padding:0;overflow:hidden;height:100vh}
+.snap-viewport{position:fixed;inset:0;overflow:hidden}
+.snap-track{position:absolute;top:0;left:0;right:0;transition:opacity .25s ease;will-change:transform,opacity}
+.snap-panel{width:100vw;height:100vh;overflow:hidden;position:relative}
+
+/* Chapter overlay */
+.chapter-overlay{position:fixed;inset:0;background:#000;z-index:150;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.chapter-overlay.visible{opacity:1}
+.chapter-overlay__label{font-family:var(--font-mono);font-size:clamp(.8rem,1.5vw,1rem);letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+/* Hero+Stats */
+.ch-hero{background:var(--color-bg-dark);display:flex;flex-direction:column}
+.ch-hero__main{flex:1;display:flex;align-items:center;padding:var(--header-height) clamp(2rem,5vw,6rem) 0}
+.ch-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:var(--space-4);padding:6px 14px;border:1px solid rgba(255,255,255,.08);border-radius:20px}
+.ch-badge__dot{width:6px;height:6px;border-radius:50%;background:var(--gradient-f1-end);animation:dp 2s ease-in-out infinite}
+@keyframes dp{0%,100%{opacity:1}50%{opacity:.4}}
+.ch-hero__title{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,4.5rem);font-weight:var(--weight-extrabold);color:#fff;letter-spacing:-.03em;line-height:1.05;margin-bottom:var(--space-4)}
+.ch-hero__tagline{font-size:clamp(1rem,2vw,1.25rem);color:rgba(255,255,255,.5);margin-bottom:var(--space-3)}
+.ch-hero__tagline .morph{color:var(--gradient-f1-start);transition:opacity .3s}
+.ch-hero__desc{font-size:var(--text-base);color:rgba(255,255,255,.35);max-width:550px;line-height:var(--leading-relaxed);margin-bottom:var(--space-6)}
+.ch-hero__actions{display:flex;gap:var(--space-4);flex-wrap:wrap}
+/* Ticker */
+.ch-ticker{background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.06);padding:10px 0;overflow:hidden}
+.ch-ticker__track{display:flex;width:max-content;animation:ts 30s linear infinite}
+.ch-ticker__track:hover{animation-play-state:paused}
+@keyframes ts{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ch-ticker__item{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.2);padding:0 clamp(.8rem,1.5vw,1.5rem);white-space:nowrap}
+.ch-ticker__sep{color:rgba(255,255,255,.06);padding:0 .4rem}
+/* Stats bar */
+.ch-stats{display:flex;gap:clamp(2rem,5vw,5rem);justify-content:center;padding:var(--space-5) clamp(2rem,5vw,6rem);background:rgba(255,255,255,.02);border-top:1px solid rgba(255,255,255,.04)}
+.ch-stat__num{font-family:var(--font-mono);font-size:clamp(1.5rem,3vw,2rem);font-weight:var(--weight-bold);background:var(--gradient-f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center}
+.ch-stat__label{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2);text-align:center;margin-top:2px}
+
+/* Spotlight */
+.ch-spot{background:var(--color-bg-dark);display:flex;flex-direction:column;justify-content:center;padding:var(--header-height) clamp(2rem,5vw,6rem) var(--space-8)}
+.ch-spot__header{margin-bottom:var(--space-6)}
+.ch-strip{display:flex;align-items:center;padding:var(--space-5) 0;border-bottom:1px solid rgba(255,255,255,.06);text-decoration:none;color:inherit;transition:background .2s}
+.ch-strip:last-child{border-bottom:none}
+.ch-strip:hover{background:rgba(255,255,255,.02)}
+.ch-strip__meta{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.ch-strip__dot{width:5px;height:5px;border-radius:50%}
+.ch-strip__pillar{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.ch-strip__name{font-family:var(--font-display);font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:var(--weight-extrabold);color:#fff;letter-spacing:-.02em}
+.ch-strip__desc{font-size:.85rem;color:rgba(255,255,255,.3);margin-top:4px;max-width:550px;line-height:1.5}
+.ch-strip__arrow{color:rgba(255,255,255,.15);flex-shrink:0;margin-left:auto;padding-left:var(--space-4)}
+
+/* Pillars */
+.ch-pillars{background:var(--color-bg-alt);display:flex;flex-direction:column;justify-content:center;padding:var(--header-height) clamp(2rem,5vw,6rem) var(--space-8)}
+.ch-pillars__grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-4);margin-top:var(--space-6)}
+.cpc{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:var(--radius-lg);padding:var(--space-5);text-decoration:none;color:inherit;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.cpc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.cpc:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.cpc[data-p="ai"]::before{background:var(--pillar-ai)}.cpc[data-p="bharatsim"]::before{background:var(--pillar-bharatsim)}.cpc[data-p="chart"]::before{background:var(--pillar-chart)}.cpc[data-p="cyber"]::before{background:var(--pillar-cyber)}.cpc[data-p="makerspace"]::before{background:var(--pillar-makerspace)}
+.cpc__title{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);margin-bottom:var(--space-2);color:var(--color-navy)}
+.cpc__desc{font-size:.75rem;color:var(--color-text-secondary);line-height:1.5}
+@media(max-width:900px){.ch-pillars__grid{grid-template-columns:repeat(2,1fr)}}
+
+/* Impact sub-slides */
+.ch-impact{background:var(--color-bg-dark);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 clamp(2rem,5vw,6rem);text-align:center}
+.ch-impact__stage{position:relative;min-height:220px;width:100%;max-width:700px}
+.ci-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(.92);transition:opacity .6s,transform .6s cubic-bezier(.34,1.56,.64,1);pointer-events:none;visibility:hidden}
+.ci-slide.active{opacity:1;transform:scale(1);pointer-events:auto;visibility:visible}
+.ci-slide__title{font-family:var(--font-display);font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:800;background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:var(--space-4);letter-spacing:-.02em}
+.ci-slide__desc{font-size:.95rem;line-height:1.6;color:rgba(255,255,255,.4);max-width:580px}
+.ci-progress{width:100%;max-width:400px;margin-top:var(--space-8)}
+.ci-progress__track{width:100%;height:2px;background:rgba(255,255,255,.06);border-radius:1px;overflow:hidden}
+.ci-progress__fill{height:100%;background:var(--gradient-f1);border-radius:1px;width:0;transition:width .4s}
+
+/* News+Footer */
+.ch-news-footer{display:flex;flex-direction:column;overflow:auto}
+.ch-news{flex:1;display:flex;flex-direction:column;justify-content:center;padding:var(--header-height) clamp(2rem,5vw,6rem) var(--space-6);background:var(--color-bg)}
+.ch-news__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-6);flex-wrap:wrap;gap:var(--space-4)}
+.ch-news__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5)}
+.cnc{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:var(--radius-lg);padding:var(--space-5);text-decoration:none;color:inherit;transition:transform .3s,box-shadow .3s}
+.cnc:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.cnc__date{font-family:var(--font-mono);font-size:.6rem;color:var(--color-text-muted);margin-bottom:var(--space-2);display:block}
+.cnc__title{font-family:var(--font-display);font-size:var(--text-sm);font-weight:var(--weight-bold);color:var(--color-navy);margin-bottom:var(--space-2)}
+.cnc__text{font-size:.78rem;color:var(--color-text-secondary);line-height:1.5}
+@media(max-width:768px){.ch-news__grid{grid-template-columns:1fr}}
+
+.snap-dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:200}
+.snap-dots__dot{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(255,255,255,.3);background:transparent;cursor:pointer;padding:0;transition:all .3s;position:relative}
+.snap-dots__dot.active{background:#fff;border-color:#fff;box-shadow:0 0 8px rgba(255,255,255,.3)}
+.snap-dots__dot[data-theme="light"]{border-color:rgba(10,25,41,.2)}
+.snap-dots__dot[data-theme="light"].active{background:var(--color-navy);border-color:var(--color-navy)}
+/* Tooltip */
+.snap-dots__dot::after{content:attr(data-label);position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-size:.55rem;letter-spacing:.08em;color:rgba(255,255,255,.4);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
+.snap-dots__dot:hover::after{opacity:1}
+.snap-dots__dot[data-theme="light"]::after{color:rgba(10,25,41,.4)}
+.header{position:fixed;z-index:300}.progress-bar{display:none}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="page">
+<div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search" hidden><div class="search-overlay__backdrop"></div><div class="search-overlay__panel"><div class="search-overlay__header"><div class="search-overlay__input-wrapper"><svg class="search-overlay__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg><input type="search" class="search-overlay__input" id="search-input" placeholder="Search projects, people, publications..." autocomplete="off"><kbd class="search-overlay__kbd">ESC</kbd></div></div><div class="search-overlay__results" id="search-results" aria-live="polite"><div class="search-overlay__empty"><p class="search-overlay__empty-text">Type to search</p></div></div><div class="search-overlay__footer"><span><kbd>⌘</kbd><kbd>K</kbd></span><span><kbd>↑</kbd><kbd>↓</kbd></span><span><kbd>Enter</kbd></span></div></div></div>
+<header class="header" role="banner"><div class="header__inner"><a href="index.html" class="header__logo"><img src="src/assets/images/logos/lab-logo.png" alt="Lab Logo"></a><nav class="nav"><a href="index.html" class="nav__link nav__link--active">Home</a><a href="pages/about.html" class="nav__link">About</a><a href="pages/research.html" class="nav__link">Research</a><a href="pages/people.html" class="nav__link">People</a><a href="pages/publications.html" class="nav__link">Publications</a><a href="pages/makerspace.html" class="nav__link">Makerspace</a><a href="pages/news.html" class="nav__link">News & Events</a><a href="pages/impact.html" class="nav__link">Impact</a><a href="pages/contact.html" class="nav__link">Contact</a></nav><div class="header__actions"><button class="header__search-trigger" aria-label="Search" aria-expanded="false" aria-controls="search-overlay"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg></button><button class="header__menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button></div></div></header>
+<nav class="nav-mobile" id="mobile-nav"><a href="index.html" class="nav-mobile__link nav-mobile__link--active">Home</a><a href="pages/about.html" class="nav-mobile__link">About</a><a href="pages/research.html" class="nav-mobile__link">Research</a><a href="pages/people.html" class="nav-mobile__link">People</a><a href="pages/publications.html" class="nav-mobile__link">Publications</a><a href="pages/makerspace.html" class="nav-mobile__link">Makerspace</a><a href="pages/news.html" class="nav-mobile__link">News & Events</a><a href="pages/impact.html" class="nav-mobile__link">Impact</a><a href="pages/contact.html" class="nav-mobile__link">Contact</a></nav>
+
+<!-- Chapter overlay -->
+<div class="chapter-overlay" id="chapterOverlay"><div class="chapter-overlay__label" id="chapterLabel"></div></div>
+
+<div class="snap-viewport" id="snapViewport"><div class="snap-track" id="snapTrack">
+
+<!-- 0: Hero+Stats (no chapter) -->
+<section class="snap-panel ch-hero" data-theme="dark" data-label="Home">
+<div class="ch-hero__main"><div class="container">
+<div class="ch-badge"><span class="ch-badge__dot"></span>Ashoka University</div>
+<h1 class="ch-hero__title">Mphasis AI &amp;<br>Applied Tech Lab</h1>
+<p class="ch-hero__tagline">Pioneering <span class="morph" id="morphText">Artificial Intelligence</span> at Ashoka University</p>
+<p class="ch-hero__desc">25+ research projects across five pillars — advancing interdisciplinary research in AI, health, fabrication, and beyond.</p>
+<div class="ch-hero__actions"><a href="pages/research.html" class="btn btn--primary btn--lg">Explore Research <svg class="btn__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 10h10M11 6l4 4-4 4"/></svg></a><a href="pages/about.html" class="btn btn--secondary btn--lg">About the Lab</a></div>
+</div></div>
+<div class="ch-ticker"><div class="ch-ticker__track" id="tickerTrack"></div></div>
+<div class="ch-stats">
+<div><div class="ch-stat__num">25+</div><div class="ch-stat__label">Research Projects</div></div>
+<div><div class="ch-stat__num">30+</div><div class="ch-stat__label">Publications</div></div>
+<div><div class="ch-stat__num">5</div><div class="ch-stat__label">Research Pillars</div></div>
+<div><div class="ch-stat__num">25+</div><div class="ch-stat__label">Faculty Researchers</div></div>
+</div>
+</section>
+
+<!-- 1: Spotlight (chapter: 01) -->
+<section class="snap-panel ch-spot" data-theme="dark" data-chapter="// 01 Featured Research" data-label="Research">
+<div class="ch-spot__header"><span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.2);display:block;margin-bottom:var(--space-2)">// Featured Research</span><h2 style="font-family:var(--font-display);font-size:var(--text-3xl);font-weight:var(--weight-extrabold);color:#fff">Spotlight</h2></div>
+<a href="pages/project.html?id=bharatsim" class="ch-strip"><div style="flex:1"><div class="ch-strip__meta"><span class="ch-strip__dot" style="background:var(--pillar-bharatsim)"></span><span class="ch-strip__pillar">BharatSim</span></div><div class="ch-strip__name">India-Scale Epidemic Simulation</div><div class="ch-strip__desc">Agent-based modelling framework for public health policy — H5N1 avian flu study published in BMC Public Health and covered by BBC, NDTV, Nature India, and 20+ international outlets.</div></div><span class="ch-strip__arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 15L15 5M15 5H7M15 5v8"/></svg></span></a>
+<a href="pages/project.html?id=cancer-ascend" class="ch-strip"><div style="flex:1"><div class="ch-strip__meta"><span class="ch-strip__dot" style="background:var(--pillar-ai)"></span><span class="ch-strip__pillar">AI@Ashoka</span></div><div class="ch-strip__name">OncoMark: Cancer Diagnostics AI</div><div class="ch-strip__desc">AI framework quantifying cancer hallmarks across millions of single cells — published in Communications Biology (Nature portfolio).</div></div><span class="ch-strip__arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 15L15 5M15 5H7M15 5v8"/></svg></span></a>
+<a href="pages/project.html?id=multimodal-food-computing" class="ch-strip"><div style="flex:1"><div class="ch-strip__meta"><span class="ch-strip__dot" style="background:var(--pillar-chart)"></span><span class="ch-strip__pillar">CHART</span></div><div class="ch-strip__name">World Food Atlas</div><div class="ch-strip__desc">Multimodal food computing platform mapping global cuisines through AI — ingredients, recipes, and nutritional analysis at scale.</div></div><span class="ch-strip__arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 15L15 5M15 5H7M15 5v8"/></svg></span></a>
+</section>
+
+<!-- 2: Pillars (chapter: 02) -->
+<section class="snap-panel ch-pillars" data-theme="light" data-chapter="// 02 Research Pillars" data-label="Pillars">
+<div><span class="section__eyebrow">Research</span><h2 class="section__title">Five Pillars of Innovation</h2><p class="section__description">Our research spans five interconnected pillars, each addressing critical challenges through technology and interdisciplinary collaboration.</p></div>
+<div class="ch-pillars__grid">
+<a href="pages/pillar.html?pillar=ai" class="cpc" data-p="ai"><h3 class="cpc__title">AI@Ashoka</h3><p class="cpc__desc">Advancing artificial intelligence research across education, health, environment, humanities, and fundamental sciences.</p></a>
+<a href="pages/pillar.html?pillar=bharatsim" class="cpc" data-p="bharatsim"><h3 class="cpc__title">BharatSim</h3><p class="cpc__desc">India-scale agent-based simulation framework for epidemiological modeling and public health policy planning.</p></a>
+<a href="pages/pillar.html?pillar=chart" class="cpc" data-p="chart"><h3 class="cpc__title">CHART</h3><p class="cpc__desc">Centre for Health Analytics Research and Trends — clinical AI, food computing, and cancer diagnostics.</p></a>
+<a href="pages/pillar.html?pillar=cyber" class="cpc" data-p="cyber"><h3 class="cpc__title">Cybersecurity</h3><p class="cpc__desc">Post-quantum cryptography research to develop encryption systems resilient against quantum computing threats.</p></a>
+<a href="pages/pillar.html?pillar=makerspace" class="cpc" data-p="makerspace"><h3 class="cpc__title">Makerspace</h3><p class="cpc__desc">Digital fabrication, maker education, and hands-on innovation powering interdisciplinary research and student projects.</p></a>
+</div>
+</section>
+
+<!-- 3: Impact (chapter: 03, 6 sub-slides) -->
+<section class="snap-panel ch-impact" data-theme="dark" data-chapter="// 03 Impact" data-slides="6" data-label="Impact">
+<div style="margin-bottom:var(--space-6)"><span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.2);display:block;margin-bottom:var(--space-2)">Impact</span><h2 style="font-family:var(--font-display);font-size:var(--text-3xl);font-weight:var(--weight-extrabold);color:#fff">Research That Makes Headlines</h2></div>
+<div class="ch-impact__stage" id="ciStage">
+<div class="ci-slide active"><div class="ci-slide__title">BharatSim: Global Headlines</div><div class="ci-slide__desc">H5N1 avian flu modelling study published in BMC Public Health — covered by BBC, NDTV, Nature India, and 20+ international outlets. Platform also deployed to the National AIDS Control Organization for HIV predictive modelling.</div></div>
+<div class="ci-slide"><div class="ci-slide__title">Cancer Diagnostics AI</div><div class="ci-slide__desc">OncoMark — AI framework for quantifying cancer hallmarks across millions of single cells. Published in Communications Biology (Nature portfolio).</div></div>
+<div class="ci-slide"><div class="ci-slide__title">Oxford Fellowship</div><div class="ci-slide__desc">Meghna Agarwala won 3-year Schmidt AI for Science Fellowship at Oxford for her work on AI-driven pollen detection and biodiversity monitoring.</div></div>
+<div class="ci-slide"><div class="ci-slide__title">IndiaMediaLens</div><div class="ci-slide__desc">First national-level tool for summarising and visualising Indian press complaints — 34 years of Press Council of India data, deployed publicly at pressanalytics.in.</div></div>
+<div class="ci-slide"><div class="ci-slide__title">RedBrick Hacks III</div><div class="ci-slide__desc">430+ applicants from 91+ universities across 23 states. 57 finalists competed across four SDG-aligned challenge tracks over 48 hours (February 6–8, 2026).</div></div>
+<div class="ci-slide"><div class="ci-slide__title">Government Recognition</div><div class="ci-slide__desc">SocraticAI — an AI tutoring system for foundational CS education — featured as a case study in MeitY's India-AI Impact Summit Compendium on the Real-World Impact of AI in Education, launched at Bharat Mandapam, New Delhi (February 17, 2026).</div></div>
+</div>
+<div class="ci-progress"><div class="ci-progress__track"><div class="ci-progress__fill" id="ciFill"></div></div></div>
+</section>
+
+<!-- 4: News+Footer (chapter: 04) -->
+<section class="snap-panel ch-news-footer" data-theme="light" data-chapter="// 04 Updates" data-label="News">
+<div class="ch-news">
+<div class="ch-news__header"><div><span class="section__eyebrow">Updates</span><h2 class="section__title">Latest News &amp; Events</h2></div><a href="pages/news.html" class="btn btn--secondary">View All <svg class="btn__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h8M8 4l4 4-4 4"/></svg></a></div>
+<div class="ch-news__grid">
+<a href="posts/2026-03-wicscon-3.html" class="cnc"><span class="cnc__date">March 21–22, 2026</span><h3 class="cnc__title">WiCSCon 3.0 at Ashoka University</h3><p class="cnc__text">India's first student-led conference on inclusivity and diversity in CS. Theme: "Designing Tomorrow, Today." 440 sign-ups.</p></a>
+<a href="posts/2026-03-acm-compute-2026.html" class="cnc"><span class="cnc__date">March 21, 2026</span><h3 class="cnc__title">ACM COMPUTE 2026 Workshop Hosted</h3><p class="cnc__text">ACM COMPUTE 2026 Regional Workshop at Ashoka — CS education discussion and hands-on workshops.</p></a>
+<a href="posts/2026-03-iticse-papers-accepted.html" class="cnc"><span class="cnc__date">March 2026</span><h3 class="cnc__title">Two Papers Accepted at ITiCSE</h3><p class="cnc__text">Students Ayush Thonge and Vaani Goenka to present in Spain in July 2026.</p></a>
+</div>
+</div>
+<footer class="footer" role="contentinfo"><div class="container"><div class="footer__grid"><div class="footer__brand"><img src="src/assets/images/logos/lab-logo.png" alt="Lab Logo" class="footer__brand-logo"><p class="footer__brand-text">Advancing interdisciplinary research in AI, health, fabrication, and beyond at Ashoka University.</p><div class="footer__brand-partner"><span>Supported by</span><img src="src/assets/images/logos/mphasis-foundation.png" alt="Mphasis F1 Foundation"></div></div><div><h4 class="footer__heading">Navigate</h4><div class="footer__links"><a href="index.html" class="footer__link">Home</a><a href="pages/about.html" class="footer__link">About</a><a href="pages/research.html" class="footer__link">Research</a><a href="pages/people.html" class="footer__link">People</a><a href="pages/publications.html" class="footer__link">Publications</a><a href="pages/makerspace.html" class="footer__link">Makerspace</a><a href="pages/news.html" class="footer__link">News & Events</a><a href="pages/impact.html" class="footer__link">Impact</a></div></div><div><h4 class="footer__heading">Research</h4><div class="footer__links"><a href="pages/pillar.html?pillar=ai" class="footer__pillar-link"><span class="footer__pillar-dot" style="background-color:var(--pillar-ai)"></span>AI@Ashoka</a><a href="pages/pillar.html?pillar=bharatsim" class="footer__pillar-link"><span class="footer__pillar-dot" style="background-color:var(--pillar-bharatsim)"></span>BharatSim</a><a href="pages/pillar.html?pillar=chart" class="footer__pillar-link"><span class="footer__pillar-dot" style="background-color:var(--pillar-chart)"></span>CHART</a><a href="pages/pillar.html?pillar=cyber" class="footer__pillar-link"><span class="footer__pillar-dot" style="background-color:var(--pillar-cyber)"></span>Cybersecurity</a><a href="pages/pillar.html?pillar=makerspace" class="footer__pillar-link"><span class="footer__pillar-dot" style="background-color:var(--pillar-makerspace)"></span>Makerspace</a></div></div><div><h4 class="footer__heading">Contact</h4><div><div class="footer__contact-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13.3 2.7H2.7c-.7 0-1.4.6-1.4 1.3v8c0 .7.6 1.4 1.4 1.4h10.6c.7 0 1.4-.6 1.4-1.4V4c0-.7-.6-1.3-1.4-1.3z"/><path d="M14.7 4L8 8.7 1.3 4"/></svg><a href="mailto:mphasis.lab@ashoka.edu.in" style="color:rgba(255,255,255,0.8)">mphasis.lab@ashoka.edu.in</a></div><div class="footer__contact-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 6.7C14 11.3 8 15.3 8 15.3S2 11.3 2 6.7a6 6 0 1 1 12 0z"/><circle cx="8" cy="6.7" r="2"/></svg><span>Ashoka University<br>Sonipat, Haryana, India</span></div></div></div></div><div class="footer__bottom"><p class="footer__copyright">&copy; 2026 Mphasis AI & Applied Tech Lab, Ashoka University. All rights reserved.</p></div></div></footer>
+</section>
+
+</div></div>
+<nav class="snap-dots" id="snapDots"></nav>
+</div>
+
+<script src="src/data/projects.js"></script><script src="src/data/people.js"></script><script src="src/data/publications.js"></script><script src="src/data/pillars.js"></script><script src="src/vendor/gsap.min.js"></script><script src="src/vendor/ScrollTrigger.min.js"></script><script src="src/js/gsap-animations.js"></script><script src="src/js/main.js"></script><script src="src/js/search.js"></script>
+
+<script>
+(function(){
+'use strict';
+// Morph
+var m=document.getElementById('morphText'),ws=['Artificial Intelligence','Health Simulation','Computational Medicine','Cybersecurity','Digital Fabrication'],wi=0;
+setInterval(function(){wi=(wi+1)%ws.length;m.style.opacity='0';setTimeout(function(){m.textContent=ws[wi];m.style.opacity='1';},300);},3000);
+
+// Ticker
+var themes=['AI Pedagogy','Epidemiological Modeling','Computational Health','Climate Science','Digital Humanities','Materials Science','Biodiversity & Conservation','Digital Fabrication','Post-Quantum Cryptography'];
+var h='';for(var r=0;r<4;r++)themes.forEach(function(t){h+='<span class="ch-ticker__item">'+t+'</span><span class="ch-ticker__sep">&bull;</span>';});
+document.getElementById('tickerTrack').innerHTML=h;
+
+// Impact slides
+var ciSlides=document.querySelectorAll('#ciStage .ci-slide'),ciTotal=ciSlides.length,ciFill=document.getElementById('ciFill');
+function ciGoTo(idx){ciSlides.forEach(function(s,i){s.classList.toggle('active',i===idx);});ciFill.style.width=((idx+1)/ciTotal*100)+'%';}
+
+// CHAPTER SNAP ENGINE
+var track=document.getElementById('snapTrack'),panels=document.querySelectorAll('.snap-panel'),total=panels.length,cur=0,anim=false;
+var overlay=document.getElementById('chapterOverlay'),label=document.getElementById('chapterLabel');
+var subSlideIdx={},subSlideTotals={};
+panels.forEach(function(p,i){var n=parseInt(p.dataset.slides);if(n){subSlideIdx[i]=0;subSlideTotals[i]=n;}});
+
+function goToPanel(idx){
+if(idx<0||idx>=total||anim)return;anim=true;
+var ch=panels[idx].dataset.chapter||'';
+// Phase 1: fade out
+track.style.opacity='0';
+setTimeout(function(){
+// Move track instantly
+track.style.transition='none';
+track.style.transform='translateY(-'+(idx*100)+'vh)';
+// Phase 2: show chapter
+if(ch){label.textContent=ch;overlay.classList.add('visible');}
+setTimeout(function(){
+// Phase 3: fade in
+overlay.classList.remove('visible');
+track.style.transition='opacity .3s ease';
+track.style.opacity='1';
+cur=idx;upDots();
+setTimeout(function(){anim=false;},300);
+},ch?400:50);
+},250);
+}
+
+function handleScroll(dir){
+if(anim)return;var p=cur;var has=subSlideTotals[p]!==undefined;
+if(has){var c=subSlideIdx[p],t=subSlideTotals[p];
+if(dir===1&&c<t-1){subSlideIdx[p]++;updateSub(p);return;}
+if(dir===-1&&c>0){subSlideIdx[p]--;updateSub(p);return;}}
+var nx=p+dir;if(nx>=0&&nx<total){
+if(dir===-1&&subSlideTotals[nx]!==undefined){subSlideIdx[nx]=subSlideTotals[nx]-1;updateSub(nx);}
+if(dir===1&&subSlideTotals[nx]!==undefined){subSlideIdx[nx]=0;updateSub(nx);}
+goToPanel(nx);}}
+
+function updateSub(pi){var idx=subSlideIdx[pi];if(pi===3)ciGoTo(idx);}
+
+function isSearchOpen(){var o=document.getElementById('search-overlay');return o&&!o.hidden;}
+var wa=0,WT=80,wt,ssc=false,SCM=900;
+document.addEventListener('wheel',function(e){if(isSearchOpen())return;e.preventDefault();if(ssc)return;clearTimeout(wt);wa+=e.deltaY;if(Math.abs(wa)>=WT){var dir=wa>0?1:-1;if(subSlideTotals[cur]!==undefined){var c=subSlideIdx[cur],t=subSlideTotals[cur];if(!((dir===1&&c>=t-1)||(dir===-1&&c<=0))){ssc=true;setTimeout(function(){ssc=false;},SCM);}}handleScroll(dir);wa=0;}wt=setTimeout(function(){wa=0;},200);},{passive:false});
+var kc=false;
+document.addEventListener('keydown',function(e){if(isSearchOpen())return;if(['ArrowDown','PageDown','ArrowUp','PageUp'].indexOf(e.key)>-1){e.preventDefault();if(kc)return;handleScroll(e.key==='ArrowDown'||e.key==='PageDown'?1:-1);kc=true;setTimeout(function(){kc=false;},SCM);}});
+var ty=0;
+document.addEventListener('touchstart',function(e){ty=e.touches[0].clientY;},{passive:true});
+document.addEventListener('touchend',function(e){var d=ty-e.changedTouches[0].clientY;if(Math.abs(d)>50)handleScroll(d>0?1:-1);},{passive:true});
+
+var dc=document.getElementById('snapDots');
+panels.forEach(function(p,i){var d=document.createElement('button');d.className='snap-dots__dot';d.dataset.theme=p.dataset.theme||'dark';d.dataset.label=p.dataset.label||'';d.addEventListener('click',function(){if(subSlideTotals[i]!==undefined){subSlideIdx[i]=0;updateSub(i);}goToPanel(i);});dc.appendChild(d);});
+function upDots(){var ds=dc.querySelectorAll('.snap-dots__dot'),th=panels[cur].dataset.theme||'dark';ds.forEach(function(d,i){d.classList.toggle('active',i===cur);d.dataset.theme=th;});}
+upDots();
+})();
+</script>
+</body>
+</html>
