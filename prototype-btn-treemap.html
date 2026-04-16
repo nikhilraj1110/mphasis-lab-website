@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By the Numbers — Weight of Numbers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased}
+body{background:#F0F7FC;color:#0A1929;font-family:'Manrope',sans-serif;overflow-x:hidden}
+
+.treemap-section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(2rem,4vw,4rem)}
+
+.tm-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#6B99B8;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+
+.tm-container{width:100%;max-width:1000px;aspect-ratio:16/10;position:relative}
+
+.tm-block{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;cursor:default;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;opacity:0;transform:scale(.8)}
+.tm-block.entered{opacity:1;transform:scale(1)}
+.tm-block:hover{transform:scale(1.02) translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:10}
+
+.tm-number{font-family:'JetBrains Mono',monospace;font-weight:700;line-height:1;letter-spacing:-.03em}
+.tm-suffix{font-weight:400;opacity:.6}
+
+.tm-label{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;text-align:center;line-height:1.3;opacity:.6}
+
+.tm-desc{font-family:'Manrope',sans-serif;text-align:center;max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s ease;line-height:1.4}
+.tm-block:hover .tm-desc{max-height:60px;opacity:.7}
+
+/* Mobile: stack vertically */
+@media(max-width:768px){
+  .tm-container{aspect-ratio:auto;display:flex;flex-direction:column;gap:3px}
+  .tm-block{position:relative!important;width:100%!important;left:0!important;top:0!important;min-height:60px}
+}
+</style>
+</head>
+<body>
+<section class="treemap-section">
+  <div class="tm-eyebrow">By the Numbers</div>
+  <div class="tm-container" id="treemap"></div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const data = [
+    { value: 1300, num: '1,300+', label: 'Hackathon Applications', desc: 'For RedBrick Hacks, the Lab\'s flagship event', color: '#D94F8A' },
+    { value: 40, num: '40+', label: 'Partnerships', desc: 'With institutions, government agencies, and industry', color: '#2DB5A3' },
+    { value: 40, num: '40+', label: 'Presentations & Talks', desc: 'At national and international venues', color: '#009BDE' },
+    { value: 30, num: '30+', label: 'Publications', desc: 'Peer-reviewed papers in top-tier journals and conferences', color: '#5AC16B' },
+    { value: 25, num: '25+', label: 'Research Projects', desc: 'Across AI, health, humanities, cybersecurity, and fabrication', color: '#2563EB' },
+    { value: 25, num: '25+', label: 'Faculty Across 7 Depts', desc: 'Truly interdisciplinary research', color: '#D97706' },
+    { value: 6, num: '6', label: 'Deployed Systems', desc: 'From epidemic modelling to diagnostic AI', color: '#059669' },
+    { value: 5, num: '5', label: 'Research Pillars', desc: 'AI@Ashoka · BharatSim · CHART · Cybersecurity · Makerspace', color: '#7C3AED' }
+  ];
+
+  // Squarified treemap algorithm
+  function squarify(items, rect) {
+    if (items.length === 0) return [];
+    const totalValue = items.reduce((s, d) => s + d.value, 0);
+    const results = [];
+
+    function layoutRow(row, rowItems, rect) {
+      const rowValue = rowItems.reduce((s, d) => s + d.value, 0);
+      const isWide = rect.w >= rect.h;
+      const rowSize = (rowValue / totalValue) * (isWide ? rect.w : rect.h);
+      let offset = 0;
+
+      rowItems.forEach(item => {
+        const frac = item.value / rowValue;
+        const crossSize = (isWide ? rect.h : rect.w) * frac;
+
+        if (isWide) {
+          results.push({ ...item, x: rect.x, y: rect.y + offset, w: rowSize, h: crossSize });
+        } else {
+          results.push({ ...item, x: rect.x + offset, y: rect.y, w: crossSize, h: rowSize });
+        }
+        offset += crossSize;
+      });
+
+      // Remaining rect
+      if (isWide) {
+        return { x: rect.x + rowSize, y: rect.y, w: rect.w - rowSize, h: rect.h };
+      } else {
+        return { x: rect.x, y: rect.y + rowSize, w: rect.w, h: rect.h - rowSize };
+      }
+    }
+
+    function worst(row, w) {
+      const total = row.reduce((s, d) => s + d.value, 0);
+      const totalNorm = (total / totalValue);
+      let maxRatio = 0;
+      row.forEach(d => {
+        const frac = (d.value / totalValue);
+        const rowH = totalNorm > 0 ? frac / totalNorm * w : 0;
+        const rowW = totalNorm > 0 ? totalNorm / 1 : 0;
+        // aspect ratio
+        const a = w > 0 ? (totalNorm * w) : 1;
+        const b = frac / totalNorm * w;
+        const ratio = Math.max(a * a / (frac * w * w + .001), (frac * w * w) / (a * a + .001));
+        maxRatio = Math.max(maxRatio, ratio);
+      });
+      return maxRatio;
+    }
+
+    // Simple slice-and-dice for reliable results
+    let remaining = [...items];
+    let currentRect = { ...rect };
+
+    while (remaining.length > 0) {
+      if (remaining.length === 1) {
+        results.push({ ...remaining[0], x: currentRect.x, y: currentRect.y, w: currentRect.w, h: currentRect.h });
+        break;
+      }
+
+      const isWide = currentRect.w >= currentRect.h;
+      let row = [remaining[0]];
+      let i = 1;
+
+      // Greedy: add items to row while aspect ratio improves
+      while (i < remaining.length) {
+        const testRow = [...row, remaining[i]];
+        const rowVal = testRow.reduce((s, d) => s + d.value, 0);
+        const rowFrac = rowVal / totalValue;
+        const sideLen = isWide ? currentRect.w * rowFrac : currentRect.h * rowFrac;
+        const crossLen = isWide ? currentRect.h : currentRect.w;
+
+        // Check worst aspect ratio
+        let worstCurrent = 0, worstTest = 0;
+        const rowValCur = row.reduce((s, d) => s + d.value, 0);
+        const sideCur = isWide ? currentRect.w * (rowValCur / totalValue) : currentRect.h * (rowValCur / totalValue);
+
+        row.forEach(d => {
+          const h = (d.value / rowValCur) * crossLen;
+          worstCurrent = Math.max(worstCurrent, Math.max(sideCur / h, h / sideCur));
+        });
+
+        testRow.forEach(d => {
+          const h = (d.value / rowVal) * crossLen;
+          worstTest = Math.max(worstTest, Math.max(sideLen / h, h / sideLen));
+        });
+
+        if (worstTest <= worstCurrent || row.length === 0) {
+          row.push(remaining[i]);
+          i++;
+        } else {
+          break;
+        }
+      }
+
+      currentRect = layoutRow(results.length, row, currentRect);
+      remaining = remaining.slice(row.length);
+    }
+
+    return results;
+  }
+
+  const container = document.getElementById('treemap');
+  const cRect = container.getBoundingClientRect();
+  const W = cRect.width || 1000;
+  const H = cRect.height || 625;
+
+  const layout = squarify(data, { x: 0, y: 0, w: 100, h: 100 });
+
+  layout.forEach((item, i) => {
+    const block = document.createElement('div');
+    block.className = 'tm-block';
+    block.style.left = item.x + '%';
+    block.style.top = item.y + '%';
+    block.style.width = Math.max(item.w - .2, 0) + '%';
+    block.style.height = Math.max(item.h - .3, 0) + '%';
+    block.style.background = item.color + '18';
+    block.style.border = `1.5px solid ${item.color}25`;
+
+    // Scale text relative to block size
+    const area = item.w * item.h;
+    const numSize = Math.max(.8, Math.min(3.5, Math.sqrt(area) * .25));
+    const labelSize = Math.max(.4, Math.min(.75, Math.sqrt(area) * .06));
+    const descSize = Math.max(.55, Math.min(.8, Math.sqrt(area) * .07));
+
+    block.innerHTML = `
+      <span class="tm-number" style="font-size:${numSize}rem;color:${item.color}">${item.num}</span>
+      <span class="tm-label" style="font-size:${labelSize}rem;margin-top:4px">${item.label}</span>
+      <div class="tm-desc" style="font-size:${descSize}rem;padding:0 8px;margin-top:4px">${item.desc}</div>
+    `;
+
+    container.appendChild(block);
+
+    // Entrance animation
+    const dirs = [
+      { x: '-60px', y: '0' },
+      { x: '60px', y: '0' },
+      { x: '0', y: '-60px' },
+      { x: '0', y: '60px' }
+    ];
+    const dir = dirs[i % 4];
+    block.style.transform = `translate(${dir.x}, ${dir.y}) scale(.85)`;
+
+    setTimeout(() => {
+      block.classList.add('entered');
+      block.style.transform = '';
+      block.style.transition = `opacity .6s ease ${i * .1}s, transform .6s cubic-bezier(.22,1,.36,1) ${i * .1}s`;
+    }, 100);
+  });
+});
+</script>
+</body>
+</html>

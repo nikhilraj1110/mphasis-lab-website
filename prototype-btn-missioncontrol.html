@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By the Numbers — Mission Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{background:#060D17;color:#F0F7FC;font-family:'Manrope',sans-serif;overflow-x:hidden}
+
+.mission-control{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:clamp(2rem,6vw,6rem);overflow:hidden}
+
+/* Dot grid background */
+.mission-control::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+
+/* Scan lines */
+.mission-control::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);pointer-events:none;z-index:1}
+
+.mc-inner{position:relative;width:100%;max-width:1200px;z-index:2}
+
+.mc-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,247,252,.2);margin-bottom:clamp(2rem,5vw,4rem);display:flex;align-items:center;gap:12px}
+.mc-eyebrow::before{content:'';width:24px;height:1px;background:rgba(240,247,252,.15)}
+
+/* Asymmetric layout */
+.mc-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto;gap:0;row-gap:clamp(2rem,4vw,3.5rem)}
+
+.mc-stat{position:relative;padding:clamp(1rem,2vw,1.5rem) 0;opacity:0;transform:translateY(10px)}
+.mc-stat.visible{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease}
+
+/* Asymmetric placement */
+.mc-stat:nth-child(1){grid-column:1/7}
+.mc-stat:nth-child(2){grid-column:7/13}
+.mc-stat:nth-child(3){grid-column:2/8}
+.mc-stat:nth-child(4){grid-column:8/13}
+.mc-stat:nth-child(5){grid-column:1/5}
+.mc-stat:nth-child(6){grid-column:5/9}
+.mc-stat:nth-child(7){grid-column:9/13}
+.mc-stat:nth-child(8){grid-column:2/10}
+
+.mc-number{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(3rem,8vw,7.5rem);line-height:1;letter-spacing:-.04em;color:#F0F7FC;position:relative;display:inline-block;text-shadow:0 0 40px rgba(0,155,222,.2),0 0 80px rgba(0,155,222,.08)}
+
+/* Larger numbers for impressive stats */
+.mc-stat:nth-child(8) .mc-number{font-size:clamp(3.5rem,10vw,9rem)}
+.mc-stat:nth-child(3) .mc-number,.mc-stat:nth-child(4) .mc-number{font-size:clamp(3rem,9vw,8rem)}
+
+.mc-suffix{font-size:.6em;color:rgba(240,247,252,.4);font-weight:400}
+
+/* Live dot */
+.mc-live{position:absolute;top:50%;right:-20px;width:6px;height:6px;border-radius:50%;background:#5AC16B;transform:translateY(-50%)}
+.mc-live::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:#5AC16B;opacity:0;animation:livePulse 2s ease-in-out infinite}
+
+@keyframes livePulse{0%,100%{opacity:0;transform:scale(1)}50%{opacity:.4;transform:scale(2.5)}}
+
+/* Loading bar */
+.mc-bar{height:2px;margin-top:8px;background:rgba(255,255,255,.04);border-radius:1px;overflow:hidden;max-width:300px}
+.mc-bar-fill{height:100%;width:0;background:linear-gradient(90deg,#D94F8A,#2DB5A3,#5AC16B);border-radius:1px;transition:width 1.5s cubic-bezier(.22,1,.36,1)}
+.mc-stat.visible .mc-bar-fill{width:100%}
+
+.mc-label{font-family:'JetBrains Mono',monospace;font-size:clamp(.55rem,1vw,.7rem);letter-spacing:.12em;text-transform:uppercase;color:rgba(240,247,252,.25);margin-top:10px}
+
+/* Stagger entrance delays */
+.mc-stat:nth-child(1){transition-delay:.1s}
+.mc-stat:nth-child(2){transition-delay:.25s}
+.mc-stat:nth-child(3){transition-delay:.4s}
+.mc-stat:nth-child(4){transition-delay:.55s}
+.mc-stat:nth-child(5){transition-delay:.7s}
+.mc-stat:nth-child(6){transition-delay:.85s}
+.mc-stat:nth-child(7){transition-delay:1s}
+.mc-stat:nth-child(8){transition-delay:1.15s}
+
+/* CRT glow effect on hover */
+.mc-stat:hover .mc-number{text-shadow:0 0 60px rgba(0,155,222,.35),0 0 120px rgba(0,155,222,.15),0 0 4px rgba(240,247,252,.3);transition:text-shadow .3s ease}
+.mc-stat:hover .mc-label{color:rgba(240,247,252,.45);transition:color .3s ease}
+
+/* Mobile */
+@media(max-width:768px){
+  .mc-grid{grid-template-columns:1fr;row-gap:1.5rem}
+  .mc-stat:nth-child(n){grid-column:1/-1}
+  .mc-live{right:-16px}
+}
+</style>
+</head>
+<body>
+<section class="mission-control">
+  <div class="mc-inner">
+    <div class="mc-eyebrow">By the Numbers</div>
+    <div class="mc-grid">
+
+      <div class="mc-stat" data-target="25" data-suffix="+">
+        <div class="mc-number"><span class="mc-digits">0</span><span class="mc-suffix">+</span><span class="mc-live"></span></div>
+        <div class="mc-bar"><div class="mc-bar-fill"></div></div>
+        <div class="mc-label">Research Projects</div>
+      </div>
+
+      <div class="mc-stat" data-target="30" data-suffix="+">
+        <div class="mc-number"><span class="mc-digits">0</span><span class="mc-suffix">+</span><span class="mc-live"></span></div>
+        <div class="mc-bar"><div class="mc-bar-fill"></div></div>
+        <div class="mc-label">Publications</div>
+      </div>
+
+      <div class="mc-stat" data-target="40" data-suffix="+">
+        <div class="mc-number"><span class="mc-digits">0</span><span class="mc-suffix">+</span><span class="mc-live"></span></div>
+        <div class="mc-bar"><div class="mc-bar-fill"></div></div>
+        <div class="mc-label">Partnerships</div>
+      </div>
+
+      <div class="mc-stat" data-target="40" data-suffix="+">
+        <div class="mc-number"><span class="mc-digits">0</span><span class="mc-suffix">+</span><span class="mc-live"></span></div>
+        <div class="mc-bar"><div class="mc-bar-fill"></div></div>
+        <div class="mc-label">Presentations &amp; Talks</div>
+      </div>
+
+      <div class="mc-stat" data-target="6" data-suffix="">
+        <div class="mc-number"><span class="mc-digits">0</span><span class="mc-suffix"></span><span class="mc-live"></span></div>
+        <div class="mc-bar"><div class="mc-bar-fill"></div></div>
+        <div class="mc-label">Deployed Systems</div>
+      </div>
+
+      <div class="mc-stat" data-target="5" data-suffix="">
+        <div class="mc-number"><span class="mc-digits">0</span><span class="mc-suffix"></span><span class="mc-live"></span></div>
+        <div class="mc-bar"><div class="mc-bar-fill"></div></div>
+        <div class="mc-label">Research Pillars</div>
+      </div>
+
+      <div class="mc-stat" data-target="25" data-suffix="+">
+        <div class="mc-number"><span class="mc-digits">0</span><span class="mc-suffix">+</span><span class="mc-live"></span></div>
+        <div class="mc-bar"><div class="mc-bar-fill"></div></div>
+        <div class="mc-label">Faculty Across 7 Departments</div>
+      </div>
+
+      <div class="mc-stat" data-target="1300" data-suffix="+">
+        <div class="mc-number"><span class="mc-digits">0</span><span class="mc-suffix">+</span><span class="mc-live"></span></div>
+        <div class="mc-bar"><div class="mc-bar-fill"></div></div>
+        <div class="mc-label">Hackathon Applications</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const stats = document.querySelectorAll('.mc-stat');
+
+  // Terminal cycling counter
+  function animateCounter(el, target, duration) {
+    const digits = el.querySelector('.mc-digits');
+    const cycleTime = 40;
+    const cycles = Math.min(Math.floor(duration * 0.6 / cycleTime), 30);
+    let count = 0;
+    const maxRand = Math.max(target * 2, 99);
+
+    // Cycling phase
+    const cycleInterval = setInterval(() => {
+      digits.textContent = Math.floor(Math.random() * maxRand).toLocaleString();
+      count++;
+      if (count >= cycles) {
+        clearInterval(cycleInterval);
+        // Count up phase
+        const countStart = performance.now();
+        const countDuration = duration * 0.4;
+        function countUp(now) {
+          const elapsed = now - countStart;
+          const progress = Math.min(elapsed / countDuration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * target);
+          digits.textContent = current.toLocaleString();
+          if (progress < 1) requestAnimationFrame(countUp);
+        }
+        requestAnimationFrame(countUp);
+      }
+    }, cycleTime);
+  }
+
+  // Staggered reveal
+  stats.forEach((stat, i) => {
+    setTimeout(() => {
+      stat.classList.add('visible');
+      const target = parseInt(stat.dataset.target);
+      animateCounter(stat, target, 1800);
+    }, 100 + i * 150);
+  });
+
+  // Randomize live dot animation delays
+  document.querySelectorAll('.mc-live').forEach(dot => {
+    dot.style.animationDelay = (Math.random() * 2).toFixed(1) + 's';
+  });
+});
+</script>
+</body>
+</html>

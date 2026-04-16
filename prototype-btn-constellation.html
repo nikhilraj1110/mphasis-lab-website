@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By the Numbers — Constellation Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased}
+body{background:#060D17;color:#F0F7FC;font-family:'Manrope',sans-serif;overflow-x:hidden}
+
+.constellation{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(2rem,4vw,4rem)}
+
+.const-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,247,252,.2);margin-bottom:2rem;display:flex;align-items:center;gap:12px;z-index:3}
+.const-eyebrow::before,.const-eyebrow::after{content:'';width:24px;height:1px;background:rgba(240,247,252,.1)}
+
+.const-canvas{position:absolute;inset:0;z-index:0}
+.const-field{position:relative;width:100%;max-width:1100px;height:clamp(500px,70vh,700px);z-index:2}
+
+/* Nodes */
+.const-node{position:absolute;display:flex;flex-direction:column;align-items:center;cursor:default;z-index:3;transition:transform .3s ease}
+.const-node:hover{transform:scale(1.08)}
+
+.const-circle{width:clamp(70px,8vw,100px);height:clamp(70px,8vw,100px);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;border:1.5px solid rgba(240,247,252,.12);background:rgba(6,13,23,.7);backdrop-filter:blur(8px);transition:border-color .4s ease,box-shadow .4s ease}
+
+.const-node:hover .const-circle{border-color:rgba(0,155,222,.5);box-shadow:0 0 30px rgba(0,155,222,.15),0 0 60px rgba(0,155,222,.06)}
+.const-node.active .const-circle{border-color:rgba(0,155,222,.6);box-shadow:0 0 40px rgba(0,155,222,.2)}
+
+.const-num{font-family:'JetBrains Mono',monospace;font-size:clamp(1rem,2vw,1.5rem);font-weight:700;color:#F0F7FC;line-height:1}
+.const-suf{font-size:.7em;color:rgba(240,247,252,.4);font-weight:400}
+
+.const-label{font-family:'JetBrains Mono',monospace;font-size:clamp(.45rem,.7vw,.6rem);letter-spacing:.08em;text-transform:uppercase;color:rgba(240,247,252,.3);margin-top:10px;text-align:center;max-width:120px;line-height:1.4;transition:color .3s ease}
+.const-node:hover .const-label,.const-node.active .const-label{color:rgba(240,247,252,.7)}
+
+/* SVG connections */
+.const-connections{position:absolute;inset:0;z-index:1;pointer-events:none}
+.const-connections line{stroke:rgba(240,247,252,.06);stroke-width:1;transition:stroke .4s ease,stroke-opacity .4s ease}
+.const-connections line.highlight{stroke:rgba(0,155,222,.35);stroke-width:1.5}
+
+/* Pulse animation on circles */
+@keyframes nodePulse{0%,100%{box-shadow:0 0 0 0 rgba(0,155,222,0)}50%{box-shadow:0 0 0 8px rgba(0,155,222,.06)}}
+.const-circle{animation:nodePulse 4s ease-in-out infinite}
+.const-node:nth-child(2) .const-circle{animation-delay:.5s}
+.const-node:nth-child(3) .const-circle{animation-delay:1s}
+.const-node:nth-child(4) .const-circle{animation-delay:1.5s}
+.const-node:nth-child(5) .const-circle{animation-delay:2s}
+.const-node:nth-child(6) .const-circle{animation-delay:2.5s}
+.const-node:nth-child(7) .const-circle{animation-delay:3s}
+.const-node:nth-child(8) .const-circle{animation-delay:3.5s}
+
+/* Entrance */
+.const-node{opacity:0}
+.const-node.entered{opacity:1;transition:opacity .8s ease}
+
+@media(max-width:768px){
+  .const-field{height:auto;min-height:auto;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding:1rem 0}
+  .const-node{position:relative!important;left:auto!important;top:auto!important;transform:none!important}
+  .const-node:hover{transform:scale(1.05)!important}
+  .const-connections{display:none}
+}
+</style>
+</head>
+<body>
+<section class="constellation">
+  <div class="const-eyebrow">By the Numbers</div>
+
+  <div class="const-field" id="field">
+    <svg class="const-connections" id="connections"></svg>
+
+    <!-- Nodes positioned as constellation -->
+    <div class="const-node" id="n-projects" style="left:8%;top:18%" data-target="25" data-suffix="+">
+      <div class="const-circle"><span class="const-num"><span class="digits">0</span><span class="const-suf">+</span></span></div>
+      <div class="const-label">Research Projects</div>
+    </div>
+
+    <div class="const-node" id="n-pubs" style="left:32%;top:5%" data-target="30" data-suffix="+">
+      <div class="const-circle"><span class="const-num"><span class="digits">0</span><span class="const-suf">+</span></span></div>
+      <div class="const-label">Publications</div>
+    </div>
+
+    <div class="const-node" id="n-partners" style="left:62%;top:10%" data-target="40" data-suffix="+">
+      <div class="const-circle"><span class="const-num"><span class="digits">0</span><span class="const-suf">+</span></span></div>
+      <div class="const-label">Partnerships</div>
+    </div>
+
+    <div class="const-node" id="n-talks" style="left:85%;top:22%" data-target="40" data-suffix="+">
+      <div class="const-circle"><span class="const-num"><span class="digits">0</span><span class="const-suf">+</span></span></div>
+      <div class="const-label">Presentations & Talks</div>
+    </div>
+
+    <div class="const-node" id="n-deployed" style="left:72%;top:55%" data-target="6" data-suffix="">
+      <div class="const-circle"><span class="const-num"><span class="digits">0</span></span></div>
+      <div class="const-label">Deployed Systems</div>
+    </div>
+
+    <div class="const-node" id="n-pillars" style="left:42%;top:48%" data-target="5" data-suffix="">
+      <div class="const-circle"><span class="const-num"><span class="digits">0</span></span></div>
+      <div class="const-label">Research Pillars</div>
+    </div>
+
+    <div class="const-node" id="n-faculty" style="left:12%;top:60%" data-target="25" data-suffix="+">
+      <div class="const-circle"><span class="const-num"><span class="digits">0</span><span class="const-suf">+</span></span></div>
+      <div class="const-label">Faculty Across 7 Depts</div>
+    </div>
+
+    <div class="const-node" id="n-hackathon" style="left:48%;top:80%" data-target="1300" data-suffix="+">
+      <div class="const-circle" style="width:clamp(85px,10vw,120px);height:clamp(85px,10vw,120px)"><span class="const-num" style="font-size:clamp(1.1rem,2.2vw,1.6rem)"><span class="digits">0</span><span class="const-suf">+</span></span></div>
+      <div class="const-label">Hackathon Applications</div>
+    </div>
+  </div>
+</section>
+
+<canvas class="const-canvas" id="starfield"></canvas>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Starfield
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const stars = Array.from({length: 200}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.2 + .3,
+    a: Math.random() * .4 + .1,
+    twinkle: Math.random() * Math.PI * 2,
+    speed: Math.random() * .01 + .005
+  }));
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.twinkle += s.speed;
+      const alpha = s.a * (.6 + .4 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(240,247,252,${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+
+  // Draw connections
+  const connections = [
+    ['n-projects', 'n-pubs'],
+    ['n-projects', 'n-deployed'],
+    ['n-projects', 'n-pillars'],
+    ['n-faculty', 'n-projects'],
+    ['n-faculty', 'n-pubs'],
+    ['n-partners', 'n-talks'],
+    ['n-partners', 'n-deployed'],
+    ['n-hackathon', 'n-pillars']
+  ];
+
+  const svg = document.getElementById('connections');
+  const field = document.getElementById('field');
+
+  function getNodeCenter(id) {
+    const node = document.getElementById(id);
+    const circle = node.querySelector('.const-circle');
+    const fRect = field.getBoundingClientRect();
+    const nRect = circle.getBoundingClientRect();
+    return {
+      x: nRect.left + nRect.width / 2 - fRect.left,
+      y: nRect.top + nRect.height / 2 - fRect.top
+    };
+  }
+
+  function drawConnections() {
+    const fRect = field.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${fRect.width} ${fRect.height}`);
+    svg.innerHTML = '';
+    connections.forEach(([a, b], i) => {
+      const pA = getNodeCenter(a);
+      const pB = getNodeCenter(b);
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', pA.x);
+      line.setAttribute('y1', pA.y);
+      line.setAttribute('x2', pB.x);
+      line.setAttribute('y2', pB.y);
+      line.dataset.from = a;
+      line.dataset.to = b;
+      svg.appendChild(line);
+    });
+  }
+
+  setTimeout(drawConnections, 100);
+  window.addEventListener('resize', () => setTimeout(drawConnections, 50));
+
+  // Hover highlighting
+  const nodes = document.querySelectorAll('.const-node');
+  nodes.forEach(node => {
+    node.addEventListener('mouseenter', () => {
+      const id = node.id;
+      node.classList.add('active');
+      // Dim others
+      nodes.forEach(n => { if (n !== node) n.style.opacity = '.3'; });
+      // Highlight connections
+      svg.querySelectorAll('line').forEach(l => {
+        if (l.dataset.from === id || l.dataset.to === id) {
+          l.classList.add('highlight');
+        } else {
+          l.style.strokeOpacity = '.02';
+        }
+      });
+    });
+    node.addEventListener('mouseleave', () => {
+      node.classList.remove('active');
+      nodes.forEach(n => n.style.opacity = '');
+      svg.querySelectorAll('line').forEach(l => {
+        l.classList.remove('highlight');
+        l.style.strokeOpacity = '';
+      });
+    });
+  });
+
+  // Counter
+  function countUp(el, target, duration) {
+    const digits = el.querySelector('.digits');
+    if (!digits) return;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      digits.textContent = Math.round(eased * target).toLocaleString();
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Staggered entrance
+  nodes.forEach((node, i) => {
+    setTimeout(() => {
+      node.classList.add('entered');
+      const target = parseInt(node.dataset.target);
+      if (target) countUp(node, target, 1800);
+    }, 300 + i * 200);
+  });
+});
+</script>
+</body>
+</html>

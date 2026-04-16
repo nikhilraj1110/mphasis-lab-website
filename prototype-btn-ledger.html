@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By the Numbers — The Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased}
+body{background:#F0F7FC;color:#0A1929;font-family:'Manrope',sans-serif;overflow-x:hidden}
+
+.ledger{min-height:100vh;display:flex;align-items:center;padding:clamp(3rem,8vw,8rem) clamp(2rem,8vw,10rem)}
+
+.ledger-inner{position:relative;width:100%;max-width:1000px;padding-left:clamp(2rem,4vw,3.5rem)}
+
+/* Vertical ledger line */
+.ledger-inner::before{content:'';position:absolute;left:0;top:-1rem;bottom:-1rem;width:2px;background:linear-gradient(180deg,transparent,#D94F8A 10%,#2DB5A3 50%,#5AC16B 90%,transparent)}
+
+.ledger-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#6B99B8;margin-bottom:clamp(2.5rem,5vw,4rem)}
+
+.ledger-line{margin-bottom:clamp(1.5rem,3vw,2.5rem);opacity:0;transform:translateX(-20px);cursor:default}
+.ledger-line.visible{opacity:1;transform:translateX(0);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+
+.ledger-row{display:flex;align-items:baseline;gap:clamp(.5rem,2vw,1.2rem);flex-wrap:wrap}
+
+.ledger-number{font-family:'JetBrains Mono',monospace;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.04em;background:linear-gradient(90deg,#D94F8A,#2DB5A3,#5AC16B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;transition:transform .3s ease;white-space:nowrap}
+
+.ledger-line:hover .ledger-number{transform:scale(1.03)}
+
+.ledger-label{font-family:'Manrope',sans-serif;font-size:clamp(.95rem,1.8vw,1.25rem);font-weight:400;color:#3D5A73;line-height:1.2;opacity:0;transform:translateX(-10px)}
+.ledger-line.visible .ledger-label{opacity:1;transform:translateX(0);transition:opacity .5s ease .3s,transform .5s ease .3s}
+
+.ledger-context{font-family:'Manrope',sans-serif;font-size:clamp(.75rem,1.2vw,.9rem);color:#6B99B8;margin-top:6px;max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s ease,margin-top .3s ease}
+.ledger-line:hover .ledger-context{max-height:40px;opacity:1;margin-top:8px}
+
+/* Stagger entrance */
+.ledger-line:nth-child(2){transition-delay:.05s}
+.ledger-line:nth-child(3){transition-delay:.1s}
+.ledger-line:nth-child(4){transition-delay:.15s}
+.ledger-line:nth-child(5){transition-delay:.2s}
+.ledger-line:nth-child(6){transition-delay:.25s}
+.ledger-line:nth-child(7){transition-delay:.3s}
+.ledger-line:nth-child(8){transition-delay:.35s}
+.ledger-line:nth-child(9){transition-delay:.4s}
+
+@media(max-width:640px){
+  .ledger{padding:3rem 1.5rem}
+  .ledger-inner{padding-left:1.5rem}
+  .ledger-row{gap:.4rem}
+}
+</style>
+</head>
+<body>
+<section class="ledger">
+  <div class="ledger-inner">
+    <div class="ledger-eyebrow ledger-line">By the Numbers</div>
+
+    <div class="ledger-line" data-target="25" data-suffix="+">
+      <div class="ledger-row">
+        <span class="ledger-number"><span class="digits">0</span>+</span>
+        <span class="ledger-label">Research Projects</span>
+      </div>
+      <div class="ledger-context">Across AI, health, humanities, cybersecurity, and fabrication</div>
+    </div>
+
+    <div class="ledger-line" data-target="30" data-suffix="+">
+      <div class="ledger-row">
+        <span class="ledger-number"><span class="digits">0</span>+</span>
+        <span class="ledger-label">Publications</span>
+      </div>
+      <div class="ledger-context">Peer-reviewed papers in top-tier journals and conferences</div>
+    </div>
+
+    <div class="ledger-line" data-target="40" data-suffix="+">
+      <div class="ledger-row">
+        <span class="ledger-number"><span class="digits">0</span>+</span>
+        <span class="ledger-label">Partnerships</span>
+      </div>
+      <div class="ledger-context">With institutions, government agencies, and industry</div>
+    </div>
+
+    <div class="ledger-line" data-target="40" data-suffix="+">
+      <div class="ledger-row">
+        <span class="ledger-number"><span class="digits">0</span>+</span>
+        <span class="ledger-label">Presentations & Talks</span>
+      </div>
+      <div class="ledger-context">At national and international venues</div>
+    </div>
+
+    <div class="ledger-line" data-target="6" data-suffix="">
+      <div class="ledger-row">
+        <span class="ledger-number"><span class="digits">0</span></span>
+        <span class="ledger-label">Deployed Systems</span>
+      </div>
+      <div class="ledger-context">From epidemic modelling to diagnostic AI</div>
+    </div>
+
+    <div class="ledger-line" data-target="5" data-suffix="">
+      <div class="ledger-row">
+        <span class="ledger-number"><span class="digits">0</span></span>
+        <span class="ledger-label">Research Pillars</span>
+      </div>
+      <div class="ledger-context">AI@Ashoka · BharatSim · CHART · Cybersecurity · Makerspace</div>
+    </div>
+
+    <div class="ledger-line" data-target="25" data-suffix="+">
+      <div class="ledger-row">
+        <span class="ledger-number"><span class="digits">0</span>+</span>
+        <span class="ledger-label">Faculty Across 7 Departments</span>
+      </div>
+      <div class="ledger-context">Truly interdisciplinary research</div>
+    </div>
+
+    <div class="ledger-line" data-target="1300" data-suffix="+">
+      <div class="ledger-row">
+        <span class="ledger-number"><span class="digits">0</span>+</span>
+        <span class="ledger-label">Hackathon Applications</span>
+      </div>
+      <div class="ledger-context">For RedBrick Hacks, the Lab's flagship event</div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const lines = document.querySelectorAll('.ledger-line');
+
+  function countUp(el, target, duration) {
+    const digits = el.querySelector('.digits');
+    if (!digits) return;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 4);
+      digits.textContent = Math.round(eased * target).toLocaleString();
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  lines.forEach((line, i) => {
+    setTimeout(() => {
+      line.classList.add('visible');
+      const target = parseInt(line.dataset.target);
+      if (target) countUp(line, target, 1600);
+    }, 200 + i * 120);
+  });
+});
+</script>
+</body>
+</html>

@@ -115,11 +115,14 @@
 
   // ── Scene Setup ──
   var width = container.clientWidth;
-  var height = Math.min(700, Math.max(500, window.innerHeight * 0.7));
+  var isInSideBySide = !!container.closest('.globe-layout');
+  var height = isInSideBySide
+    ? Math.min(550, Math.max(380, (window.innerHeight - 72) * 0.75))
+    : Math.min(700, Math.max(500, window.innerHeight * 0.7));
 
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-  camera.position.z = 2.6;
+  camera.position.z = isInSideBySide ? 3.2 : 2.6;
 
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(width, height);
@@ -367,7 +370,9 @@
   // ── Resize ──
   window.addEventListener('resize', function () {
     var w = container.clientWidth;
-    var h = Math.min(700, Math.max(500, window.innerHeight * 0.7));
+    var h = isInSideBySide
+      ? Math.min(550, Math.max(380, (window.innerHeight - 72) * 0.75))
+      : Math.min(700, Math.max(500, window.innerHeight * 0.7));
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);

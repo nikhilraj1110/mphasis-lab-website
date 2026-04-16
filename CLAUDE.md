@@ -395,15 +395,16 @@ Update IMMEDIATELY after every status change.
 
 On session start:
 1. Read this CLAUDE.md first to restore full context
-2. Check Progress Tracker for current phase and status
-3. Check existing files in Website/ for completed work
-4. Resume based on status:
+2. **REMIND USER:** Footer credit is pending — "Designed & built by Nikhil Raj" linked to his LinkedIn (URL TBD). User approved Option A (minimal) style. Awaiting LinkedIn URL and go-ahead to implement across all pages. Also create `humans.txt` at site root at the same time.
+3. Check Progress Tracker for current phase and status
+4. Check existing files in Website/ for completed work
+5. Resume based on status:
    - **IN PROGRESS** → Continue from where left off
    - **DONE — PENDING REVIEW** → Ask user if they've reviewed
    - **APPROVED** → Move to next phase
    - **NOT STARTED** → Confirm with user before beginning
-5. Never redo completed and approved work
-6. Never skip a phase without explicit user approval
+6. Never redo completed and approved work
+7. Never skip a phase without explicit user approval
 
 ---
 

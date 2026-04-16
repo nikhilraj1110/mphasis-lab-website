@@ -80,6 +80,15 @@
       closeMobileMenu();
       menuToggle.focus();
     }
+
+    // Arrow keys: scroll by 100vh per press
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      var tag = document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      e.preventDefault();
+      var delta = e.key === 'ArrowDown' ? window.innerHeight : -window.innerHeight;
+      window.scrollBy({ top: delta, behavior: 'smooth' });
+    }
   });
 
   window.addEventListener('resize', function () {
