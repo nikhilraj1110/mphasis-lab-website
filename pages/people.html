@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="People at the Mphasis AI & Applied Tech Lab — 27+ faculty, researchers, and staff across 7 departments at Ashoka University.">
   <meta name="theme-color" content="#1B2A4A">
-
-  <!-- Open Graph -->
   <meta property="og:title" content="People | Mphasis AI & Applied Tech Lab">
   <meta property="og:description" content="Meet the researchers, faculty, and staff driving innovation across five research pillars.">
   <meta property="og:type" content="website">
-
   <title>People | Mphasis AI & Applied Tech Lab</title>
 
   <link rel="icon" type="image/png" sizes="32x32" href="../src/assets/images/logos/favicon-32.png">
@@ -18,7 +15,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../src/assets/images/logos/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../src/css/variables.css">
   <link rel="stylesheet" href="../src/css/reset.css">
@@ -33,120 +30,55 @@
   <link rel="stylesheet" href="../src/css/search.css">
 
   <style>
-    /* ── Stretched link: entire card clickable ── */
-    .person-card {
-      position: relative;
-      isolation: isolate;
-    }
-
-    .person-card__name a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    /* Stretch the link over the entire card */
-    .person-card__name a::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      border-radius: inherit;
-    }
-
-    /* Cards with links get pointer + hover effects */
-    .person-card:has(.person-card__name a) {
-      cursor: pointer;
-    }
-
-    .person-card:has(.person-card__name a):hover {
-      background: rgba(37, 99, 235, 0.04);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-      transform: translateY(-4px);
-    }
-
-    .person-card:has(.person-card__name a):hover .person-card__name {
-      color: var(--color-primary, #2563eb);
-    }
-
-    .person-card:has(.person-card__name a):hover .person-card__avatar {
-      transform: scale(1.08);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .person-card__avatar {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    /* External link indicator — shows on hover */
-    .person-card__link-indicator {
-      position: absolute;
-      top: var(--space-3, 12px);
-      right: var(--space-3, 12px);
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--color-primary, #2563eb);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: scale(0.8) translate(4px, -4px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .person-card:has(.person-card__name a):hover .person-card__link-indicator {
-      opacity: 1;
-      transform: scale(1) translate(0, 0);
-    }
-
-    /* ── Department badge ── */
-    .person-card__dept-badge {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: var(--gray-100, #f3f4f6);
-      color: var(--color-text-muted, #6b7280);
-      margin-top: var(--space-2, 8px);
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .person-card:has(.person-card__name a):hover .person-card__dept-badge {
-      background: rgba(37, 99, 235, 0.08);
-      color: var(--color-primary, #2563eb);
-    }
-
-    /* Smooth card transition */
-    .person-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      border-radius: var(--radius-lg, 12px);
-      padding: var(--space-6, 24px) var(--space-4, 16px);
-    }
-
-    /* Focus-visible for keyboard accessibility */
-    .person-card:has(.person-card__name a:focus-visible) {
-      outline: 2px solid var(--color-primary, #2563eb);
-      outline-offset: 2px;
-      transform: translateY(-4px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    }
-
-    .person-card__name a:focus-visible {
-      outline: none;
-    }
+    html, body { margin: 0; padding: 0; overflow: hidden; height: 100vh; }
+    .snap-viewport { position: fixed; inset: 0; overflow: hidden; }
+    .snap-track { position: absolute; top: 0; left: 0; right: 0; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); will-change: transform; }
+    .snap-panel { width: 100vw; height: 100vh; overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(2rem, 5vw, 5rem); }
+    .snap-panel--hero { align-items: center; text-align: center; position: relative; }
+    .ppl-hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .ppl-hero__bg canvas { width: 100%; height: 100%; display: block; }
+    .ppl-hero__content { position: relative; z-index: 2; pointer-events: none; }
+    .ppl-hero__content .section__title { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; letter-spacing: -0.04em; color: #0A1929; }
+    .ppl-hero__content .section__eyebrow { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #9BBDD8; margin-bottom: 1rem; }
+    .ppl-hero__content .section__description { font-size: 0.95rem; color: #6B99B8; max-width: 600px; margin: 1rem auto 0; line-height: 1.7; }
+    .ppl-hero__rule { width: 80px; height: 2px; background: #0A1929; margin: 1.5rem auto; }
+    .ppl-hero__stats { display: flex; gap: clamp(1.5rem, 3vw, 3rem); justify-content: center; flex-wrap: wrap; margin-top: 0.5rem; }
+    .ppl-hero__stat { text-align: center; }
+    .ppl-hero__stat-num { font-family: var(--font-mono); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: #0A1929; }
+    .ppl-hero__stat-label { font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.12em; text-transform: uppercase; color: #9BBDD8; margin-top: 2px; }
+    .snap-panel--cat { }
+    .ppl-cat-hdr { margin-bottom: var(--space-6); }
+    .ppl-cat-hdr .section__title { font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--weight-extrabold); color: var(--color-text); letter-spacing: -0.02em; }
+    .ppl-cat-hdr .section__subtitle { font-size: var(--text-base); color: var(--color-text-secondary); margin-top: var(--space-2); }
+    .ppl-cat-hdr__page { font-family: var(--font-mono); font-size: 0.45rem; color: var(--color-text-muted); margin-top: var(--space-1); }
+    .ppl-grid { display: grid; gap: 12px; }
+    .ppl-grid--2 { grid-template-columns: repeat(2, 1fr); max-width: 600px; }
+    .ppl-grid--3 { grid-template-columns: repeat(3, 1fr); }
+    .ppl-grid--4 { grid-template-columns: repeat(4, 1fr); }
+    .ppl-grid--5 { grid-template-columns: repeat(5, 1fr); }
+    @media (max-width: 768px) { .ppl-grid--3, .ppl-grid--4, .ppl-grid--5 { grid-template-columns: repeat(2, 1fr); } }
+    .ppl-card { background: var(--color-bg); border-radius: var(--radius-lg); padding: 14px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+    .ppl-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .ppl-card--lg { padding: 24px; }
+    .ppl-card__avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--color-bg-alt); margin: 0 auto 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.5rem; color: var(--color-text-muted); }
+    .ppl-card--lg .ppl-card__avatar { width: 72px; height: 72px; margin-bottom: 12px; }
+    .ppl-card__avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .ppl-card__name { font-size: 0.78rem; font-weight: var(--weight-semibold); }
+    .ppl-card--lg .ppl-card__name { font-size: 1rem; }
+    .ppl-card__name a { color: inherit; text-decoration: none; transition: color var(--transition-fast); }
+    .ppl-card__name a:hover { color: var(--color-primary); }
+    .ppl-card__role { font-size: 0.58rem; color: var(--color-text-muted); margin-top: 2px; }
+    .ppl-card__dept { font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-300); margin-top: 4px; }
+    .ppl-nav-dots { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 6px; z-index: 200; }
+    .ppl-nd { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid rgba(10,25,41,0.15); background: transparent; cursor: pointer; padding: 0; transition: all 0.3s; }
+    .ppl-nd.active { background: var(--color-text); border-color: var(--color-text); box-shadow: 0 0 6px rgba(10,25,41,0.15); }
+    .header { position: fixed; z-index: 300; }
+    .progress-bar { display: none; }
+    .search-overlay { z-index: 500 !important; position: fixed !important; }
   </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
-
   <div class="page">
 
     <!-- Search Overlay -->
@@ -176,7 +108,7 @@
     <!-- HEADER -->
     <header class="header" role="banner">
       <div class="header__inner">
-        <a href="../index.html" class="header__logo" aria-label="Mphasis AI & Applied Tech Lab — Home">
+        <a href="../index.html" class="header__logo" aria-label="Home">
           <img src="../src/assets/images/logos/lab-logo.png" alt="Mphasis AI & Applied Tech Lab Logo">
         </a>
         <nav class="nav" role="navigation" aria-label="Primary navigation">
@@ -191,838 +123,109 @@
           <a href="contact.html" class="nav__link">Contact</a>
         </nav>
         <div class="header__actions">
-          <button class="header__search-trigger" aria-label="Search" aria-expanded="false" aria-controls="search-overlay">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
-          </button>
-          <button class="header__menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
-            <span></span><span></span><span></span>
-          </button>
+          <button class="header__search-trigger" aria-label="Search"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg></button>
+          <button class="header__menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
       </div>
     </header>
 
-    <!-- Mobile Navigation -->
-    <nav class="nav-mobile" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
-      <a href="../index.html" class="nav-mobile__link">Home</a>
-      <a href="about.html" class="nav-mobile__link">About</a>
-      <a href="research.html" class="nav-mobile__link">Research</a>
-      <a href="people.html" class="nav-mobile__link nav-mobile__link--active">People</a>
-      <a href="publications.html" class="nav-mobile__link">Publications</a>
-      <a href="makerspace.html" class="nav-mobile__link">Makerspace</a>
-      <a href="news.html" class="nav-mobile__link">News & Events</a>
-      <a href="impact.html" class="nav-mobile__link">Impact</a>
-      <a href="contact.html" class="nav-mobile__link">Contact</a>
-    </nav>
-
-    <!-- MAIN CONTENT -->
-    <main class="page__content" id="main-content" role="main">
-
-      <!-- Page Hero -->
-      <section class="page-hero">
-        <canvas class="page-hero__canvas" data-page="people" aria-hidden="true"></canvas>
-        <div class="container">
-          <span class="page-hero__eyebrow reveal">People</span>
-          <h1 class="page-hero__title reveal">Our Team</h1>
-          <p class="page-hero__description reveal">
-            27+ faculty spanning 7 departments, researchers, and a dedicated operations team — the people driving interdisciplinary innovation.
-          </p>
-        </div>
-      </section>
-
-      <!-- Filter Bar -->
-      <section class="section section--sm">
-        <div class="container">
-          <div class="filter-bar reveal" role="tablist" aria-label="Filter people by role">
-            <button class="filter-bar__btn filter-bar__btn--active" data-filter="all">All</button>
-            <button class="filter-bar__btn" data-filter="leadership">Leadership</button>
-            <button class="filter-bar__btn" data-filter="staff">Staff</button>
-            <button class="filter-bar__btn" data-filter="faculty">Faculty</button>
-            <button class="filter-bar__btn" data-filter="researchers">Researchers</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Leadership -->
-      <section class="section filter-target">
-        <div class="container">
-
-          <div class="people-section reveal" data-pillar="leadership">
-            <h2 class="people-section__title">Leadership</h2>
-            <p class="people-section__count">Advisory and institutional leadership</p>
-          </div>
-
-          <div class="people-grid reveal-stagger">
-
-            <article class="card person-card reveal" data-pillar="leadership">
-              <div class="person-card__avatar" role="img" aria-label="Shantanu Bhanja">
-                <img src="../src/assets/images/people/shantanu-bhanja.png" alt="Shantanu Bhanja" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/shantanu-bhanja/" target="_blank" rel="noopener noreferrer">Shantanu Bhanja</a></h3>
-                <p class="person-card__role">Senior Advisor to Chairperson, Board of Trustees, Ashoka University</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="leadership">
-              <div class="person-card__avatar" role="img" aria-label="Partha Pratim Chakrabarti">
-                <img src="../src/assets/images/people/partha-pratim-chakrabarti.png" alt="Partha Pratim Chakrabarti" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/partha-pratim-chakrabarti/" target="_blank" rel="noopener noreferrer">Partha Pratim Chakrabarti</a></h3>
-                <p class="person-card__role">Former Director, and Professor, IIT Kharagpur</p>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- Staff -->
-      <section class="section section--alt filter-target">
-        <div class="container">
-
-          <div class="people-section reveal" data-pillar="staff">
-            <h2 class="people-section__title">Staff</h2>
-            <p class="people-section__count">The team behind the Lab</p>
-          </div>
-
-          <div class="people-grid reveal-stagger">
-
-            <article class="card person-card reveal" data-pillar="staff">
-              <div class="person-card__avatar" role="img" aria-label="Nikhil Raj">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Nikhil Raj</h3>
-                <p class="person-card__role">Manager</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="staff">
-              <div class="person-card__avatar" role="img" aria-label="Kamal Nayan">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Kamal Nayan</h3>
-                <p class="person-card__role">Assistant Manager</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="staff">
-              <div class="person-card__avatar" role="img" aria-label="Sai Khurana">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Sai Khurana</h3>
-                <p class="person-card__role">Co-Lead</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="staff">
-              <div class="person-card__avatar" role="img" aria-label="Kanishk Singh">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Kanishk Singh</h3>
-                <p class="person-card__role">Co-Lead</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="staff">
-              <div class="person-card__avatar" role="img" aria-label="Ojas Tripathi">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Ojas Tripathi</h3>
-                <p class="person-card__role">Community Engagement Manager</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="staff">
-              <div class="person-card__avatar" role="img" aria-label="Neeraj Kumar">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Neeraj Kumar</h3>
-                <p class="person-card__role">Lab Attendant</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="staff">
-              <div class="person-card__avatar" role="img" aria-label="Deepak Jangra">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Deepak Jangra</h3>
-                <p class="person-card__role">Lab Attendant</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="staff">
-              <div class="person-card__avatar" role="img" aria-label="Priyanshi Bansal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Priyanshi Bansal</h3>
-                <p class="person-card__role">Media and Communications</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="staff">
-              <div class="person-card__avatar" role="img" aria-label="Naman Anshumaan">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Naman Anshumaan</h3>
-                <p class="person-card__role">Media and Communications</p>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- Faculty -->
-      <section class="section filter-target">
-        <div class="container">
-
-          <div class="people-section reveal" data-pillar="faculty">
-            <h2 class="people-section__title">Faculty and Academic Research</h2>
-            <p class="people-section__count">Faculty advisors across 7 departments</p>
-          </div>
-
-          <div class="people-grid reveal-stagger">
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Debayan Gupta">
-                <img src="../src/assets/images/people/debayan-gupta.png" alt="Debayan Gupta" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/debayan-gupta/" target="_blank" rel="noopener noreferrer">Debayan Gupta</a></h3>
-                <p class="person-card__role">Assistant Professor, Computer Science</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Gautam Menon">
-                <img src="../src/assets/images/people/gautam-menon.png" alt="Gautam Menon" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/gautam-menon-2/" target="_blank" rel="noopener noreferrer">Gautam Menon</a></h3>
-                <p class="person-card__role">Professor, Physics and Biology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="L.S. Shashidhara">
-                <img src="../src/assets/images/people/ls-shashidhara.png" alt="L.S. Shashidhara" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/l-s-shashidhara/" target="_blank" rel="noopener noreferrer">L.S. Shashidhara</a></h3>
-                <p class="person-card__role">Professor, Biology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Lipika Dey">
-                <img src="../src/assets/images/people/lipika-dey.jpg" alt="Lipika Dey" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/lipika-dey/" target="_blank" rel="noopener noreferrer">Lipika Dey</a></h3>
-                <p class="person-card__role">Professor, Computer Science</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Aalok Thakkar">
-                <img src="../src/assets/images/people/aalok-thakkar.png" alt="Aalok Thakkar" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/aalok-thakkar/" target="_blank" rel="noopener noreferrer">Aalok Thakkar</a></h3>
-                <p class="person-card__role">Assistant Professor, Computer Science</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Meghna Agarwala">
-                <img src="../src/assets/images/people/meghna-agarwala.png" alt="Meghna Agarwala" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/meghna-agarwala/" target="_blank" rel="noopener noreferrer">Meghna Agarwala</a></h3>
-                <p class="person-card__role">Associate Professor, Environmental Studies</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Imroze Khan">
-                <img src="../src/assets/images/people/imroze-khan.png" alt="Imroze Khan" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/imroze-khan/" target="_blank" rel="noopener noreferrer">Imroze Khan</a></h3>
-                <p class="person-card__role">Associate Professor, Biology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Rama Akondy">
-                <img src="../src/assets/images/people/rama-akondy.jpg" alt="Rama Akondy" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/rama-akondy/" target="_blank" rel="noopener noreferrer">Rama Akondy</a></h3>
-                <p class="person-card__role">Associate Professor, Biology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Mahavir Jhawar">
-                <img src="../src/assets/images/people/mahavir-jhawar.png" alt="Mahavir Jhawar" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/mahavir-jhawar/" target="_blank" rel="noopener noreferrer">Mahavir Jhawar</a></h3>
-                <p class="person-card__role">Associate Professor, Computer Science</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Vidya Avasare">
-                <img src="../src/assets/images/people/vidya-avasare.jpg" alt="Vidya Avasare" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/vidya-avasare/" target="_blank" rel="noopener noreferrer">Vidya Avasare</a></h3>
-                <p class="person-card__role">Professor, Chemistry</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Anirban Sen">
-                <img src="../src/assets/images/people/anirban-sen.jpg" alt="Anirban Sen" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/anirban-sen/" target="_blank" rel="noopener noreferrer">Anirban Sen</a></h3>
-                <p class="person-card__role">Assistant Professor, Computer Science</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Rintu Kutum">
-                <img src="../src/assets/images/people/rintu-kutum.png" alt="Rintu Kutum" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/rintu-kutum/" target="_blank" rel="noopener noreferrer">Rintu Kutum</a></h3>
-                <p class="person-card__role">Faculty Fellow, Computer Science</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Kasturi Mitra">
-                <img src="../src/assets/images/people/kasturi-mitra.png" alt="Kasturi Mitra" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/kasturi-mitra/" target="_blank" rel="noopener noreferrer">Kasturi Mitra</a></h3>
-                <p class="person-card__role">Associate Professor, Biology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Sourav Chatterjee">
-                <img src="../src/assets/images/people/sourav-chatterjee.png" alt="Sourav Chatterjee" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/sourav-chatterjee/" target="_blank" rel="noopener noreferrer">Sourav Chatterjee</a></h3>
-                <p class="person-card__role">Assistant Professor, Chemistry</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Bittu Kaveri Rajaraman">
-                <img src="../src/assets/images/people/bittu.png" alt="Bittu Kaveri Rajaraman" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/bittu-kaveri-rajaraman/" target="_blank" rel="noopener noreferrer">Bittu Kaveri Rajaraman</a></h3>
-                <p class="person-card__role">Associate Professor, Biology and Psychology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Pramoda Kumar">
-                <img src="../src/assets/images/people/pramoda-kumar.png" alt="Pramoda Kumar" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/pramoda-kumar/" target="_blank" rel="noopener noreferrer">Pramoda Kumar</a></h3>
-                <p class="person-card__role">Assistant Professor, Physics</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Balaji Chattopadhyay">
-                <img src="../src/assets/images/people/balaji-chattopadhyay.png" alt="Balaji Chattopadhyay" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/balaji-chattopadhyay/" target="_blank" rel="noopener noreferrer">Balaji Chattopadhyay</a></h3>
-                <p class="person-card__role">Assistant Professor, Biology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Partha Pratim Das">
-                <img src="../src/assets/images/people/partha-pratim-das.jpg" alt="Partha Pratim Das" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/partha-pratim-das/" target="_blank" rel="noopener noreferrer">Partha Pratim Das</a></h3>
-                <p class="person-card__role">Professor, Computer Science</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="faculty">
-              <div class="person-card__avatar" role="img" aria-label="Anurag Agrawal">
-                <img src="../src/assets/images/people/anurag-agrawal.jpg" alt="Anurag Agrawal" loading="lazy">
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/anurag-agrawal/" target="_blank" rel="noopener noreferrer">Anurag Agrawal</a></h3>
-                <p class="person-card__role">Dean, Trivedi School of Biosciences</p>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- Researchers -->
-      <section class="section section--alt filter-target">
-        <div class="container">
-
-          <div class="people-section reveal" data-pillar="researchers">
-            <h2 class="people-section__title">Researchers</h2>
-            <p class="people-section__count">Research fellows, associates, assistants, and project staff</p>
-          </div>
-
-          <div class="people-grid reveal-stagger">
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Neerav Dwivedi">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/neerav-dwivedi/" target="_blank" rel="noopener noreferrer">Neerav Dwivedi</a></h3>
-                <p class="person-card__role">Senior Writing Fellow, Centre for Writing and Communication</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Sampurna Dutta">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Sampurna Dutta</h3>
-                <p class="person-card__role">Senior Writing Tutor, Centre for Writing and Communication</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Archishman Sarker">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name"><a href="https://www.ashoka.edu.in/profile/archishman-sarker/" target="_blank" rel="noopener noreferrer">Archishman Sarker</a></h3>
-                <p class="person-card__role">Senior Writing Tutor, Centre for Writing and Communication</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Abhishek Panchal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Abhishek Panchal</h3>
-                <p class="person-card__role">Research Scientist, BharatSim</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Aditya Singh Rawat">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Aditya Singh Rawat</h3>
-                <p class="person-card__role">Senior Research Associate, Cybersecurity</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Pritam Chandra">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Pritam Chandra</h3>
-                <p class="person-card__role">Research Associate, Cybersecurity</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Ritu Panwar">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Ritu Panwar</h3>
-                <p class="person-card__role">Postdoctoral Fellow, Evolutionary Biology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Shreyansh Priyadarshi">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Shreyansh Priyadarshi</h3>
-                <p class="person-card__role">Software Developer, Covalent Magnetic Tweezers</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Aditi Singh">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Aditi Singh</h3>
-                <p class="person-card__role">Research Associate, Triple-Negative Breast Cancer</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Vedant Ingawale">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Vedant Ingawale</h3>
-                <p class="person-card__role">Research Assistant, Triple-Negative Breast Cancer</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Pritam Biswas">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Pritam Biswas</h3>
-                <p class="person-card__role">Research Associate, Dengue Drug Discovery</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Aawaj Kuloong Rai">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Aawaj Kuloong Rai</h3>
-                <p class="person-card__role">Research Associate, Dengue Drug Discovery</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Shivam Kheral">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Shivam Kheral</h3>
-                <p class="person-card__role">Project Assistant, Carbon Capture Research</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Zeeshan Nazir">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Zeeshan Nazir</h3>
-                <p class="person-card__role">Project Assistant, Carbon Capture Research</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Pavinap Priya">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Pavinap Priya</h3>
-                <p class="person-card__role">Project Assistant, Dengue Immunology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Mezya Sezen">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Mezya Sezen</h3>
-                <p class="person-card__role">Project Assistant, Dengue Immunology</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Abdullah Haneef">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Abdullah Haneef</h3>
-                <p class="person-card__role">Research Assistant, Cancer Diagnostics</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Philip Cherian">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Philip Cherian</h3>
-                <p class="person-card__role">PhD Student, BharatSim</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Shushant Rajak">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Shushant Rajak</h3>
-                <p class="person-card__role">Software Developer, BharatSim</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Saransh Kumar Gupta">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Saransh Kumar Gupta</h3>
-                <p class="person-card__role">Senior Software Developer, World Food Atlas</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Rik Ganguly">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Rik Ganguly</h3>
-                <p class="person-card__role">Junior Engineer, Folk Computing</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Rohit Kumar Vishwakarma">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Rohit Kumar Vishwakarma</h3>
-                <p class="person-card__role">Research Assistant, Table-Top Experiments</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Ayush Tiwari">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Ayush Tiwari</h3>
-                <p class="person-card__role">Maker-in-Residence</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Ajad Ismail">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Ajad Ismail</h3>
-                <p class="person-card__role">Maker-in-Residence</p>
-              </div>
-            </article>
-
-            <article class="card person-card reveal" data-pillar="researchers">
-              <div class="person-card__avatar" role="img" aria-label="Krishanu Kanta">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-              </div>
-              <div class="person-card__info">
-                <h3 class="person-card__name">Krishanu Kanta</h3>
-                <p class="person-card__role">Project Assistant, Evolutionary Biology</p>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- Student Impact -->
-      <section class="section section--dark section--lg">
-        <div class="container">
-          <div class="section__header text-center reveal">
-            <span class="section__eyebrow">Student Research</span>
-            <h2 class="section__title">Training the Next Generation</h2>
-          </div>
-          <div class="stats-grid reveal-stagger">
-            <div class="stat-card reveal">
-              <div class="stat-card__number" data-count="150">0<span class="stat-card__suffix">+</span></div>
-              <div class="stat-card__label">UG Students in Research</div>
-            </div>
-            <div class="stat-card reveal">
-              <div class="stat-card__number" data-count="10">0<span class="stat-card__suffix">+</span></div>
-              <div class="stat-card__label">Student Publications</div>
-            </div>
-            <div class="stat-card reveal">
-              <div class="stat-card__number" data-count="2000">0<span class="stat-card__suffix">+</span></div>
-              <div class="stat-card__label">K-12 Students Reached</div>
-            </div>
-            <div class="stat-card reveal">
-              <div class="stat-card__number" data-count="5">0<span class="stat-card__suffix">+</span></div>
-              <div class="stat-card__label">International Placements</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA -->
-      <section class="section">
-        <div class="container text-center">
-          <h2 class="section__title reveal">See What We're Building</h2>
-          <p class="section__description reveal" style="margin: 0 auto var(--space-8);">
-            Explore our research projects, read our publications, or get in touch.
-          </p>
-          <div class="hero__actions reveal" style="justify-content: center;">
-            <a href="research.html" class="btn btn--primary btn--lg">
-              Explore Research
-              <svg class="btn__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h10M11 6l4 4-4 4"/></svg>
-            </a>
-            <a href="contact.html" class="btn btn--secondary btn--lg">Get in Touch</a>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer" role="contentinfo">
-      <div class="container">
-        <div class="footer__grid">
-          <div class="footer__brand">
-            <img src="../src/assets/images/logos/lab-logo.png" alt="Lab Logo" class="footer__brand-logo">
-            <p class="footer__brand-text">
-              Advancing interdisciplinary research in AI, health, fabrication, and beyond at Ashoka University.
-            </p>
-            <div class="footer__brand-partner">
-              <span>Supported by</span>
-              <img src="../src/assets/images/logos/mphasis-foundation.png" alt="Mphasis F1 Foundation">
-            </div>
-          </div>
-          <div>
-            <h4 class="footer__heading">Navigate</h4>
-            <div class="footer__links">
-              <a href="../index.html" class="footer__link">Home</a>
-              <a href="about.html" class="footer__link">About</a>
-              <a href="research.html" class="footer__link">Research</a>
-              <a href="people.html" class="footer__link">People</a>
-              <a href="publications.html" class="footer__link">Publications</a>
-              <a href="makerspace.html" class="footer__link">Makerspace</a>
-              <a href="news.html" class="footer__link">News & Events</a>
-              <a href="impact.html" class="footer__link">Impact</a>
-            </div>
-          </div>
-          <div>
-            <h4 class="footer__heading">Research</h4>
-            <div class="footer__links">
-              <a href="pillar.html?pillar=ai" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-ai);"></span>
-                AI@Ashoka
-              </a>
-              <a href="pillar.html?pillar=bharatsim" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-bharatsim);"></span>
-                BharatSim
-              </a>
-              <a href="pillar.html?pillar=chart" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-chart);"></span>
-                CHART
-              </a>
-              <a href="pillar.html?pillar=cyber" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-cyber);"></span>
-                Cybersecurity
-              </a>
-              <a href="pillar.html?pillar=makerspace" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-makerspace);"></span>
-                Makerspace
-              </a>
-            </div>
-          </div>
-          <div>
-            <h4 class="footer__heading">Contact</h4>
-            <div>
-              <div class="footer__contact-item">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 3l6 5 6-5"/></svg>
-                <a href="mailto:mphasis.lab@ashoka.edu.in" style="color: rgba(255,255,255,0.8);">mphasis.lab@ashoka.edu.in</a>
-              </div>
-              <div class="footer__contact-item">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6.7C14 11.3 8 15.3 8 15.3S2 11.3 2 6.7a6 6 0 1 1 12 0z"/><circle cx="8" cy="6.7" r="2"/></svg>
-                <span>Ashoka University<br>Sonipat, Haryana, India</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="footer__bottom">
-          <p class="footer__copyright">&copy; 2026 Mphasis AI & Applied Tech Lab, Ashoka University. All rights reserved.</p>
-          <div class="footer__bottom-links">
-          </div>
-        </div>
-      </div>
-    </footer>
-
+    <div class="snap-viewport" id="snapViewport">
+      <div class="snap-track" id="snapTrack"></div>
+    </div>
+
+    <nav class="ppl-nav-dots" id="pplDots" aria-label="Section navigation"></nav>
   </div>
 
   <script src="../src/data/projects.js"></script>
   <script src="../src/data/people.js"></script>
   <script src="../src/data/publications.js"></script>
   <script src="../src/data/pillars.js"></script>
-  <script src="../src/vendor/gsap.min.js"></script>
-  <script src="../src/vendor/ScrollTrigger.min.js"></script>
-  <script src="../src/js/gsap-animations.js"></script>
   <script src="../src/js/main.js"></script>
   <script src="../src/js/search.js"></script>
 
   <script>
-  /* ── People page enhancements ── */
   (function() {
-    const ARROW_SVG = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l6-6M5 3h4v4"/></svg>';
+    'use strict';
+    var people = Object.values(window.PEOPLE_DATA);
+    var track = document.getElementById('snapTrack');
+    var cats = { leadership: [], staff: [], faculty: [], researchers: [] };
+    people.forEach(function(p) { if (cats[p.category]) cats[p.category].push(p); });
+    var catDescs = { leadership: 'Advisory and institutional leadership', staff: 'The team behind the Lab', faculty: 'Faculty advisors across 7 departments', researchers: 'Research fellows, associates, assistants, and project staff' };
+    var catGrids = { leadership: 'ppl-grid ppl-grid--2', staff: 'ppl-grid ppl-grid--3', faculty: 'ppl-grid ppl-grid--4', researchers: 'ppl-grid ppl-grid--5' };
+    var catCard = { leadership: 'ppl-card ppl-card--lg', staff: 'ppl-card', faculty: 'ppl-card', researchers: 'ppl-card' };
+    var SPLIT = 12;
 
-    // Map people data by name for quick lookup
-    const peopleByName = {};
-    if (window.PEOPLE_DATA) {
-      Object.values(window.PEOPLE_DATA).forEach(p => {
-        peopleByName[p.name] = p;
-      });
+    function av(p) {
+      if (p.hasPhoto && p.photo) return '<img src="' + p.photo + '" alt="' + p.name + '" loading="lazy">';
+      return p.name.split(' ').map(function(n) { return n[0]; }).join('');
     }
 
-    document.querySelectorAll('.person-card').forEach(card => {
-      const link = card.querySelector('.person-card__name a');
+    // Hero
+    var hero = document.createElement('div');
+    hero.className = 'snap-panel snap-panel--hero';
+    hero.innerHTML = '<div class="ppl-hero__bg"><canvas id="pplCanvas"></canvas></div><div class="ppl-hero__content"><span class="section__eyebrow">People</span><h1 class="section__title">Our Team</h1><p class="section__description">27+ faculty spanning 7 departments, researchers, and a dedicated operations team \u2014 the people driving interdisciplinary innovation.</p><div class="ppl-hero__rule"></div><div class="ppl-hero__stats"><div class="ppl-hero__stat"><div class="ppl-hero__stat-num" data-count="' + people.length + '">0</div><div class="ppl-hero__stat-label">People</div></div><div class="ppl-hero__stat"><div class="ppl-hero__stat-num" data-count="' + cats.faculty.length + '">0</div><div class="ppl-hero__stat-label">Faculty</div></div><div class="ppl-hero__stat"><div class="ppl-hero__stat-num" data-count="7">0</div><div class="ppl-hero__stat-label">Departments</div></div></div></div>';
+    track.appendChild(hero);
+    setTimeout(function() { hero.querySelectorAll('[data-count]').forEach(function(el) { var t = parseInt(el.dataset.count); var s = performance.now(); function step(n) { var p = Math.min(1, (n - s) / 1500); el.textContent = Math.round(t * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); } requestAnimationFrame(step); }); }, 400);
 
-      // Add external-link indicator to linked cards
-      if (link) {
-        const indicator = document.createElement('span');
-        indicator.className = 'person-card__link-indicator';
-        indicator.setAttribute('aria-hidden', 'true');
-        indicator.innerHTML = ARROW_SVG;
-        card.appendChild(indicator);
-      }
-
-      // Add department badge from data
-      const nameEl = card.querySelector('.person-card__name');
-      const name = nameEl ? (nameEl.textContent || '').trim() : '';
-      const person = peopleByName[name];
-      if (person && person.department) {
-        const badge = document.createElement('span');
-        badge.className = 'person-card__dept-badge';
-        badge.textContent = person.department;
-        card.querySelector('.person-card__info').appendChild(badge);
-      }
+    // Category panels
+    ['leadership', 'staff', 'faculty', 'researchers'].forEach(function(cat) {
+      var list = cats[cat]; if (!list.length) return;
+      var catName = cat.charAt(0).toUpperCase() + cat.slice(1);
+      if (cat === 'faculty') catName = 'Faculty and Academic Research';
+      if (list.length > SPLIT) { var half = Math.ceil(list.length / 2); [list.slice(0, half), list.slice(half)].forEach(function(chunk, ci) { buildPanel(catName, cat, chunk, ci + 1, 2, list.length); }); }
+      else { buildPanel(catName, cat, list, null, null, list.length); }
     });
+
+    function buildPanel(catName, cat, entries, pageNum, totalPages, totalCount) {
+      var pnl = document.createElement('div'); pnl.className = 'snap-panel snap-panel--cat';
+      pnl.innerHTML = '<div class="ppl-cat-hdr"><h2 class="section__title">' + catName + '</h2><p class="section__subtitle">' + catDescs[cat] + '</p>' + (pageNum ? '<div class="ppl-cat-hdr__page">Page ' + pageNum + ' of ' + totalPages + ' \u00B7 ' + totalCount + ' people</div>' : '') + '</div><div class="' + catGrids[cat] + '"></div>';
+      var grid = pnl.querySelector('.ppl-grid');
+      entries.forEach(function(p) {
+        var card = document.createElement('div'); card.className = catCard[cat];
+        card.innerHTML = '<div class="ppl-card__avatar">' + av(p) + '</div><div class="ppl-card__name">' + (p.profileUrl ? '<a href="' + p.profileUrl + '" target="_blank">' + p.name + '</a>' : p.name) + '</div><div class="ppl-card__role">' + p.role + '</div>' + (p.department ? '<div class="ppl-card__dept">' + p.department + '</div>' : '');
+        grid.appendChild(card);
+      });
+      track.appendChild(pnl);
+    }
+
+    // Snap engine
+    var panels = document.querySelectorAll('.snap-panel'); var total = panels.length; var cur = 0, animating = false;
+    var dotsEl = document.getElementById('pplDots');
+    panels.forEach(function(_, i) { var d = document.createElement('button'); d.className = 'ppl-nd' + (i === 0 ? ' active' : ''); d.setAttribute('aria-label', 'Section ' + (i + 1)); d.addEventListener('click', function() { goTo(i); }); dotsEl.appendChild(d); });
+
+    function goTo(idx) { if (idx < 0 || idx >= total || animating) return; animating = true; cur = idx; track.style.transform = 'translateY(-' + (idx * 100) + 'vh)'; dotsEl.querySelectorAll('.ppl-nd').forEach(function(d, i) { d.classList.toggle('active', i === idx); }); setTimeout(function() { animating = false; }, 800); }
+    function isSearchOpen() { var o = document.getElementById('search-overlay'); return o && !o.hidden; }
+
+    var wa = 0, wt;
+    document.addEventListener('wheel', function(e) { if (isSearchOpen()) return; e.preventDefault(); clearTimeout(wt); wa += e.deltaY; if (Math.abs(wa) >= 80) { goTo(cur + (wa > 0 ? 1 : -1)); wa = 0; } wt = setTimeout(function() { wa = 0; }, 200); }, { passive: false });
+    var kc = false;
+    document.addEventListener('keydown', function(e) { if (isSearchOpen()) return; if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (kc) return; goTo(cur + (e.key === 'ArrowDown' ? 1 : -1)); kc = true; setTimeout(function() { kc = false; }, 900); } });
+    var tsy = 0;
+    document.addEventListener('touchstart', function(e) { tsy = e.touches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', function(e) { var d = tsy - e.changedTouches[0].clientY; if (Math.abs(d) > 50) goTo(cur + (d > 0 ? 1 : -1)); }, { passive: true });
+
+    // Magnetic Web Background
+    (function() {
+      var c = document.getElementById('pplCanvas'); if (!c) return;
+      var ctx = c.getContext('2d'); var dpr = window.devicePixelRatio || 1; var pw, ph;
+      var mouse = { x: -1000, y: -1000 }; var time = 0;
+      var colors = ['#2563EB', '#059669', '#D97706', '#7C3AED', '#009BDE'];
+      var spacing = 40; var dots = [];
+      function buildDots() { dots = []; for (var x = spacing / 2; x < pw; x += spacing) { for (var y = spacing / 2; y < ph; y += spacing) { dots.push({ ox: x, oy: y, x: x, y: y, color: colors[Math.floor(Math.random() * colors.length)] }); } } }
+      function resize() { pw = c.offsetWidth; ph = c.offsetHeight; c.width = pw * dpr; c.height = ph * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); buildDots(); }
+      resize(); window.addEventListener('resize', resize);
+      document.addEventListener('mousemove', function(e) { mouse.x = e.clientX; mouse.y = e.clientY; });
+      var AR = 200, CR = 150;
+      function draw() {
+        ctx.clearRect(0, 0, pw, ph); time += 0.01;
+        dots.forEach(function(d) { var dx = mouse.x - d.ox, dy = mouse.y - d.oy; var dist = Math.sqrt(dx * dx + dy * dy); if (dist < AR && dist > 5) { var pull = (1 - dist / AR) * 12; d.x = d.ox + dx / dist * pull; d.y = d.oy + dy / dist * pull; } else { d.x += (d.ox - d.x) * 0.08; d.y += (d.oy - d.y) * 0.08; } });
+        for (var i = 0; i < dots.length; i++) { var di = dots[i]; var dmi = Math.sqrt((di.x - mouse.x) * (di.x - mouse.x) + (di.y - mouse.y) * (di.y - mouse.y)); if (dmi > CR) continue; for (var j = i + 1; j < dots.length; j++) { var dj = dots[j]; var dmj = Math.sqrt((dj.x - mouse.x) * (dj.x - mouse.x) + (dj.y - mouse.y) * (dj.y - mouse.y)); if (dmj > CR) continue; var dd = Math.sqrt((di.x - dj.x) * (di.x - dj.x) + (di.y - dj.y) * (di.y - dj.y)); if (dd < spacing * 2) { var a = Math.max(0, 0.15 * (1 - dd / (spacing * 2)) * (1 - Math.max(dmi, dmj) / CR)); ctx.beginPath(); ctx.moveTo(di.x, di.y); ctx.lineTo(dj.x, dj.y); ctx.strokeStyle = di.color; ctx.globalAlpha = a; ctx.lineWidth = 1; ctx.stroke(); ctx.globalAlpha = 1; } } }
+        dots.forEach(function(d) { var dm = Math.sqrt((d.x - mouse.x) * (d.x - mouse.x) + (d.y - mouse.y) * (d.y - mouse.y)); var near = dm < AR; var size = near ? 2.5 + (1 - dm / AR) * 4 : 2.5; var alpha = near ? 0.08 + (1 - dm / AR) * 0.25 : 0.06; ctx.beginPath(); ctx.arc(d.x, d.y, size, 0, Math.PI * 2); ctx.fillStyle = near ? d.color : '#0A1929'; ctx.globalAlpha = alpha; ctx.fill(); ctx.globalAlpha = 1; });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
   })();
   </script>
-  <script src="../src/js/page-canvases.js"></script>
 </body>
 </html>

@@ -81,7 +81,7 @@
 
     draw: function () {
       var cy = canvas.height / 2;
-      var phase = frameCount * 0.015;
+      var phase = frameCount * 0.04;
 
       for (var i = 0; i < dna.points; i++) {
         var x = i * dna.spacing;
@@ -92,8 +92,8 @@
         var depth2 = (Math.sin(angle + Math.PI) + 1) / 2;
 
         // Mouse repulsion on each node
-        var p1 = repel(x, y1, 120, 15);
-        var p2 = repel(x, y2, 120, 15);
+        var p1 = repel(x, y1, 200, 35);
+        var p2 = repel(x, y2, 200, 35);
 
         // Connecting rungs (every 3rd point)
         if (i % 3 === 0) {
@@ -111,8 +111,8 @@
           var nAngle = ((i + 1) / dna.points) * Math.PI * 4 + phase;
           var ny1 = cy + Math.sin(nAngle) * dna.amplitude;
           var ny2 = cy + Math.sin(nAngle + Math.PI) * dna.amplitude;
-          var np1 = repel(nx, ny1, 120, 15);
-          var np2 = repel(nx, ny2, 120, 15);
+          var np1 = repel(nx, ny1, 200, 35);
+          var np2 = repel(nx, ny2, 200, 35);
 
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);

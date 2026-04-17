@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Publications from the Mphasis AI & Applied Tech Lab — journal articles, conference papers, preprints, and more.">
   <meta name="theme-color" content="#1B2A4A">
-
-  <!-- Open Graph -->
   <meta property="og:title" content="Publications | Mphasis AI & Applied Tech Lab">
   <meta property="og:description" content="Research publications from the Mphasis AI & Applied Tech Lab at Ashoka University.">
   <meta property="og:type" content="website">
-
   <title>Publications | Mphasis AI & Applied Tech Lab</title>
 
   <link rel="icon" type="image/png" sizes="32x32" href="../src/assets/images/logos/favicon-32.png">
@@ -18,7 +15,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../src/assets/images/logos/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../src/css/variables.css">
   <link rel="stylesheet" href="../src/css/reset.css">
@@ -29,14 +26,76 @@
   <link rel="stylesheet" href="../src/css/components.css">
   <link rel="stylesheet" href="../src/css/animations.css">
   <link rel="stylesheet" href="../src/css/pages.css">
-  <link rel="stylesheet" href="../src/css/detail-pages.css">
   <link rel="stylesheet" href="../src/css/utilities.css">
   <link rel="stylesheet" href="../src/css/search.css">
+
+  <style>
+    /* ═══ SNAP SCROLL ENGINE ═══ */
+    html, body { margin: 0; padding: 0; overflow: hidden; height: 100vh; }
+
+    .snap-viewport { position: fixed; inset: 0; overflow: hidden; }
+    .snap-track { position: absolute; top: 0; left: 0; right: 0; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); will-change: transform; }
+    .snap-panel { width: 100vw; height: 100vh; overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(2rem, 5vw, 5rem); }
+
+    /* Hero */
+    .snap-panel--hero { align-items: center; text-align: center; background: #fff; position: relative; overflow: hidden; }
+    .pub-hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .pub-hero__bg canvas { width: 100%; height: 100%; display: block; }
+    .pub-hero__content { position: relative; z-index: 2; pointer-events: none; }
+    .pub-hero__eyebrow { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 1rem; }
+    .pub-hero__title { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 5rem); font-weight: var(--weight-extrabold); letter-spacing: -0.04em; color: var(--color-text); }
+    .pub-hero__rule { width: 80px; height: 2px; background: var(--color-text); margin: 1.5rem auto; }
+    .pub-hero__stats { display: flex; gap: clamp(1.5rem, 3vw, 3rem); justify-content: center; flex-wrap: wrap; margin-top: 0.5rem; }
+    .pub-hero__stat { text-align: center; }
+    .pub-hero__stat-num { font-family: var(--font-mono); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: var(--weight-bold); color: var(--color-text); }
+    .pub-hero__stat-label { font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-top: 2px; }
+
+    /* Year panels */
+    .snap-panel--year { background: #fff; padding-top: 0; }
+    .pub-year-wm { position: absolute; top: 50%; right: clamp(2rem, 5vw, 5rem); transform: translateY(-50%); font-family: var(--font-display); font-size: clamp(8rem, 18vw, 14rem); font-weight: var(--weight-extrabold); color: rgba(10,25,41,0.02); pointer-events: none; user-select: none; }
+    .pub-year-hdr { display: flex; align-items: baseline; gap: 12px; margin-bottom: 1rem; border-bottom: 2px solid var(--color-text); padding-bottom: 0.5rem; }
+    .pub-year-hdr__num { font-family: var(--font-display); font-size: 1.5rem; font-weight: var(--weight-extrabold); }
+    .pub-year-hdr__count { font-family: var(--font-mono); font-size: 0.55rem; color: var(--gray-400); }
+    .pub-year-hdr__page { font-family: var(--font-mono); font-size: 0.45rem; color: var(--gray-300); margin-left: auto; }
+
+    /* Two-column index */
+    .pub-idx-cols { column-count: 2; column-gap: 2.5rem; }
+    @media (max-width: 768px) { .pub-idx-cols { column-count: 1; } }
+
+    .pub-idx-entry { break-inside: avoid; margin-bottom: 0.8rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(0,0,0,0.04); position: relative; }
+    .pub-idx-entry__authors { font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.5; }
+    .pub-idx-entry__title { font-size: 0.82rem; font-weight: var(--weight-semibold); color: var(--color-text); line-height: 1.3; margin-top: 2px; }
+    .pub-idx-entry__title a { color: inherit; text-decoration: none; transition: color var(--transition-fast); }
+    .pub-idx-entry__title a:hover { color: var(--color-primary); }
+    .pub-idx-entry__venue { font-size: 0.68rem; color: var(--gray-400); font-style: italic; margin-top: 2px; }
+    .pub-idx-entry__meta { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
+    .pub-idx-entry__type { font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 1px 5px; border-radius: 2px; }
+    .pub-idx-entry__doi { font-family: var(--font-mono); font-size: 0.48rem; color: var(--color-primary); text-decoration: none; }
+    .pub-idx-entry__cite { position: absolute; top: 0; right: 0; font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--color-border-light); background: #fff; color: var(--gray-400); cursor: pointer; border-radius: 2px; opacity: 0; transition: opacity var(--transition-fast); }
+    .pub-idx-entry:hover .pub-idx-entry__cite { opacity: 1; }
+
+    /* Footer panel */
+    .snap-panel--footer { height: auto; min-height: 0; overflow: auto; }
+
+    /* Nav dots */
+    .pub-nav-dots { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 6px; z-index: 200; }
+    .pub-nd { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid rgba(10,25,41,0.15); background: transparent; cursor: pointer; padding: 0; transition: all 0.3s; }
+    .pub-nd.active { background: var(--color-text); border-color: var(--color-text); box-shadow: 0 0 6px rgba(10,25,41,0.15); }
+
+    /* Filter */
+    .pub-filters { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 200; display: flex; gap: 4px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--color-border-light); }
+    .pub-fp { font-family: var(--font-mono); font-size: 0.48rem; letter-spacing: 0.04em; padding: 3px 8px; border: none; background: none; color: var(--gray-400); cursor: pointer; border-radius: 10px; transition: all 0.2s; }
+    .pub-fp:hover { color: var(--color-text); }
+    .pub-fp.active { background: var(--color-text); color: #fff; }
+
+    /* Header / search on top */
+    .header { position: fixed; z-index: 300; }
+    .progress-bar { display: none; }
+    .search-overlay { z-index: 500 !important; position: fixed !important; }
+  </style>
 </head>
 <body data-page="publications">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
-
   <div class="page">
 
     <!-- Search Overlay -->
@@ -66,7 +125,7 @@
     <!-- HEADER -->
     <header class="header" role="banner">
       <div class="header__inner">
-        <a href="../index.html" class="header__logo" aria-label="Mphasis AI & Applied Tech Lab — Home">
+        <a href="../index.html" class="header__logo" aria-label="Home">
           <img src="../src/assets/images/logos/lab-logo.png" alt="Mphasis AI & Applied Tech Lab Logo">
         </a>
         <nav class="nav" role="navigation" aria-label="Primary navigation">
@@ -81,138 +140,24 @@
           <a href="contact.html" class="nav__link">Contact</a>
         </nav>
         <div class="header__actions">
-          <button class="header__search-trigger" aria-label="Search" aria-expanded="false" aria-controls="search-overlay">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
-          </button>
-          <button class="header__menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
-            <span></span><span></span><span></span>
-          </button>
+          <button class="header__search-trigger" aria-label="Search"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg></button>
+          <button class="header__menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
       </div>
     </header>
 
-    <!-- Mobile Navigation -->
-    <nav class="nav-mobile" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
-      <a href="../index.html" class="nav-mobile__link">Home</a>
-      <a href="about.html" class="nav-mobile__link">About</a>
-      <a href="research.html" class="nav-mobile__link">Research</a>
-      <a href="people.html" class="nav-mobile__link">People</a>
-      <a href="publications.html" class="nav-mobile__link nav-mobile__link--active">Publications</a>
-      <a href="makerspace.html" class="nav-mobile__link">Makerspace</a>
-      <a href="news.html" class="nav-mobile__link">News & Events</a>
-      <a href="impact.html" class="nav-mobile__link">Impact</a>
-      <a href="contact.html" class="nav-mobile__link">Contact</a>
-    </nav>
-
-    <!-- MAIN CONTENT -->
-    <main class="page__content" id="main-content" role="main">
-
-      <!-- Page Hero -->
-      <section class="page-hero">
-        <canvas class="page-hero__canvas" data-page="publications" aria-hidden="true"></canvas>
-        <div class="container">
-          <span class="page-hero__eyebrow reveal">Publications</span>
-          <h1 class="page-hero__title reveal">Publications</h1>
-          <p class="page-hero__description reveal">
-            Research output from the Mphasis AI & Applied Tech Lab — journal articles, conference papers, preprints, and more.
-          </p>
-          <div id="pub-stats" class="pub-stats reveal"></div>
-        </div>
-      </section>
-
-      <!-- Filter Bar -->
-      <section class="section section--sm">
-        <div class="container">
-          <div id="publications-filter" class="filter-bar reveal">
-            <!-- Populated dynamically -->
-          </div>
-        </div>
-      </section>
-
-      <!-- Publications Content -->
-      <section class="section">
-        <div class="container container--narrow">
-          <div id="publications-content">
-            <div class="detail-loading">Loading publications...</div>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer" role="contentinfo">
-      <div class="container">
-        <div class="footer__grid">
-          <div class="footer__brand">
-            <img src="../src/assets/images/logos/lab-logo.png" alt="Lab Logo" class="footer__brand-logo">
-            <p class="footer__brand-text">
-              Advancing interdisciplinary research in AI, health, fabrication, and beyond at Ashoka University.
-            </p>
-            <div class="footer__brand-partner">
-              <span>Supported by</span>
-              <img src="../src/assets/images/logos/mphasis-foundation.png" alt="Mphasis F1 Foundation">
-            </div>
-          </div>
-          <div>
-            <h4 class="footer__heading">Navigate</h4>
-            <div class="footer__links">
-              <a href="../index.html" class="footer__link">Home</a>
-              <a href="about.html" class="footer__link">About</a>
-              <a href="research.html" class="footer__link">Research</a>
-              <a href="people.html" class="footer__link">People</a>
-              <a href="publications.html" class="footer__link">Publications</a>
-              <a href="makerspace.html" class="footer__link">Makerspace</a>
-              <a href="news.html" class="footer__link">News & Events</a>
-              <a href="impact.html" class="footer__link">Impact</a>
-            </div>
-          </div>
-          <div>
-            <h4 class="footer__heading">Research</h4>
-            <div class="footer__links">
-              <a href="pillar.html?pillar=ai" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-ai);"></span>
-                AI@Ashoka
-              </a>
-              <a href="pillar.html?pillar=bharatsim" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-bharatsim);"></span>
-                BharatSim
-              </a>
-              <a href="pillar.html?pillar=chart" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-chart);"></span>
-                CHART
-              </a>
-              <a href="pillar.html?pillar=cyber" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-cyber);"></span>
-                Cybersecurity
-              </a>
-              <a href="pillar.html?pillar=makerspace" class="footer__pillar-link">
-                <span class="footer__pillar-dot" style="background-color: var(--pillar-makerspace);"></span>
-                Makerspace
-              </a>
-            </div>
-          </div>
-          <div>
-            <h4 class="footer__heading">Contact</h4>
-            <div>
-              <div class="footer__contact-item">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 3l6 5 6-5"/></svg>
-                <a href="mailto:mphasis.lab@ashoka.edu.in" style="color: rgba(255,255,255,0.8);">mphasis.lab@ashoka.edu.in</a>
-              </div>
-              <div class="footer__contact-item">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6.7C14 11.3 8 15.3 8 15.3S2 11.3 2 6.7a6 6 0 1 1 12 0z"/><circle cx="8" cy="6.7" r="2"/></svg>
-                <span>Ashoka University<br>Sonipat, Haryana, India</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="footer__bottom">
-          <p class="footer__copyright">&copy; 2026 Mphasis AI & Applied Tech Lab, Ashoka University. All rights reserved.</p>
-          <div class="footer__bottom-links">
-          </div>
-        </div>
+    <!-- ═══ SNAP VIEWPORT ═══ -->
+    <div class="snap-viewport" id="snapViewport">
+      <div class="snap-track" id="snapTrack">
+        <!-- Panels built dynamically by JS -->
       </div>
-    </footer>
+    </div>
+
+    <!-- Filter pills -->
+    <div class="pub-filters" id="pubFilters"></div>
+
+    <!-- Nav dots -->
+    <nav class="pub-nav-dots" id="pubDots" aria-label="Section navigation"></nav>
 
   </div>
 
@@ -223,12 +168,248 @@
   <script src="../src/data/pillars.js"></script>
 
   <!-- Scripts -->
-  <script src="../src/vendor/gsap.min.js"></script>
-  <script src="../src/vendor/ScrollTrigger.min.js"></script>
-  <script src="../src/js/gsap-animations.js"></script>
   <script src="../src/js/main.js"></script>
-  <script src="../src/js/detail-page.js"></script>
   <script src="../src/js/search.js"></script>
-  <script src="../src/js/page-canvases.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    var pubs = window.PUBLICATIONS_DATA;
+    var pc = {ai:'#2563EB',bharatsim:'#059669',chart:'#D97706',cyber:'#7C3AED',makerspace:'#009BDE'};
+    var tl = {journal:'Journal',conference:'Conference',workshop:'Workshop',preprint:'Preprint',report:'Report'};
+    var track = document.getElementById('snapTrack');
+    var tc = {};
+    pubs.forEach(function(p) { tc[p.type] = (tc[p.type]||0) + 1; });
+
+    var SPLIT_THRESHOLD = 10;
+
+    // ── Hero Panel ──
+    var hero = document.createElement('div');
+    hero.className = 'snap-panel snap-panel--hero';
+    var statsData = [{val:pubs.length,label:'Total'}].concat(
+      Object.keys(tl).filter(function(t){return tc[t]}).map(function(t){return {val:tc[t],label:tl[t]+'s'}})
+    );
+    hero.innerHTML = '<div class="pub-hero__bg"><canvas id="pulseCanvas"></canvas></div><div class="pub-hero__content"><div class="pub-hero__eyebrow">Research Output</div><h1 class="pub-hero__title">Publications</h1><div class="pub-hero__rule"></div><div class="pub-hero__stats">' +
+      statsData.map(function(s){return '<div class="pub-hero__stat"><div class="pub-hero__stat-num" data-count="'+s.val+'">0</div><div class="pub-hero__stat-label">'+s.label+'</div></div>'}).join('') +
+    '</div></div>';
+    track.appendChild(hero);
+
+    // Count-up
+    setTimeout(function() {
+      hero.querySelectorAll('[data-count]').forEach(function(el) {
+        var target = parseInt(el.dataset.count);
+        var start = performance.now();
+        function step(now) {
+          var p = Math.min(1, (now - start) / 1500);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, 400);
+
+    // ── Year Panels ──
+    var byY = {};
+    pubs.forEach(function(p) { if (!byY[p.year]) byY[p.year] = []; byY[p.year].push(p); });
+    var years = Object.keys(byY).sort(function(a,b) { return b - a; });
+
+    years.forEach(function(year) {
+      var yearPubs = byY[year];
+      if (yearPubs.length > SPLIT_THRESHOLD) {
+        var half = Math.ceil(yearPubs.length / 2);
+        [yearPubs.slice(0, half), yearPubs.slice(half)].forEach(function(chunk, ci) {
+          buildYearPanel(year, chunk, ci+1, 2, yearPubs.length);
+        });
+      } else {
+        buildYearPanel(year, yearPubs, null, null, yearPubs.length);
+      }
+    });
+
+    function buildYearPanel(year, entries, pageNum, totalPages, totalForYear) {
+      var pnl = document.createElement('div');
+      pnl.className = 'snap-panel snap-panel--year';
+      var h = '<div class="pub-year-wm">' + year + '</div>';
+      h += '<div class="pub-year-hdr"><span class="pub-year-hdr__num">' + year + '</span><span class="pub-year-hdr__count">' + totalForYear + ' publications</span>';
+      if (pageNum) h += '<span class="pub-year-hdr__page">Page ' + pageNum + ' of ' + totalPages + '</span>';
+      h += '</div><div class="pub-idx-cols">';
+      entries.forEach(function(pub) {
+        var c = pc[pub.pillar] || '#6B99B8';
+        var link = pub.url || (pub.doi ? 'https://doi.org/' + pub.doi : '');
+        h += '<div class="pub-idx-entry" data-type="' + pub.type + '">' +
+          '<div class="pub-idx-entry__authors">' + pub.authors.join(', ') + '</div>' +
+          '<div class="pub-idx-entry__title">' + (link ? '<a href="' + link + '" target="_blank">' + pub.title + '</a>' : pub.title) + '</div>' +
+          '<div class="pub-idx-entry__venue">' + pub.venue + '</div>' +
+          '<div class="pub-idx-entry__meta"><span class="pub-idx-entry__type" style="color:' + c + ';background:' + c + '10">' + tl[pub.type] + '</span>' +
+          (pub.doi ? '<a class="pub-idx-entry__doi" href="https://doi.org/' + pub.doi + '" target="_blank">DOI ↗</a>' : '') +
+          '</div><button class="pub-idx-entry__cite" onclick="pubCopyBib(this)">Cite</button></div>';
+      });
+      h += '</div>';
+      pnl.innerHTML = h;
+      track.appendChild(pnl);
+    }
+
+    // ── Snap Engine ──
+    var panels = document.querySelectorAll('.snap-panel');
+    var total = panels.length;
+    var cur = 0, animating = false;
+    var ANIM = 800;
+
+    var dotsEl = document.getElementById('pubDots');
+    panels.forEach(function(_, i) {
+      var d = document.createElement('button');
+      d.className = 'pub-nd' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Section ' + (i + 1));
+      d.addEventListener('click', function() { goTo(i); });
+      dotsEl.appendChild(d);
+    });
+
+    function goTo(idx) {
+      if (idx < 0 || idx >= total || animating) return;
+      animating = true; cur = idx;
+      track.style.transform = 'translateY(-' + (idx * 100) + 'vh)';
+      dotsEl.querySelectorAll('.pub-nd').forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+      setTimeout(function() { animating = false; }, ANIM);
+    }
+
+    function isSearchOpen() {
+      var overlay = document.getElementById('search-overlay');
+      return overlay && !overlay.hidden;
+    }
+
+    // Wheel
+    var wa = 0, wt;
+    document.addEventListener('wheel', function(e) {
+      if (isSearchOpen()) return;
+      e.preventDefault();
+      clearTimeout(wt); wa += e.deltaY;
+      if (Math.abs(wa) >= 80) { goTo(cur + (wa > 0 ? 1 : -1)); wa = 0; }
+      wt = setTimeout(function() { wa = 0; }, 200);
+    }, { passive: false });
+
+    // Keyboard
+    var kc = false;
+    document.addEventListener('keydown', function(e) {
+      if (isSearchOpen()) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (kc) return;
+        goTo(cur + (e.key === 'ArrowDown' ? 1 : -1));
+        kc = true; setTimeout(function() { kc = false; }, 900);
+      }
+    });
+
+    // Touch
+    var tsy = 0;
+    document.addEventListener('touchstart', function(e) { tsy = e.touches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', function(e) { var d = tsy - e.changedTouches[0].clientY; if (Math.abs(d) > 50) goTo(cur + (d > 0 ? 1 : -1)); }, { passive: true });
+
+    // ── Filters ──
+    var filtersEl = document.getElementById('pubFilters');
+    ['all'].concat(Object.keys(tl).filter(function(t) { return tc[t]; })).forEach(function(t) {
+      var btn = document.createElement('button');
+      btn.className = 'pub-fp' + (t === 'all' ? ' active' : '');
+      btn.textContent = t === 'all' ? 'All' : tl[t];
+      btn.addEventListener('click', function() {
+        filtersEl.querySelectorAll('.pub-fp').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        document.querySelectorAll('.pub-idx-entry').forEach(function(e) {
+          e.style.display = (t === 'all' || e.dataset.type === t) ? '' : 'none';
+        });
+      });
+      filtersEl.appendChild(btn);
+    });
+
+    // ── Pulse Grid Background ──
+    (function() {
+      var pCanvas = document.getElementById('pulseCanvas');
+      if (!pCanvas) return;
+      var pCtx = pCanvas.getContext('2d');
+      var pDpr = window.devicePixelRatio || 1;
+      var pw, ph;
+      var pMouse = { x: -1000, y: -1000 };
+      var pTime = 0, pLastAutoWave = 0;
+      var pWaves = [];
+      var pColors = ['#2563EB', '#059669', '#D97706', '#7C3AED', '#009BDE'];
+
+      function pResize() {
+        pw = pCanvas.offsetWidth; ph = pCanvas.offsetHeight;
+        pCanvas.width = pw * pDpr; pCanvas.height = ph * pDpr;
+        pCtx.setTransform(pDpr, 0, 0, pDpr, 0, 0);
+      }
+      pResize();
+      window.addEventListener('resize', pResize);
+
+      document.addEventListener('mousemove', function(e) {
+        pMouse.x = e.clientX; pMouse.y = e.clientY;
+        if (!pMouse.lastWave || pTime - pMouse.lastWave > 0.08) {
+          pWaves.push({ x: e.clientX, y: e.clientY, t: pTime, speed: 300, color: pColors[Math.floor(Math.random() * pColors.length)], small: true });
+          pMouse.lastWave = pTime;
+        }
+      });
+
+      document.addEventListener('click', function(e) {
+        pWaves.push({ x: e.clientX, y: e.clientY, t: pTime, speed: 350, color: pColors[Math.floor(Math.random() * pColors.length)], small: false });
+      });
+
+      var pSpacing = 24, pBaseSize = 2.5;
+
+      function pDraw() {
+        pCtx.clearRect(0, 0, pw, ph);
+        pTime += 0.016;
+
+        if (pTime - pLastAutoWave > 1.8) {
+          pWaves.push({ x: pw / 2, y: ph / 2, t: pTime, speed: 280, color: pColors[Math.floor(Math.random() * pColors.length)], small: false });
+          pLastAutoWave = pTime;
+        }
+        pWaves = pWaves.filter(function(w) { return pTime - w.t < 2.5; });
+
+        for (var gx = pSpacing / 2; gx < pw; gx += pSpacing) {
+          for (var gy = pSpacing / 2; gy < ph; gy += pSpacing) {
+            var tSize = 0; var dColor = null; var maxI = 0;
+
+            pWaves.forEach(function(wave) {
+              var dx = gx - wave.x, dy = gy - wave.y;
+              var dist = Math.sqrt(dx * dx + dy * dy);
+              var elapsed = pTime - wave.t;
+              var wR = elapsed * wave.speed;
+              var wDist = Math.abs(dist - wR);
+              var wW = wave.small ? 40 : 70;
+              if (wDist < wW) {
+                var intensity = (1 - wDist / wW) * Math.max(0, 1 - elapsed * 0.6);
+                tSize += intensity * 4;
+                if (intensity > maxI) { maxI = intensity; dColor = wave.color; }
+              }
+            });
+
+            var mdx = gx - pMouse.x, mdy = gy - pMouse.y;
+            var mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+            if (mdist < 150) { tSize += (1 - mdist / 150) * 5; }
+
+            var size = pBaseSize + tSize;
+            var alpha = 0.06 + maxI * 0.3;
+
+            pCtx.beginPath();
+            pCtx.arc(gx, gy, Math.min(size, 8), 0, Math.PI * 2);
+            pCtx.fillStyle = dColor || '#0A1929';
+            pCtx.globalAlpha = Math.min(0.4, alpha);
+            pCtx.fill();
+            pCtx.globalAlpha = 1;
+          }
+        }
+        requestAnimationFrame(pDraw);
+      }
+      pDraw();
+    })();
+
+  })();
+
+  // Global cite function
+  function pubCopyBib(btn) {
+    var e = btn.closest('.pub-idx-entry');
+    var t = e.querySelector('.pub-idx-entry__authors').textContent + '. "' + e.querySelector('.pub-idx-entry__title').textContent + '." ' + e.querySelector('.pub-idx-entry__venue').textContent + '.';
+    navigator.clipboard.writeText(t).then(function() { btn.textContent = 'Copied!'; setTimeout(function() { btn.textContent = 'Cite'; }, 1500); });
+  }
+  </script>
 </body>
 </html>

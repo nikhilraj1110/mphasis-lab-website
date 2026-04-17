@@ -425,11 +425,38 @@
     /* Header on top */
     .header { position: fixed; z-index: 300; }
     .progress-bar { display: none; }
+
+    /* Search overlay must sit above everything */
+    .search-overlay { z-index: 500 !important; position: fixed !important; }
   </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="page">
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search" hidden>
+      <div class="search-overlay__backdrop"></div>
+      <div class="search-overlay__panel">
+        <div class="search-overlay__header">
+          <div class="search-overlay__input-wrapper">
+            <svg class="search-overlay__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+            <input type="search" class="search-overlay__input" id="search-input" placeholder="Search projects, people, publications..." autocomplete="off">
+            <kbd class="search-overlay__kbd">ESC</kbd>
+          </div>
+        </div>
+        <div class="search-overlay__results" id="search-results" aria-live="polite">
+          <div class="search-overlay__empty">
+            <p class="search-overlay__empty-text">Type to search across projects, people, and publications</p>
+          </div>
+        </div>
+        <div class="search-overlay__footer">
+          <span><kbd>&#8984;</kbd><kbd>K</kbd> to toggle</span>
+          <span><kbd>&#8593;</kbd><kbd>&#8595;</kbd> to navigate</span>
+          <span><kbd>Enter</kbd> to select</span>
+        </div>
+      </div>
+    </div>
 
     <!-- HEADER -->
     <header class="header" role="banner">
@@ -612,6 +639,12 @@
 
   </div>
 
+  <script src="../src/data/projects.js"></script>
+  <script src="../src/data/people.js"></script>
+  <script src="../src/data/publications.js"></script>
+  <script src="../src/data/pillars.js"></script>
+  <script src="../src/js/main.js"></script>
+  <script src="../src/js/search.js"></script>
   <script src="../src/vendor/three.min.js"></script>
   <script src="../src/js/globe.js"></script>
 
@@ -782,7 +815,13 @@
     var subSlideCooldown = false;
     var SUB_COOLDOWN_MS = 900; // prevents rapid sub-slide changes
 
+    function isSearchOpen() {
+      var overlay = document.getElementById('search-overlay');
+      return overlay && !overlay.hidden;
+    }
+
     document.addEventListener('wheel', function(e) {
+      if (isSearchOpen()) return; // let search overlay handle scroll
       e.preventDefault();
       if (subSlideCooldown) return;
 
@@ -813,6 +852,7 @@
     // ── Keyboard ──
     var keyCooldown = false;
     document.addEventListener('keydown', function(e) {
+      if (isSearchOpen()) return; // let search handle arrow keys
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === 'ArrowUp' || e.key === 'PageUp') {
         e.preventDefault();
         if (keyCooldown) return;
