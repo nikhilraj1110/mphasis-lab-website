@@ -800,33 +800,57 @@
     'use strict';
 
     // ═══ CONTEXT-AWARE FLOATING BUTTONS ═══
-    // Switch button style based on whether we're on dark or light sections
-    var heroSection = document.getElementById('hero-section');
     var floatMenuBtn = document.getElementById('floatMenuBtn');
     var floatSearchBtn = document.getElementById('floatSearchBtn');
 
-    if (heroSection && floatMenuBtn && floatSearchBtn) {
+    if (floatMenuBtn && floatSearchBtn) {
+      function isDarkAt(x, y) {
+        floatMenuBtn.style.pointerEvents = 'none';
+        floatSearchBtn.style.pointerEvents = 'none';
+        var sn = document.getElementById('side-nav');
+        if (sn) sn.style.pointerEvents = 'none';
+
+        var el = document.elementFromPoint(x, y);
+
+        floatMenuBtn.style.pointerEvents = '';
+        floatSearchBtn.style.pointerEvents = '';
+        if (sn) sn.style.pointerEvents = '';
+
+        if (!el) return false;
+
+        var node = el;
+        while (node && node !== document.documentElement) {
+          var bg = getComputedStyle(node).backgroundColor;
+          if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
+            var m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+            if (m) {
+              var r = parseInt(m[1]) / 255;
+              var g = parseInt(m[2]) / 255;
+              var b = parseInt(m[3]) / 255;
+              var lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+              return lum < 0.4;
+            }
+          }
+          if (node.getAttribute && node.getAttribute('data-theme') === 'dark') return true;
+          node = node.parentElement;
+        }
+        return false;
+      }
+
       function updateFloatingButtons() {
-        // Check if we're on a dark section (stats+spotlight or impact)
-        var darkSections = document.querySelectorAll('[data-theme="dark"]');
-        var onDark = false;
-        darkSections.forEach(function(sec) {
-          var r = sec.getBoundingClientRect();
-          if (r.top < 80 && r.bottom > 80) onDark = true;
-        });
+        var onDark = isDarkAt(60, 40) || isDarkAt(window.innerWidth - 60, 40);
 
         if (onDark) {
-          // On dark section — white buttons
           floatMenuBtn.classList.add('on-dark');
           floatSearchBtn.classList.add('on-dark');
         } else {
-          // On light/hero section — navy buttons (default)
           floatMenuBtn.classList.remove('on-dark');
           floatSearchBtn.classList.remove('on-dark');
         }
       }
 
       window.addEventListener('scroll', updateFloatingButtons, { passive: true });
+      setTimeout(updateFloatingButtons, 100);
       updateFloatingButtons();
     }
 

@@ -32,10 +32,68 @@
   <link rel="stylesheet" href="../src/css/detail-pages.css">
   <link rel="stylesheet" href="../src/css/utilities.css">
   <link rel="stylesheet" href="../src/css/search.css">
+  <link rel="stylesheet" href="../src/css/floating-nav.css">
 </head>
 <body data-page="project">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
+  <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>  <!-- Floating Buttons -->
+  <button class="float-menu-btn" id="floatMenuBtn" aria-label="Open navigation">
+    <div class="float-menu-btn__icon"><span></span><span></span><span></span></div>
+    <span class="float-menu-btn__label">Menu</span>
+  </button>
+  <button class="float-search-btn" id="floatSearchBtn" aria-label="Search">
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+    <span class="float-search-btn__label">Search</span>
+  </button>
+
+  <!-- Side Navigation -->
+  <nav class="side-nav" id="side-nav" aria-label="Side navigation">
+    <div class="side-nav__backdrop" id="side-nav-backdrop"></div>
+    <div class="side-nav__panel">
+      <div class="side-nav__header">
+        <a href="../index.html" style="display:inline-block; margin-left:-70px;">
+          <img src="../src/assets/images/logos/lab-logo.png" alt="Mphasis AI & Applied Tech Lab" style="height:100px; width:auto;">
+        </a>
+        <button class="side-nav__close" id="side-nav-close" aria-label="Close menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <span>Close</span>
+        </button>
+      </div>
+      <div class="side-nav__body">
+        <div class="side-nav__col-pages">
+          <span class="side-nav__subtitle">Navigate</span>
+          <ul class="side-nav__list">
+            <li class="side-nav__item"><a href="../index.html" class="side-nav__link">Home</a></li>
+            <li class="side-nav__item"><a href="about.html" class="side-nav__link">About</a></li>
+            <li class="side-nav__item"><a href="research.html" class="side-nav__link">Research</a></li>
+            <li class="side-nav__item"><a href="people.html" class="side-nav__link">People</a></li>
+            <li class="side-nav__item"><a href="publications.html" class="side-nav__link">Publications</a></li>
+            <li class="side-nav__item"><a href="makerspace.html" class="side-nav__link">Makerspace</a></li>
+            <li class="side-nav__item"><a href="news.html" class="side-nav__link">News &amp; Events</a></li>
+            <li class="side-nav__item"><a href="impact.html" class="side-nav__link">Impact</a></li>
+            <li class="side-nav__item"><a href="contact.html" class="side-nav__link">Contact</a></li>
+          </ul>
+        </div>
+        <div class="side-nav__col-pillars">
+          <span class="side-nav__subtitle">Research Pillars</span>
+          <ul class="side-nav__pill-list">
+            <li class="side-nav__item"><a href="pillar.html?pillar=ai" class="side-nav__pill-card" style="--pill-color:#2563EB;"><span class="side-nav__pill-icon" style="background:#DBEAFE;color:#2563EB;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></span><span class="side-nav__pill-name">AI</span></a></li>
+            <li class="side-nav__item"><a href="pillar.html?pillar=bharatsim" class="side-nav__pill-card" style="--pill-color:#059669;"><span class="side-nav__pill-icon" style="background:#D1FAE5;color:#059669;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/><path d="M2 7c2-3 4-3 6 0s4 3 6 0 4-3 6 0" opacity="0.4"/></svg></span><span class="side-nav__pill-name">BharatSim</span></a></li>
+            <li class="side-nav__item"><a href="pillar.html?pillar=chart" class="side-nav__pill-card" style="--pill-color:#D97706;"><span class="side-nav__pill-icon" style="background:#FEF3C7;color:#D97706;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l3-6 4 12 3-6h4"/></svg></span><span class="side-nav__pill-name">CHART</span></a></li>
+            <li class="side-nav__item"><a href="pillar.html?pillar=cyber" class="side-nav__pill-card" style="--pill-color:#7C3AED;"><span class="side-nav__pill-icon" style="background:#EDE9FE;color:#7C3AED;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4v5c0 5.5-3.8 10.2-8 12-4.2-1.8-8-6.5-8-12V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="side-nav__pill-name">Cybersecurity</span></a></li>
+            <li class="side-nav__item"><a href="pillar.html?pillar=makerspace" class="side-nav__pill-card" style="--pill-color:#009BDE;"><span class="side-nav__pill-icon" style="background:#E0F2FE;color:#009BDE;"><img src="../src/assets/images/logos/makerspace-logo.png" alt="Makerspace"></span><span class="side-nav__pill-name">Makerspace</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="side-nav__footer">
+        <div class="side-nav__contact">
+          <a href="mailto:mphasis.lab.edu.in">mphasis.lab.edu.in</a> &nbsp;&middot;&nbsp; Ashoka University, Sonipat, India
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
 
   <div class="page">
 
@@ -208,5 +266,6 @@
   <script src="../src/js/main.js"></script>
   <script src="../src/js/detail-page.js"></script>
   <script src="../src/js/search.js"></script>
+  <script src="../src/js/floating-nav.js"></script>
 </body>
 </html>
