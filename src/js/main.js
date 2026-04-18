@@ -81,10 +81,14 @@
       menuToggle.focus();
     }
 
-    // Arrow keys: scroll by 100vh per press
+    // Arrow keys: scroll by 100vh per press (disabled when search overlay or side nav is open)
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       var tag = document.activeElement.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      var searchEl = document.getElementById('search-overlay');
+      if (searchEl && !searchEl.hidden) return;
+      var sideNavEl = document.getElementById('side-nav');
+      if (sideNavEl && sideNavEl.classList.contains('side-nav--open')) return;
       e.preventDefault();
       var delta = e.key === 'ArrowDown' ? window.innerHeight : -window.innerHeight;
       window.scrollBy({ top: delta, behavior: 'smooth' });
